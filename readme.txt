@@ -36,7 +36,7 @@ ThirstyAffiliates will create pretty links from ugly affiliate links all the whi
 * Insert using standard link
 * Shortcode link support for link styling
 * Add images to affiliate links for easy insertion
-* ... and loads more via our [official add-ons](http://thirstyaffiliates/add-ons)!
+* ... and loads more via our [official add-ons](http://thirstyaffiliates.com/add-ons)!
 
 == Installation ==
 
