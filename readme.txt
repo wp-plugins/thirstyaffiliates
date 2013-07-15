@@ -22,7 +22,7 @@ ThirstyAffiliates will create pretty links from ugly affiliate links all the whi
 
 = Features at a glance =
 
-* Inbuilt affiliate link shortening
+* Inbuilt affiliate link shortening (yourwebsite.com/recommends/your-affiliate-link)
 * Commission protecting affiliate link 301 redirection
 * Customizable link URL prefixes – dozens to choose from or use your own custom prefix
 * Hierarchical link categorization to easily segment links
