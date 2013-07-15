@@ -12,6 +12,8 @@ Affiliate link management for affiliate marketers. Organize your affiliate links
 
 == Description ==
 
+Website: http://thirstyaffiliates.com
+
 ThirstyAffiliates empowers website owners with the tools they need to monetize their WordPress website with affiliate marketing.
 
 It’s lets you to administer the affiliate links you’re inserting into your website from a central location in WordPress.
