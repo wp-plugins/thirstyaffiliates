@@ -1,0 +1,126 @@
+/*******************************************************************************
+** File: thirstystyle.css
+** Description: Admin styles for ThirstyAffiliates plugin
+*******************************************************************************/
+
+.infolabel {
+	padding-bottom: 5px;
+}
+
+#thirsty_linkname, #thirsty_linkurl, #thirsty_linkslug, .infotext, #thirsty_cloakedurl {
+	height: 31px;
+	font-size: 14px;
+	border: 1px solid #DFDFDF;
+	width: 100%;
+	margin: 0;
+	padding: 5px;
+}
+
+.infotext {
+	height: 16px;
+}
+
+#thirsty_linkslug, #thirstySaveSlug {
+	display: none;
+}
+
+
+#thirstyEditSlug, #thirstyVisitLink {
+	display: inline-block;
+	margin-top: 5px;
+}
+
+#thirstySaveSlug {
+	margin-top: 5px;
+}
+
+#thirstyEditSlug:hover, #thirstyVisitLink:hover {
+	border: 1px solid #666666;
+}
+
+.thirstySaveMe {
+	display: none;
+	color: #0000ff;
+}
+
+#thirstylink-main-meta div.inside {
+	background: #ffffff;
+	margin: 0;
+	padding: 0 0 30px 0;
+}
+
+#thirsty_upload_insert_img {
+	font-size: 12px;
+	font-family: Arial, sans serif;
+}
+
+.thirsty_description {
+	color: #909090;
+	padding-left: 2px;
+	font-style: italic;
+	font-size: 10px !important;
+}
+
+#thirsty_logo {
+	margin: 25px 0 15px 30px;
+	float: left;
+	width: 100%;
+}
+
+#thirsty_add_images {
+	cursor: pointer;
+	vertical-align: middle;
+}
+
+#thirsty_upload_insert_img {
+	margin-top: 15px;
+}
+
+#thirsty_image_holder {
+	background: white;
+	overflow: hidden;
+	padding: 0px 0px 20px 0px;
+	margin: 0;
+	border: 1px solid #DFDFDF;
+	text-align: center;
+}
+
+.thirstyImg img {
+}
+
+#thirsty_cloakedurl {
+	display: inline;
+}
+
+#publish {
+	margin-top: 8px;
+	margin-bottom: 5px;
+}
+
+.submitdelete {
+	color: #ff0000;
+	font-weight: normal;
+	text-decoration: underline;
+}
+
+.thirstyImgHolder {
+	border: 1px solid #eee;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	padding: 5px;
+	margin-left: 20px;
+	margin-top: 20px;
+	float: left;
+}
+
+.thirstyRemoveImg {
+	float: right;
+	background: transparent url('../images/deleteImg.png') no-repeat left top;
+	height: 17px;
+	width: 17px;
+	margin-top: -14px;
+	margin-right: -24px;
+	padding: 5px;
+	cursor: pointer;
+}
