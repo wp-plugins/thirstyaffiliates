@@ -17,7 +17,7 @@ ThirstyAffiliates empowers website owners with the tools they need to monetize t
 It’s lets you to administer the affiliate links you’re inserting into your website from a central location in WordPress.
 
 Let ThirstyAffiliates create pretty links from ugly affiliate links all the while giving you the double benefit of protecting your commissions from theft.
-
+ 
 = Features at a glance =
 
 * Inbuilt affiliate link shortening
