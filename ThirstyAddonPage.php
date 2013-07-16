@@ -34,7 +34,7 @@ function thirstyAddonsPage() {
 	.thirstyaddon {
 		display: inline-block;
 		width: 300px;
-		min-height: 215px;
+		min-height: 250px;
 		margin-right: 15px;
 		margin-bottom: 15px;
 		padding: 5px 15px 15px 15px;
@@ -85,7 +85,7 @@ function thirstyAddonsPage() {
 
 function thirstyAddonsPageGetProducts() {
 	$rssXMLString = '';
-	$rssUrl = 'http://thirstyaffiliates.com/rss?post_type=product';
+	$rssUrl = 'http://thirstyaffiliates.com/feed?post_type=product';
 	
 	if (function_exists('curl_init')) { // cURL is installed on the server so use this preferably
 		$ch = curl_init();

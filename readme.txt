@@ -90,6 +90,10 @@ Coming soon!
 
 == Changelog ==
 
+= 2.2.1 =
+* Fixing add-ons page (thanks Hesham)
+* Adding javascript layout tweak
+
 = 2.2 =
 * Adding API hooks for future development
 * Cleaning up code structure

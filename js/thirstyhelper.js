@@ -23,6 +23,8 @@ jQuery(document).ready(function() {
 			}
 		});
 		jQuery('#post_name').remove();
+		jQuery('#post-body-content').remove();
+		
 		jQuery('#thirstyEditSlug').click(thirstyEditSlug);
 		
 		jQuery('#thirsty_upload_insert_img').click(thirstyAddImagesClicked);

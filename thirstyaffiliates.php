@@ -7,10 +7,10 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.2
+* Version: 2.2.1
 */
 
-define('THIRSTY_VERSION', '2.2', true);
+define('THIRSTY_VERSION', '2.2.1', true);
 
 /******************************************************************************* 
 ** thirstyRegisterPostType
