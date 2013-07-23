@@ -35,9 +35,10 @@ function thirstyAdminOptions() {
 	
 	$thirstyOptions['nofollow'] = isset($thirstyOptions['nofollow']) ? 'checked="checked"' : '';
 	$thirstyOptions['newwindow'] = isset($thirstyOptions['newwindow']) ? 'checked="checked"' : '';
-	$thirstyOptions['recordloggedin'] = isset($thirstyOptions['recordloggedin']) ? 'checked="checked"' : '';
 	$thirstyOptions['showcatinslug'] = isset($thirstyOptions['showcatinslug']) ? 'checked="checked"' : '';
 	$thirstyOptions['legacyuploader'] = isset($thirstyOptions['legacyuploader']) ? 'checked="checked"' : '';
+	$thirstyOptions['disabletitleattribute'] = isset($thirstyOptions['disabletitleattribute']) ? 'checked="checked"' : '';
+	$thirstyOptions['disablethirstylinkclass'] = isset($thirstyOptions['disablethirstylinkclass']) ? 'checked="checked"' : '';
 	
 	echo '<script type="text/javascript">var thirstyPluginDir = "' . 
 	plugins_url('thirstyaffiliates/') . '";
@@ -172,6 +173,33 @@ function thirstyAdminOptions() {
 		</td>
 		<td>
 			<span class="description">Disable the new media uploader in favour of the old style uploader</span>
+		</td>
+	</tr>
+	
+	<tr>
+		<th>
+			<label for="thirstyOptions[disabletitleattribute]">Disable title attribute output on link insertion?</label>
+		<td>
+			<input type="checkbox" name="thirstyOptions[disabletitleattribute]" id="thirstyOptionsDisableTitleAttribute" ' . 
+			$thirstyOptions['disabletitleattribute'] . ' />
+		</td>
+		<td>
+			<span class="description">Links are automatically output with a title html attribute (by default this shows the text 
+			that you have linked), this option lets you disable the output of the title attribute on your links.</span>
+		</td>
+	</tr>
+	
+	<tr>
+		<th>
+			<label for="thirstyOptions[disablethirstylinkclass]">Disable automatic output of ThirstyAffiliates CSS classes?</label>
+		<td>
+			<input type="checkbox" name="thirstyOptions[disablethirstylinkclass]" id="thirstyOptionsDisableThirstylinkClass" ' . 
+			$thirstyOptions['disablethirstylinkclass'] . ' />
+		</td>
+		<td>
+			<span class="description">To help with styling your affiliate links a CSS class called "thirstylink" is added 
+			to the link and a CSS class called "thirstylinkimg" is added to images (when inserting image affiliate links), 
+			this option disables the addition of both of these CSS classes.</span>
 		</td>
 	</tr>
 	';

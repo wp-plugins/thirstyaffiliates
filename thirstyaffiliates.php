@@ -7,10 +7,10 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.2.1
+* Version: 2.2.2
 */
 
-define('THIRSTY_VERSION', '2.2.1', true);
+define('THIRSTY_VERSION', '2.2.2', true);
 
 /******************************************************************************* 
 ** thirstyRegisterPostType
@@ -798,12 +798,7 @@ function thirstyAdminHeader() {
 ** @since 2.2
 *******************************************************************************/
 function thirstyHeader() {
-	if (!is_admin()) {
-		echo "\n<!-- ThirstyAffiliates -->\n" .
-		'<script type="text/javascript">' . "\n" . 
-		'	var thirstyAjaxLink = "' . admin_url('admin-ajax.php') . '";' . "\n" .
-		"</script>\n\n";
-	}
+	// Reserved for future use
 }
 
 /******************************************************************************* 
@@ -1121,6 +1116,8 @@ function thirstyGetLinkCode($linkType = '', $linkID = '', $copiedText = '', $ima
 	
 	$nofollow = (!empty($thirstyOptions['nofollow']) ? 'nofollow' : '');
 	$target = (!empty($thirstyOptions['newwindow']) ? '_blank' : '');
+	$linkclass = (!empty($thirstyOptions['disablethirstylinkclass']) ? '' : 'thirstylink');
+	$disabletitle = (!empty($thirstyOptions['disabletitleattribute']) ? true : false);
 	
 	// Set the link's nofollow if global setting is not set
 	if (empty($nofollow)) 
@@ -1130,13 +1127,32 @@ function thirstyGetLinkCode($linkType = '', $linkID = '', $copiedText = '', $ima
 	if (empty($target))
 		$target = ($linkData['newwindow'] == 'on' ? '_blank' : '');
 	
+	// Check if copied text contains HTML
+	$copiedTextContainsHTML = false;
+	if($copiedText != strip_tags($copiedText)) {
+		$copiedTextContainsHTML = true;
+		$disabletitle = true;
+		
+		// We don't support using shortcode links or image links on top of copied 
+		// text that has an image tag in it
+		if (($linkType == 'shortcode' || $linkType == 'image') &&
+			preg_match('/<img/', $copiedText)) {
+			$output = stripslashes($copiedText);
+			if ($echo)
+				echo $output;
+			else
+				return $output;
+			die();
+		}
+	}
+	
 	$linkAttributes = array(
 		'href' => get_post_permalink($link->ID),
-		'class' => 'thirstylink',
+		'class' => $linkclass,
 		'id' => '',
 		'rel' => $nofollow,
 		'target' => $target,
-		'title' => (!empty($copiedText) ? $copiedText : $linkData['linkname']),
+		'title' => ((!empty($copiedText) && !$disabletitle) ? $copiedText : (!$disabletitle ? $linkData['linkname'] : '')),
 	);
 	
 	// filter link attributes
@@ -1148,9 +1164,9 @@ function thirstyGetLinkCode($linkType = '', $linkID = '', $copiedText = '', $ima
 			'src' => $imageDetails[0],
 			'width' => $imageDetails[1],
 			'height' => $imageDetails[2],
-			'alt' => (!empty($copiedText) ? $copiedText : $linkData['linkname']),
-			'title' => (!empty($copiedText) ? $copiedText : $linkData['linkname']),
-			'class' => 'thirstylinkimg',
+			'alt' => (!empty($copiedText) ? strip_tags($copiedText) : $linkData['linkname']),
+			'title' => ((!empty($copiedText) && !$disabletitle) ? $copiedText : (!$disabletitle ? $linkData['linkname'] : '')),
+			'class' => (!empty($linkclass) ? 'thirstylinkimg' : ''),
 			'id' => ''
 		);
 		
@@ -1201,7 +1217,7 @@ function thirstyGetLinkCode($linkType = '', $linkID = '', $copiedText = '', $ima
 			$output .= (!empty($value) ? ' ' . $name . '="' . $value . '"' : '');
 		}
 		
-		$output .= '>' . $copiedText . '</a>';
+		$output .= '>' . stripslashes($copiedText) . '</a>';
 		
 		break;
 	}

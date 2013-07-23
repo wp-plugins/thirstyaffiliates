@@ -90,6 +90,13 @@ Coming soon!
 
 == Changelog ==
 
+= 2.2.2 =
+* During link insertion check if copied text contains HTML and handle appropriately
+* Add global switch to turn off title attribute on inserted links
+* Add global switch to turn off thirstylink and thirstylinkimg link classes
+* Strip slashes from apostrophes in copied text during link insertion
+* Remove ajax url from front end (no longer used)
+
 = 2.2.1 =
 * Fixing add-ons page (thanks Hesham)
 * Adding javascript layout tweak
