@@ -1,14 +1,14 @@
 === ThirstyAffiliates ===
 Contributors: jkohlbach,rymerawebco
 Donate link: 
-Tags: thirstyaffiliates, thirsty affiliates, affiliate marketing, affiliate, affiliate links, affiliate link, affiliate link management, affiliate link manager, manage links, manage affiliate links, redirection, redirect, cloak, cloaker, cloaking, redirecting, redirect links
+Tags: thirstyaffiliates, thirsty affiliates, affiliate marketing, affiliate, affiliate links, affiliate link, affiliate link management, affiliate link manager, manage links, manage affiliate links, redirection, redirect, cloak, cloaker, cloaking, redirecting, redirect links, link cloaking, link redirect
 Requires at least: 3.4
 Tested up to: 3.6
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Affiliate link management for affiliate marketers. Organize your affiliate links, get accurate tracking & monetize your website on autopilot.
+Affiliate link management for affiliate marketers. This affiliate marketing plugin helps you organize your affiliate links, can give you accurate click tracking & help you monetize your WordPress website on autopilot.
 
 == Description ==
 
