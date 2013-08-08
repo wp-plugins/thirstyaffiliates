@@ -3,7 +3,7 @@ Contributors: jkohlbach,rymerawebco
 Donate link: 
 Tags: thirstyaffiliates, thirsty affiliates, affiliate marketing, affiliate, affiliate links, affiliate link, affiliate link management, affiliate link manager, manage links, manage affiliate links, redirection, redirect, cloak, cloaker, cloaking, redirecting, redirect links
 Requires at least: 3.4
-Tested up to: 3.5.2
+Tested up to: 3.6
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -89,6 +89,9 @@ Thanks to Matty of WooThemes for the workaround.
 Coming soon!
 
 == Changelog ==
+
+= 2.2.3 =
+* Fixed link of categories a link belongs to in list view to show a list of links from that category
 
 = 2.2.2 =
 * During link insertion check if copied text contains HTML and handle appropriately
