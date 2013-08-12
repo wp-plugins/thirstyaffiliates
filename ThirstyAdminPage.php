@@ -28,9 +28,16 @@ function thirstyAdminOptions() {
 	if ($thirstyOptions['rebuildlinks'] == 'true') {
 		$thirstyOptions['rebuildlinks'] = 'false';
 		update_option('thirstyOptions', $thirstyOptions);
+		$thirstyOptions = get_option('thirstyOptions');
 		thirstyResaveAllLinks();
 		flush_rewrite_rules();
 		$linksRebuilt = true;
+	}
+
+	// Sanity check on link prefix
+	if (empty($thirstyOptions['linkprefix'])) {
+		$thirstyOptions['linkprefix'] = 'recommends';
+		update_option('thirstyOptions', $thirstyOptions);
 	}
 	
 	$thirstyOptions['nofollow'] = isset($thirstyOptions['nofollow']) ? 'checked="checked"' : '';
@@ -104,7 +111,7 @@ function thirstyAdminOptions() {
 		</th>
 		<td>
 			<select id="thirstyOptionsLinkPrefix" name="thirstyOptions[linkprefix]">
-				<option value="custom"' . ($thirstyOptions['linkprefix'] == 'custom' ? ' selected' : '') . '>-- Custom --</option>';
+				<option value="custom"' . (!empty($thirstyOptions['linkprefix']) && $thirstyOptions['linkprefix'] == 'custom' ? ' selected' : '') . '>-- Custom --</option>';
 	
 		thirstyGenerateSelectOptions(array("recommends", "link", "go", "review",
 			"product", "suggests", "follow", "endorses", "proceed", "fly", "goto",
@@ -113,7 +120,7 @@ function thirstyAdminOptions() {
 		echo '</select><br />
 			<input type="text" id="thirstyCustomLinkPrefix" value="' . (isset($thirstyOptions['linkprefixcustom']) ? $thirstyOptions['linkprefixcustom'] : '') . '" name="thirstyOptions[linkprefixcustom]" />';
 		
-		if ($thirstyOptions['linkprefix'] == 'custom') {
+		if (!empty($thirstyOptions['linkprefix']) && $thirstyOptions['linkprefix'] == 'custom') {
 			echo '<script type="text/javascript">
 			jQuery("#thirstyCustomLinkPrefix").show();</script>';
 		}
@@ -236,9 +243,13 @@ function thirstyAdminOptions() {
 	<li><a href="http://twitter.com/thirstyaff" style="margin-right: 10px;">Follow us on Twitter</a> <a href="https://twitter.com/thirstyaff" class="twitter-follow-button" data-show-count="true" style="vertical-align: bottom;">Follow @thirstyaff</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "twitter-wjs");</script></li>
 	</ul>
 	
-	
-	
 	</div>';
+	
+	// Provide debug output for diagnostics and support use
+	if ($_GET['debug'] == 'true') {
+		$thirstyOptions = get_option('thirstyOptions'); // re-retrieve options in case any of the filters/actions messed with it
+		echo '<pre>DEBUG: ' . print_r($thirstyOptions, true) . '</pre>';
+	}
 }
 
 /*******************************************************************************

@@ -92,6 +92,9 @@ Coming soon!
 
 = 2.2.3 =
 * Fixed link of categories a link belongs to in list view to show a list of links from that category
+* Fixed warning on settings page and added sanity checks for link prefix option
+* Added debug flag to settings page for support and testing
+* Deprecated PHP function split() replaced with preg_split(), was throwing a warning on PHP 5.3.0+ servers.
 
 = 2.2.2 =
 * During link insertion check if copied text contains HTML and handle appropriately
