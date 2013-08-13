@@ -7,10 +7,10 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.2.3
+* Version: 2.2.4
 */
 
-define('THIRSTY_VERSION', '2.2.3', true);
+define('THIRSTY_VERSION', '2.2.4', true);
 
 /******************************************************************************* 
 ** thirstyRegisterPostType
@@ -1178,6 +1178,8 @@ function thirstyGetLinkCode($linkType = '', $linkID = '', $copiedText = '', $ima
 	switch ($linkType) {
 	case 'shortcode':
 		$output .= '[thirstylink linkid="' . $link->ID . '" linktext="' . $copiedText . '"';
+		
+		unset($linkAttributes['href']);
 		
 		foreach ($linkAttributes as $name => $value) {
 			// Handle square bracket escaping (used for some addons, eg. Google Analytics click tracking)

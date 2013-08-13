@@ -8,18 +8,28 @@ function thirstyLinkByShortcode($atts) {
     
     $output = '';
     
-    /* Retrieve the link */
+    // Sanity check, if the linkid attribute is empty we can't retrieve the link
     if (!empty($linkid)) {
     	
-    	/* Remove linkid and linktext to get final link attributes */
+    	// Remove linkid and linktext to get final link attributes
     	$linkAttributes = array_diff($atts, array('linkid' => $linkid, 'linktext' => $linktext, 'linkclass' => $linkclass));
     	
-    	/* Backwards compatibility for linkclass shortcode attribute, should add this to the "class" link attribute */
+    	// Backwards compatibility for linkclass shortcode attribute, should add this to the "class" link attribute
     	if (!empty($linkclass))
     		$linkAttributes['class'] = $linkAttributes['class'] . ' ' . $linkclass;
     	
-    	/* Retrieving via the link ID */
+    	// Retrieving via the link ID
     	if (is_numeric($linkid)) {
+    		
+    		// Get the link URL
+    		$linkAttributes['href'] = get_post_permalink($linkid);
+    		
+    		// If the link text is empty, use the link name instead
+    		if (empty($linktext)) {
+    			$link = get_post($linkid);
+    			$linktext = $link->post_title;
+    		}
+    		
     		$output .= '<a';
     		
 			foreach ($linkAttributes as $name => $value) {
@@ -41,6 +51,6 @@ function thirstyLinkByShortcode($atts) {
     return $output;
 }
 
-/* Add a shortcode for thirsty affiliate links */
+// Add a shortcode for thirsty affiliate links
 add_shortcode('thirstylink', 'thirstyLinkByShortcode', 1); 
 ?>

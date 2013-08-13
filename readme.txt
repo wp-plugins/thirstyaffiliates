@@ -90,6 +90,9 @@ Coming soon!
 
 == Changelog ==
 
+= 2.2.4 =
+* Fixing regression in shortcode functionality (thanks Roshan)
+
 = 2.2.3 =
 * Fixed link of categories a link belongs to in list view to show a list of links from that category
 * Fixed warning on settings page and added sanity checks for link prefix option
