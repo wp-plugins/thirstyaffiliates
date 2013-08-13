@@ -7,10 +7,10 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.2.4
+* Version: 2.2.5
 */
 
-define('THIRSTY_VERSION', '2.2.4', true);
+define('THIRSTY_VERSION', '2.2.5', true);
 
 /******************************************************************************* 
 ** thirstyRegisterPostType
@@ -1152,7 +1152,7 @@ function thirstyGetLinkCode($linkType = '', $linkID = '', $copiedText = '', $ima
 		'id' => '',
 		'rel' => $nofollow,
 		'target' => $target,
-		'title' => ((!empty($copiedText) && !$disabletitle) ? $copiedText : (!$disabletitle ? $linkData['linkname'] : '')),
+		'title' => ((!empty($copiedText) && !$disabletitle) ? $copiedText : (!$disabletitle ? $linkData['linkname'] : ''))
 	);
 	
 	// filter link attributes
@@ -1180,6 +1180,8 @@ function thirstyGetLinkCode($linkType = '', $linkID = '', $copiedText = '', $ima
 		$output .= '[thirstylink linkid="' . $link->ID . '" linktext="' . $copiedText . '"';
 		
 		unset($linkAttributes['href']);
+		unset($linkAttributes['rel']);
+		unset($linkAttributes['target']);
 		
 		foreach ($linkAttributes as $name => $value) {
 			// Handle square bracket escaping (used for some addons, eg. Google Analytics click tracking)

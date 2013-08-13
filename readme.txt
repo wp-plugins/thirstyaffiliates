@@ -90,6 +90,11 @@ Coming soon!
 
 == Changelog ==
 
+= 2.2.5 =
+* Bug fix title attribute not showing on shortcodes
+* Make shortcodes obey the global flags properly
+* Output shortcode defaults properly when no attributes specified (backwards compatibility)
+
 = 2.2.4 =
 * Fixing regression in shortcode functionality (thanks Roshan)
 
