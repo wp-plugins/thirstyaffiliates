@@ -8,7 +8,7 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Affiliate link management for affiliate marketers. This affiliate marketing plugin helps you organize your affiliate links, can give you accurate click tracking & help you monetize your WordPress website on autopilot.
+Affiliate link management and link cloaking plugin made specifically for affiliate marketers. If you monetize your site with affiliate marketing this plugin will help you earn more!
 
 == Description ==
 
@@ -16,9 +16,9 @@ Website: http://thirstyaffiliates.com
 
 ThirstyAffiliates empowers website owners with the tools they need to monetize their WordPress website with affiliate marketing.
 
-It lets you administer the affiliate links you’re inserting into your website from a central location in WordPress.
+It lets you administer your affiliate links, assist you with inserting them into your posts, pages and comments and gives you a central location in WordPress to manage all of your affiliate links.
 
-ThirstyAffiliates will create pretty links from ugly affiliate links all the while giving you the double benefit of protecting your commissions from theft.
+ThirstyAffiliates will create pretty links from ugly affiliate links (aka link redirection or link cloaking) all the while giving you the double benefit of protecting your commissions from theft.
 
 = Features at a glance =
 
@@ -26,17 +26,17 @@ ThirstyAffiliates will create pretty links from ugly affiliate links all the whi
 * Commission protecting affiliate link 301 redirection
 * Customizable link URL prefixes – dozens to choose from or use your own custom prefix
 * Hierarchical link categorization to easily segment links
+* Handy affiliate link picker tool (with full instant search capabilities) makes it easy to insert affiliate links in posts, pages and comments!
 * Show category slugs in link URLs
 * DoFollow/NoFollow options (global or per link)
 * Open in new window options (global or per link)
 * Full importing and exporting support via standard WordPress tools
 * Full backup support via standard WordPress backup solutions
-* Uses WordPress approved coding techniques, doesn’t bloat your database with extra tables
-* Handy link builder authoring tool with full search capabilities
-* Insert using standard link
-* Shortcode link support for link styling
-* Add images to affiliate links for easy insertion
-* ... and loads more via our [official add-ons](http://thirstyaffiliates.com/add-ons)!
+* Uses WordPress approved storage techniques – doesn't bloat your database with extra tables!
+* Using the link picker insert affiliate links as standard links, shortcodes (great for adding classes for link styling), or pre-linked images.
+* Add your graphics, banners and other images to affiliate links for easy insertion
+
+[Want more features? Check out our Official ThirstyAffiliates Add-ons](http://thirstyaffiliates.com/add-ons)!
 
 == Installation ==
 
