@@ -37,7 +37,8 @@ ThirstyAffiliates will create pretty links from ugly affiliate links (aka link r
 * Using the link picker insert affiliate links as standard links, shortcodes (great for adding classes for link styling), or pre-linked images.
 * Add your graphics, banners and other images to affiliate links for easy insertion
 
-[Want more features? Check out our Official ThirstyAffiliates Add-ons](http://thirstyaffiliates.com/add-ons)!
+= Want more features? =
+[Check out our Official ThirstyAffiliates Add-ons](http://thirstyaffiliates.com/add-ons)!
 
 == Installation ==
 
