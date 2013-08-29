@@ -1,7 +1,7 @@
 === ThirstyAffiliates ===
 Contributors: jkohlbach,rymerawebco
 Donate link: 
-Tags: thirstyaffiliates, thirsty affiliates, affiliate marketing, affiliate, affiliate links, affiliate link, affiliate link management, affiliate link manager, manage links, manage affiliate links, redirection, redirect, cloak, cloaker, cloaking, redirecting, redirect links, link cloaking, link redirect
+Tags: thirstyaffiliates, thirsty affiliates, affiliate marketing, affiliate link management, link cloaking, affiliate links, affiliate link, affiliate link manager, manage affiliate links, affiliate link redirect, link cloak, link cloaker, link redirect
 Requires at least: 3.4
 Tested up to: 3.6
 Stable tag: trunk
@@ -23,7 +23,7 @@ ThirstyAffiliates will create pretty links from ugly affiliate links (aka link r
 
 = Features at a glance =
 
-* Inbuilt affiliate link shortening (yourwebsite.com/recommends/your-affiliate-link)
+* Inbuilt affiliate link shortening/link cloaking (yourwebsite.com/recommends/your-affiliate-link)
 * Commission protecting affiliate link 301 redirection
 * Customizable link URL prefixes – dozens to choose from or use your own custom prefix
 * Hierarchical link categorization to easily segment links
@@ -32,7 +32,7 @@ ThirstyAffiliates will create pretty links from ugly affiliate links (aka link r
 * DoFollow/NoFollow options (global or per link)
 * Open in new window options (global or per link)
 * Full importing and exporting support via standard WordPress tools
-* Full backup support via standard WordPress backup solutions
+* Full backup compatibility via standard WordPress backup solutions
 * Uses WordPress approved storage techniques – doesn't bloat your database with extra tables!
 * Using the link picker insert affiliate links as standard links, shortcodes (great for adding classes for link styling), or pre-linked images.
 * Add your graphics, banners and other images to affiliate links for easy insertion
