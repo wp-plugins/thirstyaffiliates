@@ -8,7 +8,7 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Affiliate link management plugin for affiliate marketers. If you monetize your site with affiliate marketing this plugin will help you earn more!
+Earn more with affiliate marketing using ThirstyAffiliates – the professional affiliate link management & link cloaking tool for affiliate marketers.
 
 == Description ==
 
