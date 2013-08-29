@@ -13,10 +13,11 @@ Affiliate link management plugin for affiliate marketers. If you monetize your s
 == Description ==
 
 Website: http://thirstyaffiliates.com
+PRO Add-ons: http://thirstyaffiliates.com/add-ons
 
 ThirstyAffiliates empowers website owners with the tools they need to monetize their WordPress website with affiliate marketing.
 
-It lets you administer your affiliate links, assist you with inserting them into your posts, pages and comments and gives you a central location in WordPress to manage all of your affiliate links.
+It lets you administer your affiliate links, assists you with inserting them into your posts, pages and comments and gives you a central location in WordPress to manage all of your affiliate links.
 
 ThirstyAffiliates will create pretty links from ugly affiliate links (aka link redirection or link cloaking) all the while giving you the double benefit of protecting your commissions from theft.
 
