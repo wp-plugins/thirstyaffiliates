@@ -40,57 +40,31 @@ function thirstyAdminOptions() {
 		update_option('thirstyOptions', $thirstyOptions);
 	}
 	
+	$redirectTypes = thirstyGetRedirectTypes();
+
+	// Sanity check on link redirect type
+	if (empty($thirstyOptions['linkredirecttype'])) {
+		$thirstyOptions['linkredirecttype'] = '301';
+		update_option('thirstyOptions', $thirstyOptions);
+	}
+
 	$thirstyOptions['nofollow'] = isset($thirstyOptions['nofollow']) ? 'checked="checked"' : '';
 	$thirstyOptions['newwindow'] = isset($thirstyOptions['newwindow']) ? 'checked="checked"' : '';
 	$thirstyOptions['showcatinslug'] = isset($thirstyOptions['showcatinslug']) ? 'checked="checked"' : '';
 	$thirstyOptions['legacyuploader'] = isset($thirstyOptions['legacyuploader']) ? 'checked="checked"' : '';
 	$thirstyOptions['disabletitleattribute'] = isset($thirstyOptions['disabletitleattribute']) ? 'checked="checked"' : '';
 	$thirstyOptions['disablethirstylinkclass'] = isset($thirstyOptions['disablethirstylinkclass']) ? 'checked="checked"' : '';
-	
+
 	echo '<script type="text/javascript">var thirstyPluginDir = "' . 
 	plugins_url('thirstyaffiliates/') . '";
 	var thirstyJSEnable = true;
 	</script>';
 	
-	echo '<style>
-	
-	div.wrap {
-		padding: 20px;
-	}
-	
-	#thirstylogo {
-		margin: 0px;
-	}
-	
-	.form-table td, .form-table th {
-		vertical-align: top;
-		padding-left: 0;
-	}
-	
-	#thirstyCustomLinkPrefix {
-		display: none;
-		width: 130px;
-	}
-	
-	.description {
-		color: #808080;
-	}
-	
-	#thirstyCustomLinkPrefix, #thirstyOptionsLinkPrefix {
-		width: 120px;
-	}
-	
-	#thirstyCommunityLinks li {
-		height: 28px;
-	}
-	
-	</style>';
-	
 	echo '<div class="wrap">';
 	
 	echo '<img id="thirstylogo" src="' . plugins_url('thirstyaffiliates/images/thirstylogo.png') . '" alt="ThirstyAffiliates" />';
 	
-	echo '<form method="post" action="options.php">';
+	echo '<form id="thirstySettingsForm" method="post" action="options.php">';
 	
 	wp_nonce_field('update-options');
 	settings_fields('thirstyOptions');
@@ -103,7 +77,7 @@ function thirstyAdminOptions() {
 	echo '
 	<table class="thirstyTable form-table" cellspacing="0" cellpadding="0">
 	
-	<tr><td><h3>General Settings</h3></td></tr>
+	<tr><td><h3 style="margin-top: 0;">General Settings</h3></td></tr>
 	
 	<tr>
 		<th>
@@ -144,6 +118,29 @@ function thirstyAdminOptions() {
 			<span class="description">Show the selected category in the url. eg. ' . 
 			trailingslashit(get_bloginfo('url')) . '' . thirstyGetCurrentSlug() . '/<span style="font-weight: bold;">link-category</span>/your-affiliate-link-name</span></span>
 			<br /><span class="description"><b>Warning:</b> Changing this setting after you\'ve used links in a post could break those links. Be careful!</span>
+		</td>
+	</tr>
+
+	<tr>
+		<th>
+			<label for="thirstyOptions[linkredirecttype]">Link Redirect Type:</label>
+		<td>';
+	
+	foreach ($redirectTypes as $redirectTypeCode => $redirectTypeDesc) {
+		
+		$linkTypeSelected = false;
+		if (strcasecmp($thirstyOptions['linkredirecttype'], $redirectTypeCode) == 0)
+			$linkTypeSelected = true;
+
+		echo '<input type="radio" name="thirstyOptions[linkredirecttype]" id="thirstyOptionsLinkRedirectType' . $redirectTypeCode .'" ' . 
+			($linkTypeSelected ? 'checked="checked" ' : '') . 'value="' . $redirectTypeCode . '" /> <label for="thirstyOptionsLinkRedirectType' . $redirectTypeCode .'">' . $redirectTypeDesc . '</label><br />';
+
+	}
+
+	echo '
+		</td>
+		<td>
+			<span class="description">This is the type of redirect ThirstyAffiliates will use to redirect the user to your affiliate link.</span>
 		</td>
 	</tr>
 	
@@ -208,8 +205,7 @@ function thirstyAdminOptions() {
 			to the link and a CSS class called "thirstylinkimg" is added to images (when inserting image affiliate links), 
 			this option disables the addition of both of these CSS classes.</span>
 		</td>
-	</tr>
-	';
+	</tr>';
 	
 	do_action('thirstyAffiliatesAfterMainSettings');
 	
@@ -227,23 +223,28 @@ function thirstyAdminOptions() {
 	
 	</form>
 	
-	<hr />
+	<div class="thirstyWhiteBox">
 	
-	<h3>Plugin Information</h3>
+		<h3>Plugin Information</h3>
+		
+		ThirstyAffiliates Version: ' . THIRSTY_VERSION . '<br />';
+		
+		do_action('thirstyAffiliatesPluginInformation');
+		
+	echo '</div><!-- /.thirstyWhiteBox -->';
 	
-	ThirstyAffiliates Version: ' . THIRSTY_VERSION . '<br />';
+	echo '
+		<div class="thirstyWhiteBox">
+			<h3>Join The Community</h3>
+			<ul id="thirstyCommunityLinks"><li><a href="http://thirstyaffiliates.com">Visit Our Website</a></li>
+				<li><a href="' . admin_url('edit.php?post_type=thirstylink&page=thirsty-addons') . '">Browse ThirstyAffiliates Add-ons</a></li>
+				<li><a href="http://thirstyaffiliates.com/affiliates">Join Our Affiliate Program</a> (up to 50% commissions)</li>
+				<li><a href="http://facebook.com/thirstyaffiliates" style="margin-right: 10px;">Like us on Facebook</a><iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fthirstyaffiliates&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;font=arial&amp;colorscheme=light&amp;action=like&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px; vertical-align: bottom;" allowTransparency="true"></iframe></li>
+				<li><a href="http://twitter.com/thirstyaff" style="margin-right: 10px;">Follow us on Twitter</a> <a href="https://twitter.com/thirstyaff" class="twitter-follow-button" data-show-count="true" style="vertical-align: bottom;">Follow @thirstyaff</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "twitter-wjs");</script></li>
+			</ul>
+		</div><!-- /.thirstyWhiteBox -->
 	
-	do_action('thirstyAffiliatesPluginInformation');
-	
-	echo '<h3>Join The Community</h3>
-	<ul id="thirstyCommunityLinks"><li><a href="http://thirstyaffiliates.com">Visit Our Website</a></li>
-	<li><a href="' . admin_url('edit.php?post_type=thirstylink&page=thirsty-addons') . '">Browse ThirstyAffiliates Add-ons</a></li>
-	<li><a href="http://thirstyaffiliates.com/affiliates">Join Our Affiliate Program</a> (up to 50% commissions)</li>
-	<li><a href="http://facebook.com/thirstyaffiliates" style="margin-right: 10px;">Like us on Facebook</a><iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fthirstyaffiliates&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;font=arial&amp;colorscheme=light&amp;action=like&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px; vertical-align: bottom;" allowTransparency="true"></iframe></li>
-	<li><a href="http://twitter.com/thirstyaff" style="margin-right: 10px;">Follow us on Twitter</a> <a href="https://twitter.com/thirstyaff" class="twitter-follow-button" data-show-count="true" style="vertical-align: bottom;">Follow @thirstyaff</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "twitter-wjs");</script></li>
-	</ul>
-	
-	</div>';
+	</div><!-- /.wrap -->';
 	
 	// Provide debug output for diagnostics and support use
 	if ($_GET['debug'] == 'true') {

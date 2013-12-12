@@ -17,43 +17,6 @@ function thirstyAddonsPage() {
 		wp_die( __('You do not have suffifient permissions to access this page.') );
 	}
 	
-	echo '<style>
-	
-	div.wrap {
-		padding: 20px;
-	}
-	
-	#thirstylogo {
-		margin: 0px;
-	}
-	
-	#thirstyaddonscontainer {
-		margin-top: 20px;
-	}
-	
-	.thirstyaddon {
-		display: inline-block;
-		width: 300px;
-		min-height: 250px;
-		margin-right: 15px;
-		margin-bottom: 15px;
-		padding: 5px 15px 15px 15px;
-		vertical-align: top;
-		border: 1px solid #cccccc;
-		border-radius: 5px;
-		-webkit-border-radius: 5px;
-		-moz-border-radius: 5px;
-	}
-
-	.thirstyaddon h3 {
-		font-size: 12pt;
-	}
-	
-	.thirstyaddondescription {
-		margin-bottom: 15px;
-	}
-	</style>';
-	
 	echo '<div class="wrap">';
 	echo '<img id="thirstylogo" src="' . plugins_url('thirstyaffiliates/images/thirstylogo.png') . '" alt="ThirstyAffiliates" />';
 	
@@ -64,7 +27,7 @@ function thirstyAddonsPage() {
 	$products = thirstyAddonsPageGetProducts();
 
 	if (!empty($products)) {
-		echo '<ul id="thirstyaddonscontainer">';
+		echo '<ul id="thirstyaddonscontainer" class="columns-2">';
 		
 		foreach ($products as $product) {
 			$productUrl = str_replace('utm_source=rss' , 'utm_source=plugin', $product['url']);

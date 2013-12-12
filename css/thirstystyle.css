@@ -124,3 +124,94 @@
 	padding: 5px;
 	cursor: pointer;
 }
+
+#thirstyaddonscontainer {
+	margin-top: 20px;
+}
+
+.thirstyaddon {
+	display: inline-block;
+	margin: 0 1% 1% 0;
+	position: relative;
+	width: 28.5%;
+	padding: 1.5%;
+	vertical-align: top;
+	border: 1px solid #CCC;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+.thirstyaddon:nth-child(3n) {
+	margin-right: 0;
+}
+
+.thirstyaddon h3 {
+	font-size: 12pt;
+}
+
+.thirstyaddondescription {
+	margin-bottom: 15px;
+}
+
+#thirstyCustomLinkPrefix {
+	display: none;
+	width: 130px;
+}
+
+#thirstySettingsForm {
+	padding: 2%;
+	background: #ffffff;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+#thirstySettingsForm .description {
+	color: #808080;
+}
+
+#thirstySettingsForm td {
+	vertical-align: top;
+}
+
+#thirstyCustomLinkPrefix, #thirstyOptionsLinkPrefix {
+	width: 120px;
+}
+
+#thirstyCommunityLinks li {
+	height: 28px;
+}
+
+.thirstyWhiteBox {
+	padding: 2%;
+	background: #ffffff;
+	margin-bottom: 1em;
+}
+
+@media handheld, only screen and (max-width: 959px) {
+	.thirstyaddon {
+		width: 45.5%;
+	}
+	
+	.thirstyaddon:nth-child(3n) {
+		margin-right: 1%;
+	}
+	
+	.thirstyaddon:nth-child(2n) {
+		margin-right: 0;
+	}
+}
+
+@media handheld, only screen and (max-width: 599px) {
+	.thirstyaddon {
+		width: 97%;
+	}
+	
+	.thirstyaddon:nth-child(3n) {
+		margin-right: 1%;
+	}
+	
+	.thirstyaddon:nth-child(2n) {
+		margin-right: 1%;
+	}
+}

@@ -7,10 +7,10 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.2.5
+* Version: 2.3
 */
 
-define('THIRSTY_VERSION', '2.2.5', true);
+define('THIRSTY_VERSION', '2.3', true);
 
 /******************************************************************************* 
 ** thirstyRegisterPostType
@@ -51,7 +51,7 @@ function thirstyRegisterPostType() {
 				'search_items' =>  __('Search Affiliate Links'),
 				'not_found' => __('No Affiliate Links found!'),
 				'not_found_in_trash' => __('No Affiliate Links found in trash'),
-				'menu_name' => __('ThirstyAffiliates'),
+				'menu_name' => __('Affiliate Links'),
 				'all_items' => __('All Affiliate Links')
 			),
 			'description' => 'ThirstyAffiliates affiliate links',
@@ -433,6 +433,63 @@ function thirstySetupPostBoxes() {
 		'normal',
 		'low'
 	);
+
+	add_meta_box(
+		'thirstylink-redirect-type-meta',
+		'Redirect Type',
+		'thirstyRedirectTypeMeta',
+		'thirstyLink',
+		'side',
+		'low'
+	);
+}
+
+/******************************************************************************* 
+** thirstyRedirectTypeMeta
+** Redirect type override meta box
+** @since 2.3
+*******************************************************************************/
+function thirstyRedirectTypeMeta() {
+	wp_nonce_field( plugin_basename(__FILE__), 'thirstyaffiliates_noncename' );
+	
+	global $post;
+	$linkData = unserialize(get_post_meta($post->ID, 'thirstyData', true));
+	$thirstyOptions = get_option('thirstyOptions');
+
+	$redirectTypes = thirstyGetRedirectTypes();
+
+	echo "<p>Override the default redirection type for this link: </p><p>";
+	
+	foreach ($redirectTypes as $redirectTypeCode => $redirectTypeDesc) {
+		
+		// set default values
+		$linkTypeDefault = false;
+		$linkTypeSelected = false;
+
+		// check if this is the default link redirect type as per global settings
+		if (strcasecmp($thirstyOptions['linkredirecttype'], $redirectTypeCode) == 0)
+			$linkTypeDefault = true;
+
+		// check if the link specific redirect type is empty and if this is the default link type
+		// mark it as selected
+		if (empty($linkData['linkredirecttype'])) {
+			if ($linkTypeDefault)
+				$linkTypeSelected = true;
+		} else {
+			if (strcasecmp($linkData['linkredirecttype'], $redirectTypeCode) == 0) {
+				$linkTypeSelected = true;
+			}
+		}
+
+		echo '<input type="radio" name="thirsty[linkredirecttype]" id="thirstyOptionsLinkRedirectType' . $redirectTypeCode .'" ' . 
+			($linkTypeSelected ? 'checked="checked" ' : '') . 'value="' . $redirectTypeCode . 
+			'" /> <label for="thirstyOptionsLinkRedirectType' . $redirectTypeCode .'">' . 
+			$redirectTypeDesc . ($linkTypeDefault ? ' (default)' : '') . '</label><br />';
+
+	}
+
+	//echo '</p><p><span id="thirstyClearRedirectOverride" class="button-secondary">Clear Redirect Override</span></p>';
+
 }
 
 /******************************************************************************* 
@@ -603,10 +660,9 @@ function thirstySavePost($post_id) {
 	/* Get link data from post array */	
 	$linkDataNew = array();
 	$linkDataNew = $_POST['thirsty'];
-
+	
 	/* Set the link data to be the new link data */
 	$linkData = thirstyFilterData($linkDataNew);
-	
 	/* Because we trick wordpress into setting the post title by using our field
 	** name as post_title we need to make sure our meta data is updated to reflect
 	** that correct name.
@@ -654,17 +710,23 @@ function thirstySavePost($post_id) {
 *******************************************************************************/
 function thirstyFilterData($data) {
 	if (is_array($data)) {
-		foreach ($data as $elem) {
-			thirstyFilterData($elem);
+		foreach ($data as $key => $elem) {
+			// 2.3 (jkohlbach) - filtered data wasn't being passed on to array elements properly
+			$data[$key] = thirstyFilterData($elem);
 		}
 	} else {
-		$data = trim(htmlentities(strip_tags($data)));
+		// 2.3 (jkohlbach) - harden up the filtering so we can use wp_editor in some add-ons
+		if (empty($data))
+			return $data;
+		
+		$data = nl2br(trim(htmlentities(wp_kses_post($data), ENT_COMPAT)));
+		$breaks = array("\r\n", "\n", "\r");
+		$data = str_replace($breaks, "", $data);
+		
 		if (get_magic_quotes_gpc())
 			$data = stripslashes($data);
-		
 		$data = mysql_real_escape_string($data);
 	}
-	
     return $data;
 }
 
@@ -730,17 +792,29 @@ function thirstyRedirectUrl() {
 	if (get_post_type($post) == 'thirstylink') {
 		// Get link data and set the redirect url
 		$linkData = unserialize(get_post_meta($post->ID, 'thirstyData', true));
+		$thirstyOptions = get_option('thirstyOptions');
+
+		// Set redirect URL
 		$redirectUrl = $linkData['linkurl'];
+
+		// Set redirect type
+		$redirectType = $linkData['linkredirecttype'];
+		if (empty($redirectType))
+			$redirectType = $thirstyOptions['linkredirecttype'];
 		
 		// Apply any filters to the url before redirecting
 		$redirectUrl = apply_filters('thirstyFilterRedirectUrl', $redirectUrl);
+		$redirectType = apply_filters('thirstyFilterRedirectType', $redirectType);
 		
 		// Perform any actions before redirecting
 		do_action('thirstyBeforeLinkRedirect');
 		
+		if (empty($redirectType))
+			$redirectType = 301; // default to 301 redirect
+
 		// Redirect the page
 		if (!empty($redirectUrl))
-			wp_redirect($redirectUrl, 301);
+			wp_redirect($redirectUrl, intval($redirectType));
 		exit();
 	}
 }
@@ -777,7 +851,9 @@ function thirstyAdminHeader() {
 		wp_enqueue_script('media');
 	}
 	
-	if (!empty($post->post_type) && $post->post_type == 'thirstylink') {
+	if (!empty($post->post_type) && $post->post_type == 'thirstylink' || 
+		$_GET['page'] == 'thirsty-addons' ||
+		$_GET['page'] == 'thirsty-settings') {
 		wp_enqueue_style( 'thirstyStylesheet', plugins_url('thirstyaffiliates/css/thirstystyle.css'));
 		
 		wp_dequeue_script('jquery-ui-sortable');
@@ -1094,6 +1170,8 @@ function thirstyGetLinkCode($linkType = '', $linkID = '', $copiedText = '', $ima
 		$linkType = (!empty($_POST['linkType']) ? $_POST['linkType'] : '');
 	if (empty($linkID))
 		$linkID = (!empty($_POST['linkID']) ? $_POST['linkID'] : '');
+	if (empty($imageID))
+		$imageID = (!empty($_POST['imageID']) ? $_POST['imageID'] : '');
 	if (empty($copiedText))
 		$copiedText = (!empty($_POST['copiedText']) ? $_POST['copiedText'] : '');
 
@@ -1103,6 +1181,9 @@ function thirstyGetLinkCode($linkType = '', $linkID = '', $copiedText = '', $ima
 	if (empty($linkType))
 		$linkType = 'link';
 	
+	if ($linkType == 'image' && empty($imageID))
+		return;
+
 	// Get the link and thirsty options
 	$thirstyOptions = get_option('thirstyOptions');
 	$link = get_post($linkID);
@@ -1234,6 +1315,11 @@ function thirstyGetLinkCode($linkType = '', $linkID = '', $copiedText = '', $ima
 	die();
 }
 
+/******************************************************************************* 
+** thirstyGetThickboxContent
+** Get the link picker thickbox content
+** @since 2.2
+*******************************************************************************/
 function thirstyGetThickboxContent() {
 	?>
 	
@@ -1410,6 +1496,21 @@ function thirstyGetThickboxContent() {
 	
 	<?php
 	die();
+}
+
+/******************************************************************************* 
+** thirstyGetRedirectTypes
+** Return the redirect types in the system, the default plus anything any 
+** add-on adds to the list.
+** @since 2.3
+*******************************************************************************/
+function thirstyGetRedirectTypes() {
+	$redirectTypes = array(
+		'301' => '301 Permanent',
+		'302' => '302 Temporary'
+	);
+
+	return apply_filters('thirstyFilterRedirectTypeOptions', $redirectTypes);
 }
 
 /******************************************************************************* 

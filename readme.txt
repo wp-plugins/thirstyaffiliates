@@ -1,9 +1,9 @@
 === ThirstyAffiliates ===
-Contributors: jkohlbach,rymerawebco
+Contributors: jkohlbach, RymeraWebCo
 Donate link: 
 Tags: thirstyaffiliates, thirsty affiliates, affiliate marketing, affiliate link management, link cloaking, affiliate links, affiliate link, affiliate link manager, manage affiliate links, affiliate link redirect, link cloak, link cloaker, link redirect
 Requires at least: 3.4
-Tested up to: 3.6
+Tested up to: 3.8
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -91,6 +91,19 @@ Thanks to Matty of WooThemes for the workaround.
 Coming soon!
 
 == Changelog ==
+
+= 2.3 =
+* New Feature: Added the option to choose a global redirect type (301 or 302 at this stage) and also the option to override this per link
+* Admin layout compatiblity with WordPress 3.8 specifically responsiveness
+* Changed menu name to Affiliate Links as 3.8 made ThirstyAffiliates word wrap to the next line
+* Inserting images using the link picker stopped working due to imageID not being passed properly
+* Moving some core styles for the settings page to the core stylesheet
+* Improved data filtering function to selectively strip html on input data
+* Filtered data wasn't being passed to array elements properly and hence was unfiltered
+* 
+
+= 2.2.6 =
+* Tweaked add-on page layout
 
 = 2.2.5 =
 * Bug fix title attribute not showing on shortcodes
