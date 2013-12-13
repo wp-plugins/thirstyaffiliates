@@ -7,10 +7,10 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.3
+* Version: 2.3.1
 */
 
-define('THIRSTY_VERSION', '2.3', true);
+define('THIRSTY_VERSION', '2.3.1', true);
 
 /******************************************************************************* 
 ** thirstyRegisterPostType
@@ -232,7 +232,7 @@ function thirstyShowDestinationColumnInList($column) {
 		switch ($column) {
 		case 'thirstylink-destination':
 			$linkData = unserialize(get_post_meta($post->ID, 'thirstyData', true));
-			echo $linkData['linkurl'];
+			echo htmlspecialchars_decode($linkData['linkurl'], ENT_COMPAT);
 			break;
 		}
 		
@@ -719,7 +719,7 @@ function thirstyFilterData($data) {
 		if (empty($data))
 			return $data;
 		
-		$data = nl2br(trim(htmlentities(wp_kses_post($data), ENT_COMPAT)));
+		$data = nl2br(trim(htmlspecialchars(wp_kses_post($data), ENT_COMPAT)));
 		$breaks = array("\r\n", "\n", "\r");
 		$data = str_replace($breaks, "", $data);
 		
@@ -795,7 +795,7 @@ function thirstyRedirectUrl() {
 		$thirstyOptions = get_option('thirstyOptions');
 
 		// Set redirect URL
-		$redirectUrl = $linkData['linkurl'];
+		$redirectUrl = htmlspecialchars_decode($linkData['linkurl'], ENT_COMPAT);
 
 		// Set redirect type
 		$redirectType = $linkData['linkredirecttype'];
@@ -1513,6 +1513,10 @@ function thirstyGetRedirectTypes() {
 	return apply_filters('thirstyFilterRedirectTypeOptions', $redirectTypes);
 }
 
+function thirstyConvertSpecialToChars($redirectUrl) {
+	return htmlspecialchars_decode($redirectUrl, ENT_COMPAT);
+}
+
 /******************************************************************************* 
 ** thirstyAffiliatesActivation
 ** On activation add flush flag which gets removed after flushing the rules once
@@ -1560,6 +1564,9 @@ function thirstyInit() {
 		
 	/* Control redirection */
 	add_action('template_redirect', 'thirstyRedirectUrl', 1);
+
+	/* Filter to convert html special entities back to chars on redirect */
+	add_filter('thirstyFilterRedirectUrl', 'thirstyConvertSpecialToChars', 1, 1);
 	
 	if (is_admin()) {
 		require_once("ThirstyAdminPage.php");

@@ -92,6 +92,9 @@ Coming soon!
 
 == Changelog ==
 
+= 2.3.1 =
+* IMPORTANT BUG FIX: Fixed issue with special char filtering causing invalid redirects on some merchants, advise people who are on 2.3 to update to this version immediately.
+
 = 2.3 =
 * New Feature: Added the option to choose a global redirect type (301 or 302 at this stage) and also the option to override this per link
 * Admin layout compatiblity with WordPress 3.8 specifically responsiveness
@@ -99,8 +102,7 @@ Coming soon!
 * Inserting images using the link picker stopped working due to imageID not being passed properly
 * Moving some core styles for the settings page to the core stylesheet
 * Improved data filtering function to selectively strip html on input data
-* Filtered data wasn't being passed to array elements properly and hence was unfiltered
-* 
+* Filtered data wasn't being passed to array elements properly and hence was unfiltered 
 
 = 2.2.6 =
 * Tweaked add-on page layout
