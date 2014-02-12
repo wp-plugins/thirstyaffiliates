@@ -41,6 +41,7 @@ ThirstyAffiliates will create pretty links from ugly affiliate links (aka link r
 = Want more PRO features? =
 
 Some of our popular add-ons include:
+
 * Autolinker - get massive increase in your affiliate income by automatically linking affiliate links to keywords throughout your site
 * Stats - the insight you need to find out what links are popular on your site
 * Google Click Tracking - adds the special Google Analytics Click Event code on your affiliate links as you insert them
