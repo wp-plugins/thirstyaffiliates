@@ -7,10 +7,10 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.3.1
+* Version: 2.4
 */
 
-define('THIRSTY_VERSION', '2.3.1', true);
+define('THIRSTY_VERSION', '2.4', true);
 
 /******************************************************************************* 
 ** thirstyRegisterPostType
@@ -542,6 +542,7 @@ function thirstyLinkUrlMeta() {
 	
 	global $post;
 	$linkData = unserialize(get_post_meta($post->ID, 'thirstyData', true));
+
 	$linkData['nofollow'] = isset($linkData['nofollow']) ? 'checked="checked"' : '';
 	$linkData['newwindow'] = isset($linkData['newwindow']) ? 'checked="checked"' : '';
 	
@@ -766,7 +767,8 @@ function thirstyEditorButtons() {
 ** @since 1.0
 *******************************************************************************/
 function thirstyMCEButton($plugin_array) {
-	$plugin_array['thirstyaffiliates'] = plugins_url('thirstyaffiliates/thirstymce/editor_plugin.js');   
+	//$plugin_array['thirstyaffiliates'] = plugins_url('thirstyaffiliates/thirstymce/editor_plugin.js');   
+	$plugin_array['thirstyaffiliates'] = plugins_url('thirstyaffiliates/thirstymce/editor_plugin_src.js');
 	return $plugin_array;
 }
 
@@ -778,6 +780,7 @@ function thirstyMCEButton($plugin_array) {
 *******************************************************************************/
 function thirstyRegisterMCEButton($buttons) {
 	array_push($buttons, 'separator', 'thirstyaffiliates_button');
+	array_push($buttons, 'separator', 'thirstyaffiliates_quickaddlink_button');
 	return $buttons;
 }
 
@@ -852,8 +855,8 @@ function thirstyAdminHeader() {
 	}
 	
 	if (!empty($post->post_type) && $post->post_type == 'thirstylink' || 
-		$_GET['page'] == 'thirsty-addons' ||
-		$_GET['page'] == 'thirsty-settings') {
+		(isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] == 'thirsty-addons') ||
+		(isset($_GET['page']) && !empty($_GET['page']) && $_GET['page'] == 'thirsty-settings')) {
 		wp_enqueue_style( 'thirstyStylesheet', plugins_url('thirstyaffiliates/css/thirstystyle.css'));
 		
 		wp_dequeue_script('jquery-ui-sortable');
@@ -927,6 +930,11 @@ function thirstyQuicktags() {
 	jQuery(document).ready(function() {
 		if (typeof QTags != "undefined")
 			QTags.addButton("ThirstyAffiliates_Aff_Link", "affiliate link", thirstyQTagsButton, "", "", "Open the ThirstyAffiliates link picker", 30);
+		
+		// Quick add quick tag
+		if (typeof QTags != "undefined")
+			QTags.addButton("ThirstyAffiliates_quick_add_Aff_Link", "quick add affiliate link", thirstyQTagsButtonQuickAdd, "", "", "Open quick add affiliate link dialog", 31);
+
 	});
 	
 	function thirstyQTagsButton() {
@@ -934,6 +942,15 @@ function thirstyQuicktags() {
 			thirstyOpenLinkPicker(tinymce.activeEditor);
 		} else {
 			thirstyOpenLinkPicker();
+		}
+	}
+	
+	// Quick add affiliate link callback
+	function thirstyQTagsButtonQuickAdd() {
+		if (typeof tinymce != "undefined") {
+			thirstyOpenQuickAddLinkPicker(tinymce.activeEditor);
+		} else {
+			thirstyOpenQuickAddLinkPicker();
 		}
 	}
 	
@@ -969,7 +986,8 @@ function thirstyQuicktags() {
 	</script>
 	
 	<style>
-	.quicktags-toolbar input[value="affiliate link"] {
+	.quicktags-toolbar input[value="affiliate link"],
+	.quicktags-toolbar input[value="quick add affiliate link"] {
 		text-decoration: underline;
 		font-style: italic;
 	}</style>';
@@ -1499,6 +1517,430 @@ function thirstyGetThickboxContent() {
 }
 
 /******************************************************************************* 
+** thirstyGetQuickAddLinkThickboxContent
+** Get the quick add link thickbox content
+** Contributor: J++
+** @since 2.3.1
+*******************************************************************************/
+function thirstyGetQuickAddLinkThickboxContent() {
+	?>
+	<html>
+		<head>
+			<?php
+				wp_enqueue_script('editor');
+				wp_dequeue_script('jquery-ui-sortable');
+				wp_dequeue_script('admin-scripts');
+				do_action('admin_print_styles');
+				do_action('admin_print_scripts');
+				do_action('admin_head');
+			?>
+			<style>
+				body {
+					font: 14px/16px sans-serif;
+					background: #fff;
+				}
+
+				#heading_title {
+					display: block;
+					margin: 10px auto 0px auto;
+				}
+				
+				#quick-add-link-container {
+					padding: 1em 3em;
+				}
+				
+				#error-bulletin {
+					padding: .4em .8em;
+					border: 1px solid #BB0E19 !important;
+					background-color: #FFEFF0;
+					font-size: 1em;
+					/*font-family: arial, sans-serif;*/
+					font-family: 'Open Sans', sans-serif;
+					margin: 1em 0;
+					color: #BB0E19;
+					display: none;
+					border-radius: 3px;
+				}
+
+				#quick-add-link-form {
+					display: block;
+				}
+
+				.field_row {
+					padding: .2em;
+					margin-bottom: 1em;
+				}
+				.field_row label,
+				.field_row .desc {
+					display: block;
+					font-size: 14px;
+					color: #444444;
+					/*font-family: arial, sans-serif;*/
+					font-family: 'Open Sans', sans-serif;
+					margin-bottom: .4em;
+					font-weight: normal;
+				}
+				.field_row .errmsg {
+					display: none;
+					color: red;
+					font-size: 12px;
+					font-weight: bold;
+					/*font-family: arial, sans-serif;*/
+					font-family: 'Open Sans', sans-serif;
+					margin-bottom: .4em;
+				}
+				.field_row .desc {
+					font-size: 12px;
+					font-style: italic;
+				}
+				.field_row input[type="text"] {
+					display: block;
+					width: 100%;
+					border: 1px solid #DDD;
+					padding: 5px;
+					margin-bottom: .4em;
+					height: 31px;
+					font-size: 14px;
+					box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
+					background-color: #fff;
+					color: #333;
+				}
+				.field_row select {
+					padding: 2px;
+					line-height: 28px;
+					height: 28px;
+					vertical-align: middle;
+					border-color: #ddd;
+					box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
+					background-color: #fff;
+					color: #333;
+					font-size: 14px;
+				}
+				.field_row select option {
+					font-weight: normal;
+					font: inherit;
+					line-height: 28px;
+				}
+				.field_row .err {
+					border: 1px solid #BB0E19 !important;
+					background-color: #FFEFF0;
+				}
+				.field_row .option label {
+					cursor: pointer;
+				}
+				.field_row .button-primary {
+					margin-top: 8px;
+					margin-bottom: 5px;
+					background: #2ea2cc;
+					border-color: #0074a2;
+					-webkit-box-shadow: inset 0 1px 0 rgba(120,200,230,.5),0 1px 0 rgba(0,0,0,.15);
+					box-shadow: inset 0 1px 0 rgba(120,200,230,.5),0 1px 0 rgba(0,0,0,.15);
+					color: #fff;
+					text-decoration: none;
+				}
+				.field_row .button-primary:hover {
+					background: #1e8cbe;
+					-webkit-box-shadow: inset 0 1px 0 rgba(120,200,230,.6);
+					box-shadow: inset 0 1px 0 rgba(120,200,230,.6);
+				}
+				.field_row .button_secondary {
+					color: #555;
+					border-color: #ccc;
+					background: #f7f7f7;
+					-webkit-box-shadow: inset 0 1px 0 #fff,0 1px 0 rgba(0,0,0,.08);
+					box-shadow: inset 0 1px 0 #fff,0 1px 0 rgba(0,0,0,.08);
+					vertical-align: top;
+				}
+				.field_row .button_secondary:hover {
+					background: #fafafa;
+					border-color: #999;
+					color: #222;
+				}
+				.field_row .button {
+					display: inline-block;
+					line-height: 26px;
+					height: 28px;
+					margin: 0;
+					padding: 0 10px 1px;
+					cursor: pointer;
+					border-width: 1px;
+					border-style: solid;
+					-webkit-border-radius: 3px;
+					-webkit-appearance: none;
+					border-radius: 3px;
+					white-space: nowrap;
+					box-sizing: border-box;
+					margin-left: 5px;
+					font-size: 14px;
+					font-family: Arial, sans-serif;
+				}
+				.field_row.button-container {
+					text-align: right;
+				}
+			</style>
+		</head>
+		<body>
+			<div id="quick-add-link-container">
+				
+				<?php
+					// Create Nonce
+					wp_nonce_field(plugin_basename(__FILE__), 'quick_add_aff_link_nonce');
+
+					// Get Global Options
+					$thirstyOptions = get_option('thirstyOptions');
+				?>
+
+				<img id="heading_title" src="<?php echo plugins_url('thirstyaffiliates/'); ?>images/thirstylogo.png" alt="Affiliate Link Picker" />
+				
+				<div id="error-bulletin"></div>
+
+				<div id="quick-add-link-form">
+					
+					<div class="field_row">
+						<label for="qal_link_name">Link Name:</label>
+						<input type="text" name="qal_link_name" id="qal_link_name">
+						<div class="errmsg"></div>
+					</div>
+
+					<div class="field_row">
+						<label for="qal_destination_url">Destination URL:</label>
+						<div class="desc">http:// or https:// is required</div>
+						<input type="text" name="qal_destination_url" id="qal_destination_url">
+						<div class="errmsg"></div>
+
+						<?php
+
+							/* Only display link nofollow setting if the global nofollow setting is disabled */
+							if ($thirstyOptions['nofollow'] != 'on') {
+								?>
+								<div class="option"><label for="qal_no_follow_link"><input type="checkbox" name="qal_no_follow_link" value="on" id="qal_no_follow_link">No follow this link?</label></div>
+								<?php
+							}
+							
+							/* Only display link new window setting if the global new window setting is disabled */
+							if ($thirstyOptions['newwindow'] != 'on') {
+								?>
+								<div class="option"><label for="qal_new_window"><input type="checkbox" name="qal_new_window" value="on" id="qal_new_window">Open this link in new window?</label></div>
+								<?php
+							}
+
+						?>
+					</div>
+					
+					<div class="field_row">
+						<label>Redirect Type</label>
+						<span class="desc">Override the default redirection type for this link:</span>
+						<?php
+							foreach (thirstyGetRedirectTypes() as $key => $value) {
+								?>
+								<div class="option">
+									<label>
+										<input type="radio" name="qal_redirect_type" value="<?php echo $key; ?>" <?php echo (strcasecmp($key, $thirstyOptions['linkredirecttype']) == 0)?"checked":""; ?>>
+										<?php echo $value; ?>
+										<?php echo (strcasecmp($key, $thirstyOptions['linkredirecttype']) == 0)?" (Default)":""; ?>
+									</label>
+								</div>
+								<?php		
+							}
+						?>
+					</div>
+					
+					<?php
+						/* If we are using categories in slugs force user to select a category */
+						if (!empty($thirstyOptions['showcatinslug']) && $thirstyOptions['showcatinslug'] == 'on') {
+							$selectedLinkCats = wp_get_post_terms($post_id, 'thirstylink-category');
+							
+							if(empty($selectedLinkCats)) {
+								$defaultCat = 'Uncategorized';
+								
+								// create the default term if it doesn't exist
+								if (!term_exists($defaultCat, 'thirstylink-category')) {
+									wp_insert_term($defaultCat, 'thirstylink-category');
+								}
+								
+								// get the default term and set this post to have it
+								$defaultTerm = get_term_by('name', $defaultCat, 'thirstylink-category');
+								wp_set_post_terms($post_id, $defaultTerm->term_id, 'thirstylink-category');
+							}
+						}
+					?>
+
+					<?php
+						/* Only show category when the show category in slug setting is turned on */
+						if(strcasecmp($thirstyOptions['showcatinslug'], "on") == 0){
+
+							// Retrieve all link categories
+							$link_categories = get_terms("thirstylink-category", array('hide_empty' => false));
+
+							if(count($link_categories) > 0){
+								// If no category term is present, create one, coz we really need this for the plugin to work properly
+								if (!term_exists('Uncategorized', 'thirstylink-category')) {
+									wp_insert_term('Uncategorized', 'thirstylink-category');
+								}
+
+								// Ok, Retrieve again all link categories
+								$link_categories = get_terms("thirstylink-category", array('hide_empty' => false));
+							}
+
+							// Only show combo box if there are indeed link categories
+							if(count($link_categories) > 0){
+								?>
+								<div class="field_row">
+									<label for="">Link Categories</label>
+									<span class="desc">You must select a link category as you set the general setting to include category on the link</span>
+									<select name="qal_link_categories" id="qal_link_categories">
+									<?php
+										foreach (get_terms("thirstylink-category", array('hide_empty' => false)) as $link_category) {
+											?>
+											<option value="<?php echo $link_category->term_id; ?>"><?php echo $link_category->name; ?></option>
+											<?php
+										}
+									?>
+									</select>
+								</div>
+								<?php
+							}
+						}
+					?>
+					
+					<div class="field_row button-container">
+						<input type="button" id="add-link" class="button button_secondary" value="Add Link">
+						<input type="button" id="quick-add-link" class="button button-primary" value="Add Link &amp; Insert Into Post">
+					</div>
+
+				</div><!-- quick-add-link-form -->
+			</div><!-- quick-add-link-container -->
+
+
+		<?php echo '<script type="text/javascript">var thirstyPluginDir = "' . 
+			plugins_url('thirstyaffiliates/') . '";
+			var thirstyMCE;</script>';?>
+			
+		<script type="text/javascript" src="<?php echo plugins_url('thirstyaffiliates/'); ?>js/ThirstyQuickAddLinkPicker.js"></script>
+		</body>
+	</html>
+
+	<?php
+	die();
+}
+
+/******************************************************************************* 
+** quickCreateAffiliateLink
+** Quick create affiliate link
+** Contributor: J++
+** @since 2.3.1
+*******************************************************************************/
+function quickCreateAffiliateLink($linkname = '', $linkurl = '', $nofollow = '', $newwindow = '', $linkredirecttype = '', $linkCategory ='', $echo = true) {
+
+	// Validate Nonce
+	if(!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], plugin_basename(__FILE__))) {
+		echo "You don't have appropriate permission to perform this action";
+		echo $_POST['nonce'];
+		die();
+	}
+
+
+	/*==========  Server side validation  ==========*/
+	$linkname			=	stripslashes(strip_tags(trim($_POST['linkname'])));
+	$linkurl			=	stripslashes(strip_tags(trim($_POST['linkurl'])));
+	$nofollow			=	stripslashes(strip_tags(trim($_POST['nofollow'])));
+	$newwindow			=	stripslashes(strip_tags(trim($_POST['newwindow'])));
+	$linkredirecttype	=	stripslashes(strip_tags(trim($_POST['linkredirecttype'])));
+	$allGood			=	true;
+
+	// Link Name
+	if(strcasecmp($linkname, "") == 0){
+		$allGood = false;
+	}
+
+	// Link URL
+	if(strcasecmp($linkurl, "") == 0){
+		$allGood = false;
+	}
+
+	// Checkpoint
+	if(!$allGood){
+
+		// Kill the flow
+		// TODO: Enhance error message
+		echo "Server Error: Some fields dont have appropriate values";
+		die();
+
+	}else{
+
+		/*==========  Create new affiliate link  ==========*/
+
+		// Insert new post
+		$current_user = wp_get_current_user();
+
+		$new_post = array(
+					  'post_author'		=>	$current_user->ID,
+					  'post_date'		=>	current_time('mysql'),
+					  'post_date_gmt'	=>	current_time('mysql', true),
+					  'post_title'		=>	$linkname,
+					  'post_status'		=>	'publish',
+					  'post_type'		=>	'thirstyLink'
+					);
+
+		$new_post_id = wp_insert_post($new_post);
+
+		// Check if inserting new post was succeful
+		if($new_post_id == 0){
+
+			// Kill the flow
+			// TODO: Enhance error message
+			echo "Server Error: Failed to dynamically insert new post";
+			die();
+
+		}else{
+
+			/*==========  Update meta data  ==========*/
+			// Update post meta for the newly dynamically created post
+			$linkData = array(
+							'linkname'			=>	$linkname,
+							'linkurl'			=>	$linkurl,
+							'linkredirecttype'	=>	$linkredirecttype
+						);
+
+			// Check if nofollow meta contains valid data
+			if(strcasecmp($nofollow, "on") == 0){
+				$linkData['nofollow'] = $nofollow;
+			}
+
+			// Check if newwindow meta contains valid data
+			if(strcasecmp($newwindow, "on") == 0){
+				$linkData['newwindow'] = $newwindow;
+			}
+
+			$meta_update_status = update_post_meta($new_post_id, 'thirstyData', serialize($linkData));
+
+			if(!$meta_update_status){
+
+				// Kill the flow
+				// TODO: Enhance error message
+				echo "Server Error: Failed to update meta data of recently dynamically created post";
+				die();
+
+			}
+
+			/*==========  Set link category if required  ==========*/
+			if( isset($_POST['linkCategory']) ){
+				$linkCat = array( trim($_POST['linkCategory']) );
+
+				wp_set_post_terms( $new_post_id, $linkCat, 'thirstylink-category' );
+			}
+
+		}// if($new_post_id == 0) else
+
+	}// if(!$allGood) else
+
+	// Return the newly created post id for use in inserting link to editor
+	echo $new_post_id;
+	die();
+
+}
+
+/******************************************************************************* 
 ** thirstyGetRedirectTypes
 ** Return the redirect types in the system, the default plus anything any 
 ** add-on adds to the list.
@@ -1596,6 +2038,8 @@ function thirstyInit() {
 	add_action('wp_ajax_thirstyUnattachImageFromLink', 'thirstyUnattachImageFromLink');
 	add_action('wp_ajax_thirstyGetLinkCode', 'thirstyGetLinkCode');
 	add_action('wp_ajax_thirstyGetThickboxContent', 'thirstyGetThickboxContent');
+	add_action('wp_ajax_thirstyGetQuickAddLinkThickboxContent', 'thirstyGetQuickAddLinkThickboxContent');
+	add_action('wp_ajax_quickCreateAffiliateLink', 'quickCreateAffiliateLink');
 }
 
 register_activation_hook(__FILE__, 'thirstyAffiliatesActivation');

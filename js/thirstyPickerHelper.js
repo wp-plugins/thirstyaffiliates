@@ -7,6 +7,14 @@ function thirstyOpenLinkPicker(ed) {
 	//tb_show("Add an Affiliate Link", thirstyPluginDir + 'ThirstyLinkPicker.php?TB_inline=true');
 }
 
+function thirstyOpenQuickAddLinkPicker(ed){
+	thirstyMCE = ed;
+
+	tb_show("Quick Add Affiliate Link", thirstyAjaxLink + '?action=thirstyGetQuickAddLinkThickboxContent&height=640&width=640&TB_iframe=true');
+	
+	//tb_show("Quick Add Affiliate Link", thirstyPluginDir + 'ThirstyLinkPicker.php?TB_inline=true');
+}
+
 function thirstyInsertLink(linkcode) {
 	var richEditorActive = false;
 	if (parent.thirstyMCE != null && !parent.thirstyMCE.isHidden()) {

@@ -26,7 +26,7 @@
 		 * @param {string} url Absolute URL to where the plugin is located.
 		 */
 		init : function(ed, url) {
-			// Register command
+			// Register commands
 			ed.addCommand('ThirstyAffiliates', function() {
 				
 				/* Open the link chooser and pass the editor into it for 
@@ -35,11 +35,25 @@
 				thirstyOpenLinkPicker(ed);
 				
 			});
+
+			ed.addCommand('ThirstyAffiliatesQuickAddLink', function() {
+				
+				/* Open the quick add link thick box */
+				
+				thirstyOpenQuickAddLinkPicker(ed);
+				
+			});			
 			
 			ed.addButton('thirstyaffiliates_button', {
 				title : 'Add Affiliate Link',
 				image : url + '/img/aff.gif',
 				cmd : 'ThirstyAffiliates'
+			});
+
+			ed.addButton('thirstyaffiliates_quickaddlink_button', {
+				title : 'Quick Add Affiliate Link',
+				image : url + '/img/aff-new.gif',
+				cmd : 'ThirstyAffiliatesQuickAddLink'
 			});
 		}
 		

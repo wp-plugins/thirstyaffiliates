@@ -25,9 +25,10 @@ ThirstyAffiliates will create pretty links from ugly affiliate links (aka link r
 
 * Inbuilt affiliate link shortening/link cloaking (yourwebsite.com/recommends/your-affiliate-link)
 * Commission protecting affiliate link 301 redirection
-* Customizable link URL prefixes – dozens to choose from or use your own custom prefix
+* Customizable link URL prefixes – loads to choose from or use your own custom prefix
 * Hierarchical link categorization to easily segment links
 * Handy affiliate link picker tool (with full instant search capabilities) makes it easy to insert affiliate links in posts, pages and comments!
+* Handy quick add tool lets you easily create new affiliate links without even leaving the post edit screen
 * Show category slugs in link URLs
 * DoFollow/NoFollow options (global or per link)
 * Open in new window options (global or per link)
@@ -37,8 +38,17 @@ ThirstyAffiliates will create pretty links from ugly affiliate links (aka link r
 * Using the link picker insert affiliate links as standard links, shortcodes (great for adding classes for link styling), or pre-linked images.
 * Add your graphics, banners and other images to affiliate links for easy insertion
 
-= Want more features? =
-[Check out our Official ThirstyAffiliates Add-ons](http://thirstyaffiliates.com/add-ons)!
+= Want more PRO features? =
+
+Some of our popular add-ons include:
+* Autolinker - get massive increase in your affiliate income by automatically linking affiliate links to keywords throughout your site
+* Stats - the insight you need to find out what links are popular on your site
+* Google Click Tracking - adds the special Google Analytics Click Event code on your affiliate links as you insert them
+* CSV Importer - import your links from other packages in simple CSV format
+* Geolocations - geo target your visitors and redirect them to geographically appropriate alternative affiliate URLs, a great way to level up your income
+* Scheduled Links - create special schedules for your affiliate links to automatically change the destination URL, great for sales running during a specific time period
+
+[Check out all the ThirstyAffiliates Add-ons](http://thirstyaffiliates.com/add-ons)
 
 == Installation ==
 
@@ -91,6 +101,10 @@ Thanks to Matty of WooThemes for the workaround.
 Coming soon!
 
 == Changelog ==
+
+= 2.4 =
+* New Feature: Quick Add button on TinyMCE editor lets you add new affiliate links on the fly without leaving the edit screen
+* Fixed admin site debug warning on non-ThirstyAffiliates pages
 
 = 2.3.1 =
 * IMPORTANT BUG FIX: Fixed issue with special char filtering causing invalid redirects on some merchants, advise people who are on 2.3 to update to this version immediately.
