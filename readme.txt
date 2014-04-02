@@ -99,7 +99,15 @@ Thanks to Matty of WooThemes for the workaround.
 
 == Screenshots ==
 
-Coming soon!
+1. Affiliate link listing
+
+2. Edit screen for a single affiliate link
+
+3. The affiliate link picker dialog, shows up when you press the green 'aff' icon on any editor box
+
+4. Insertion options for affiliate link in the affiliate link picker
+
+5. Settings page
 
 == Changelog ==
 
