@@ -111,6 +111,9 @@ Thanks to Matty of WooThemes for the workaround.
 
 == Changelog ==
 
+= 2.4.1 =
+* IMPORTANT BUG FIX: Default post status is no longer set to 'publish' when left empty in 3.8.2 so we need to set in our custom post save box otherwise you can't save new links.
+
 = 2.4 =
 * New Feature: Quick Add button on TinyMCE editor lets you add new affiliate links on the fly without leaving the edit screen
 * Fixed admin site debug warning on non-ThirstyAffiliates pages

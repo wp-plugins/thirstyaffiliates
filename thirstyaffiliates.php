@@ -7,10 +7,10 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.4
+* Version: 2.4.1
 */
 
-define('THIRSTY_VERSION', '2.4', true);
+define('THIRSTY_VERSION', '2.4.1', true);
 
 /******************************************************************************* 
 ** thirstyRegisterPostType
@@ -501,6 +501,7 @@ function thirstySaveLinkMeta() {
 	global $post;
 	
 	echo '<p class="thirstySaveMe">NOTE: Please save your link after adding or removing images</p>';
+	echo '<input name="post_status" type="hidden" id="post_status" value="publish" />';
 	echo '<input name="original_publish" type="hidden" id="original_publish" value="Save" />';
 	echo '<input name="save" type="submit" class="button-primary" id="publish" tabindex="5" accesskey="p" value="Save Link">';
 	
