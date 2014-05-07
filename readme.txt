@@ -1,9 +1,9 @@
 === ThirstyAffiliates ===
 Contributors: jkohlbach, RymeraWebCo
-Donate link: 
+Donate link:
 Tags: thirstyaffiliates, thirsty affiliates, affiliate marketing, affiliate link management, link cloaking, affiliate links, affiliate link, affiliate link manager, manage affiliate links, affiliate link redirect, link cloak, link cloaker, link redirect
 Requires at least: 3.4
-Tested up to: 3.8
+Tested up to: 3.9
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -111,6 +111,11 @@ Thanks to Matty of WooThemes for the workaround.
 
 == Changelog ==
 
+= 2.4.2 =
+* Bugfix: Had to retire data filtering with mysql_ escape functions in favour of using esc_sql as provided by WordPress core. Some servers now don't support mysql_ functions at all (thanks Daniel)
+* Bugfix: If the post isn't an affiliate link, skip slug shortening
+* Feature: Added disable slug shortening option to turn off removing stop words from affiliate link urls
+
 = 2.4.1 =
 * IMPORTANT BUG FIX: Default post status is no longer set to 'publish' when left empty in 3.8.2 so we need to set in our custom post save box otherwise you can't save new links.
 
@@ -123,12 +128,12 @@ Thanks to Matty of WooThemes for the workaround.
 
 = 2.3 =
 * New Feature: Added the option to choose a global redirect type (301 or 302 at this stage) and also the option to override this per link
-* Admin layout compatiblity with WordPress 3.8 specifically responsiveness
+* Admin layout compatibility with WordPress 3.8 specifically responsiveness
 * Changed menu name to Affiliate Links as 3.8 made ThirstyAffiliates word wrap to the next line
 * Inserting images using the link picker stopped working due to imageID not being passed properly
 * Moving some core styles for the settings page to the core stylesheet
 * Improved data filtering function to selectively strip html on input data
-* Filtered data wasn't being passed to array elements properly and hence was unfiltered 
+* Filtered data wasn't being passed to array elements properly and hence was unfiltered
 
 = 2.2.6 =
 * Tweaked add-on page layout

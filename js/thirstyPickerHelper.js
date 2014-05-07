@@ -3,16 +3,12 @@ function thirstyOpenLinkPicker(ed) {
 	thirstyMCE = ed;
 	
 	tb_show("Add an Affiliate Link", thirstyAjaxLink + '?action=thirstyGetThickboxContent&height=640&width=640&TB_iframe=true');
-	
-	//tb_show("Add an Affiliate Link", thirstyPluginDir + 'ThirstyLinkPicker.php?TB_inline=true');
 }
 
 function thirstyOpenQuickAddLinkPicker(ed){
 	thirstyMCE = ed;
 
 	tb_show("Quick Add Affiliate Link", thirstyAjaxLink + '?action=thirstyGetQuickAddLinkThickboxContent&height=640&width=640&TB_iframe=true');
-	
-	//tb_show("Quick Add Affiliate Link", thirstyPluginDir + 'ThirstyLinkPicker.php?TB_inline=true');
 }
 
 function thirstyInsertLink(linkcode) {

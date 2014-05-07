@@ -70,8 +70,21 @@ function printSearchResults(html, replace) {
 	jQuery('.insert_link').unbind();
 	
 	jQuery('.insert_link').click(function() {
+
 		var linkID = jQuery(this).attr('linkID');
 		var copiedText = thirstyGetCopiedText();
+
+		// Check if there are anything selected on the editor
+		// If none, use the linkname
+		if((copiedText == "") || (jQuery.trim(copiedText) == "")){
+			
+			// Select the image control with appropriate linkid
+			// Go up to the closest table row
+			// Go down to that particular row's span with a class of linkname
+			// Get the text
+			var linkname	=	jQuery("img[linkid='"+linkID+"']").closest("tr").find(".linkname").text();
+			copiedText 		=	linkname;
+		}
 		
 		// Make ajax call to get the link code
 		jQuery.post(

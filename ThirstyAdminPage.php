@@ -21,9 +21,9 @@ function thirstyAdminOptions() {
 	if (!current_user_can('manage_options'))  {
 		wp_die( __('You do not have suffifient permissions to access this page.') );
 	}
-	
+
 	$thirstyOptions = get_option('thirstyOptions');
-	
+
 	$linksRebuilt = false;
 	if ($thirstyOptions['rebuildlinks'] == 'true') {
 		$thirstyOptions['rebuildlinks'] = 'false';
@@ -39,7 +39,7 @@ function thirstyAdminOptions() {
 		$thirstyOptions['linkprefix'] = 'recommends';
 		update_option('thirstyOptions', $thirstyOptions);
 	}
-	
+
 	$redirectTypes = thirstyGetRedirectTypes();
 
 	// Sanity check on link redirect type
@@ -54,31 +54,32 @@ function thirstyAdminOptions() {
 	$thirstyOptions['legacyuploader'] = isset($thirstyOptions['legacyuploader']) ? 'checked="checked"' : '';
 	$thirstyOptions['disabletitleattribute'] = isset($thirstyOptions['disabletitleattribute']) ? 'checked="checked"' : '';
 	$thirstyOptions['disablethirstylinkclass'] = isset($thirstyOptions['disablethirstylinkclass']) ? 'checked="checked"' : '';
+	$thirstyOptions['disableslugshortening'] = isset($thirstyOptions['disableslugshortening']) ? 'checked="checked"' : '';
 
-	echo '<script type="text/javascript">var thirstyPluginDir = "' . 
+	echo '<script type="text/javascript">var thirstyPluginDir = "' .
 	plugins_url('thirstyaffiliates/') . '";
 	var thirstyJSEnable = true;
 	</script>';
-	
+
 	echo '<div class="wrap">';
-	
+
 	echo '<img id="thirstylogo" src="' . plugins_url('thirstyaffiliates/images/thirstylogo.png') . '" alt="ThirstyAffiliates" />';
-	
+
 	echo '<form id="thirstySettingsForm" method="post" action="options.php">';
-	
+
 	wp_nonce_field('update-options');
 	settings_fields('thirstyOptions');
-	
+
 	if (!empty($_GET['settings-updated'])) {
-		echo '<div id="message" class="updated below-h2"><p>Settings updated.</p>' . 
+		echo '<div id="message" class="updated below-h2"><p>Settings updated.</p>' .
 		($linksRebuilt ? '<p>Links rebuilt.</p>' : '') . '</div>';
 	}
-	
+
 	echo '
 	<table class="thirstyTable form-table" cellspacing="0" cellpadding="0">
-	
+
 	<tr><td><h3 style="margin-top: 0;">General Settings</h3></td></tr>
-	
+
 	<tr>
 		<th>
 			<label for="thirstyOptions[linkprefix]">Link Prefix:</label>
@@ -86,22 +87,22 @@ function thirstyAdminOptions() {
 		<td>
 			<select id="thirstyOptionsLinkPrefix" name="thirstyOptions[linkprefix]">
 				<option value="custom"' . (!empty($thirstyOptions['linkprefix']) && $thirstyOptions['linkprefix'] == 'custom' ? ' selected' : '') . '>-- Custom --</option>';
-	
+
 		thirstyGenerateSelectOptions(array("recommends", "link", "go", "review",
 			"product", "suggests", "follow", "endorses", "proceed", "fly", "goto",
 			"get", "find", "act", "click", "move", "offer", "run"), true);
-		
+
 		echo '</select><br />
 			<input type="text" id="thirstyCustomLinkPrefix" value="' . (isset($thirstyOptions['linkprefixcustom']) ? $thirstyOptions['linkprefixcustom'] : '') . '" name="thirstyOptions[linkprefixcustom]" />';
-		
+
 		if (!empty($thirstyOptions['linkprefix']) && $thirstyOptions['linkprefix'] == 'custom') {
 			echo '<script type="text/javascript">
 			jQuery("#thirstyCustomLinkPrefix").show();</script>';
 		}
-		
+
 		echo '</td>
 		<td>
-			<span class="description">The prefix that comes before your cloaked link\'s slug.<br />eg. ' . 
+			<span class="description">The prefix that comes before your cloaked link\'s slug.<br />eg. ' .
 			trailingslashit(get_bloginfo('url')) . '<span style="font-weight: bold;">' . thirstyGetCurrentSlug() . '</span>/your-affiliate-link-name</span>
 			<br /><span class="description"><b>Warning:</b> Changing this setting after you\'ve used links in a post could break those links. Be careful!</span>
 		</td>
@@ -111,11 +112,11 @@ function thirstyAdminOptions() {
 		<th>
 			<label for="thirstyOptions[showcatinslug]">Show Link Category in URL?</label>
 		<td>
-			<input type="checkbox" name="thirstyOptions[showcatinslug]" id="thirstyOptionsShowCatInSlug" ' . 
+			<input type="checkbox" name="thirstyOptions[showcatinslug]" id="thirstyOptionsShowCatInSlug" ' .
 			$thirstyOptions['showcatinslug'] . ' />
 		</td>
 		<td>
-			<span class="description">Show the selected category in the url. eg. ' . 
+			<span class="description">Show the selected category in the url. eg. ' .
 			trailingslashit(get_bloginfo('url')) . '' . thirstyGetCurrentSlug() . '/<span style="font-weight: bold;">link-category</span>/your-affiliate-link-name</span></span>
 			<br /><span class="description"><b>Warning:</b> Changing this setting after you\'ve used links in a post could break those links. Be careful!</span>
 		</td>
@@ -125,14 +126,14 @@ function thirstyAdminOptions() {
 		<th>
 			<label for="thirstyOptions[linkredirecttype]">Link Redirect Type:</label>
 		<td>';
-	
+
 	foreach ($redirectTypes as $redirectTypeCode => $redirectTypeDesc) {
-		
+
 		$linkTypeSelected = false;
 		if (strcasecmp($thirstyOptions['linkredirecttype'], $redirectTypeCode) == 0)
 			$linkTypeSelected = true;
 
-		echo '<input type="radio" name="thirstyOptions[linkredirecttype]" id="thirstyOptionsLinkRedirectType' . $redirectTypeCode .'" ' . 
+		echo '<input type="radio" name="thirstyOptions[linkredirecttype]" id="thirstyOptionsLinkRedirectType' . $redirectTypeCode .'" ' .
 			($linkTypeSelected ? 'checked="checked" ' : '') . 'value="' . $redirectTypeCode . '" /> <label for="thirstyOptionsLinkRedirectType' . $redirectTypeCode .'">' . $redirectTypeDesc . '</label><br />';
 
 	}
@@ -143,96 +144,108 @@ function thirstyAdminOptions() {
 			<span class="description">This is the type of redirect ThirstyAffiliates will use to redirect the user to your affiliate link.</span>
 		</td>
 	</tr>
-	
+
 	<tr>
 		<th>
 			<label for="thirstyOptions[nofollow]">Use no follow on links?</label>
 		<td>
-			<input type="checkbox" name="thirstyOptions[nofollow]" id="thirstyOptionsNofollow" ' . 
+			<input type="checkbox" name="thirstyOptions[nofollow]" id="thirstyOptionsNofollow" ' .
 			$thirstyOptions['nofollow'] . ' />
 		</td>
 		<td>
 			<span class="description">Add the nofollow attribute to links so search engines don\'t index them</span>
 		</td>
 	</tr>
-	
+
 	<tr>
 		<th>
 			<label for="thirstyOptions[newwindow]">Open links in new window?</label>
 		<td>
-			<input type="checkbox" name="thirstyOptions[newwindow]" id="thirstyOptionsNewwindow" ' . 
+			<input type="checkbox" name="thirstyOptions[newwindow]" id="thirstyOptionsNewwindow" ' .
 			$thirstyOptions['newwindow'] . ' />
 		</td>
 		<td>
 			<span class="description">Force the user to open links in a new window or tab</span>
 		</td>
 	</tr>
-	
+
 	<tr>
 		<th>
 			<label for="thirstyOptions[legacyuploader]">Revert to legacy image uploader?</label>
 		<td>
-			<input type="checkbox" name="thirstyOptions[legacyuploader]" id="thirstyOptionsLegacyUploader" ' . 
+			<input type="checkbox" name="thirstyOptions[legacyuploader]" id="thirstyOptionsLegacyUploader" ' .
 			$thirstyOptions['legacyuploader'] . ' />
 		</td>
 		<td>
 			<span class="description">Disable the new media uploader in favour of the old style uploader</span>
 		</td>
 	</tr>
-	
+
 	<tr>
 		<th>
 			<label for="thirstyOptions[disabletitleattribute]">Disable title attribute output on link insertion?</label>
 		<td>
-			<input type="checkbox" name="thirstyOptions[disabletitleattribute]" id="thirstyOptionsDisableTitleAttribute" ' . 
+			<input type="checkbox" name="thirstyOptions[disabletitleattribute]" id="thirstyOptionsDisableTitleAttribute" ' .
 			$thirstyOptions['disabletitleattribute'] . ' />
 		</td>
 		<td>
-			<span class="description">Links are automatically output with a title html attribute (by default this shows the text 
+			<span class="description">Links are automatically output with a title html attribute (by default this shows the text
 			that you have linked), this option lets you disable the output of the title attribute on your links.</span>
 		</td>
 	</tr>
-	
+
 	<tr>
 		<th>
 			<label for="thirstyOptions[disablethirstylinkclass]">Disable automatic output of ThirstyAffiliates CSS classes?</label>
 		<td>
-			<input type="checkbox" name="thirstyOptions[disablethirstylinkclass]" id="thirstyOptionsDisableThirstylinkClass" ' . 
+			<input type="checkbox" name="thirstyOptions[disablethirstylinkclass]" id="thirstyOptionsDisableThirstylinkClass" ' .
 			$thirstyOptions['disablethirstylinkclass'] . ' />
 		</td>
 		<td>
-			<span class="description">To help with styling your affiliate links a CSS class called "thirstylink" is added 
-			to the link and a CSS class called "thirstylinkimg" is added to images (when inserting image affiliate links), 
+			<span class="description">To help with styling your affiliate links a CSS class called "thirstylink" is added
+			to the link and a CSS class called "thirstylinkimg" is added to images (when inserting image affiliate links),
 			this option disables the addition of both of these CSS classes.</span>
 		</td>
+	</tr>
+
+	<tr>
+		<th>
+			<label for="thirstyOptions[disableslugshortening]">Disable slug shortening?</label>
+		<td>
+			<input type="checkbox" name="thirstyOptions[disableslugshortening]" id="thirstyOptionsDisableSlugShortening" ' .
+			$thirstyOptions['disableslugshortening'] . ' />
+		</td>
+		<td>
+			<span class="description">By default, ThirstyAffiliates removes superfluous words from your cloaked link URLs, this option turns that feature off.</span>
+		</td>
 	</tr>';
-	
+
 	do_action('thirstyAffiliatesAfterMainSettings');
-	
+
 	echo '
 	</table>
-	
+
 	<input type="hidden" name="thirstyOptions[rebuildlinks]" id="thirstyHiddenRebuildFlag" value="false" />
-	
+
 	<input type="hidden" name="page_options" value="thirstyOptions" />
-	
+
 	<p class="submit">
 	<input type="submit" class="button-primary" value="Save All Changes" />
 	<input type="submit" id="thirstyForceLinkRebuild" class="button-secondary" value="Save & Force Link Rebuild" />
 	</p>
-	
+
 	</form>
-	
+
 	<div class="thirstyWhiteBox">
-	
+
 		<h3>Plugin Information</h3>
-		
+
 		ThirstyAffiliates Version: ' . THIRSTY_VERSION . '<br />';
-		
+
 		do_action('thirstyAffiliatesPluginInformation');
-		
+
 	echo '</div><!-- /.thirstyWhiteBox -->';
-	
+
 	echo '
 		<div class="thirstyWhiteBox">
 			<h3>Join The Community</h3>
@@ -243,9 +256,9 @@ function thirstyAdminOptions() {
 				<li><a href="http://twitter.com/thirstyaff" style="margin-right: 10px;">Follow us on Twitter</a> <a href="https://twitter.com/thirstyaff" class="twitter-follow-button" data-show-count="true" style="vertical-align: bottom;">Follow @thirstyaff</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "twitter-wjs");</script></li>
 			</ul>
 		</div><!-- /.thirstyWhiteBox -->
-	
+
 	</div><!-- /.wrap -->';
-	
+
 	// Provide debug output for diagnostics and support use
 	if ($_GET['debug'] == 'true') {
 		$thirstyOptions = get_option('thirstyOptions'); // re-retrieve options in case any of the filters/actions messed with it
@@ -267,12 +280,12 @@ function thirstyResaveAllLinks() {
 		'posts_per_page' => -1,
 		'ignore_sticky_posts'=> 1
 	));
-	
+
 	if($thirstyLinkQuery->have_posts()) {
 		while ($thirstyLinkQuery->have_posts()) {
 			$thirstyLinkQuery->the_post();
-			
-			$thirstyLink['ID'] = get_the_ID(); 
+
+			$thirstyLink['ID'] = get_the_ID();
 			wp_update_post($thirstyLink);
 		}
 	}
@@ -286,11 +299,11 @@ function thirstyResaveAllLinks() {
 function thirstyGenerateSelectOptions($selectNames, $echo = false) {
 	$thirstyOptions = get_option('thirstyOptions');
 	$html = '';
-	
+
 	foreach ($selectNames as $selectName) {
 		$html .= '<option value="' . $selectName . '"' . ($thirstyOptions['linkprefix'] == $selectName ? ' selected' : '') . '>' . $selectName . '</option>';
 	}
-	
+
 	if ($echo)
 		echo $html;
 	else
