@@ -55,6 +55,8 @@ function thirstyAdminOptions() {
 	$thirstyOptions['disabletitleattribute'] = isset($thirstyOptions['disabletitleattribute']) ? 'checked="checked"' : '';
 	$thirstyOptions['disablethirstylinkclass'] = isset($thirstyOptions['disablethirstylinkclass']) ? 'checked="checked"' : '';
 	$thirstyOptions['disableslugshortening'] = isset($thirstyOptions['disableslugshortening']) ? 'checked="checked"' : '';
+	$thirstyOptions['disablevisualeditorbuttons'] = isset($thirstyOptions['disablevisualeditorbuttons']) ? 'checked="checked"' : '';
+	$thirstyOptions['disabletexteditorbuttons'] = isset($thirstyOptions['disabletexteditorbuttons']) ? 'checked="checked"' : '';
 
 	echo '<script type="text/javascript">var thirstyPluginDir = "' .
 	plugins_url('thirstyaffiliates/') . '";
@@ -218,6 +220,30 @@ function thirstyAdminOptions() {
 		<td>
 			<span class="description">By default, ThirstyAffiliates removes superfluous words from your cloaked link URLs, this option turns that feature off.</span>
 		</td>
+	</tr>
+
+	<tr>
+		<th>
+			<label for="thirstyOptions[disablevisualeditorbuttons]">Disable buttons on the Visual editor?</label>
+		<td>
+			<input type="checkbox" name="thirstyOptions[disablevisualeditorbuttons]" id="thirstyOptionsDisableVisualEditorButtons" ' .
+			$thirstyOptions['disablevisualeditorbuttons'] . ' />
+		</td>
+		<td>
+			<span class="description">Hide the ThirstyAffiliates buttons on the Visual editor.</span>
+		</td>
+	</tr>
+
+	<tr>
+		<th>
+			<label for="thirstyOptions[disabletexteditorbuttons]">Disable buttons on the Text/Quicktags editor?</label>
+		<td>
+			<input type="checkbox" name="thirstyOptions[disabletexteditorbuttons]" id="thirstyOptionsDisableTextEditorButtons" ' .
+			$thirstyOptions['disabletexteditorbuttons'] . ' />
+		</td>
+		<td>
+			<span class="description">Hide the ThirstyAffiliates buttons on the Text editor.</span>
+		</td>
 	</tr>';
 
 	do_action('thirstyAffiliatesAfterMainSettings');
@@ -260,10 +286,12 @@ function thirstyAdminOptions() {
 	</div><!-- /.wrap -->';
 
 	// Provide debug output for diagnostics and support use
-	if ($_GET['debug'] == 'true') {
-		$thirstyOptions = get_option('thirstyOptions'); // re-retrieve options in case any of the filters/actions messed with it
-		echo '<pre>DEBUG: ' . print_r($thirstyOptions, true) . '</pre>';
-	}
+    if(isset($_GET['debug'])){
+        if ($_GET['debug'] == 'true') {
+            $thirstyOptions = get_option('thirstyOptions'); // re-retrieve options in case any of the filters/actions messed with it
+            echo '<pre>DEBUG: ' . print_r($thirstyOptions, true) . '</pre>';
+        }
+    }
 }
 
 /*******************************************************************************

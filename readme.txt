@@ -3,7 +3,7 @@ Contributors: jkohlbach, RymeraWebCo
 Donate link:
 Tags: thirstyaffiliates, thirsty affiliates, affiliate marketing, affiliate link management, link cloaking, affiliate links, affiliate link, affiliate link manager, manage affiliate links, affiliate link redirect, link cloak, link cloaker, link redirect
 Requires at least: 3.4
-Tested up to: 3.9
+Tested up to: 3.9.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -110,6 +110,15 @@ Thanks to Matty of WooThemes for the workaround.
 5. Settings page
 
 == Changelog ==
+
+= 2.4.4 =
+* Bugfix: Notify the plain text editor of change event after link is returned
+* Bugfix: Hardening up checks for when editor is not properly defined
+* Bugfix: Added check to see if debug index is present before using it to prevent outputting notices when wp_debug is set to true, on the settings page
+* Feature: Add switches for turning off editor buttons on Visual or Text/Quicktags editors
+
+= 2.4.3 =
+* Bugfix: Add html character encoding on link name field on edit screen so link names with quotes are displayed properly
 
 = 2.4.2 =
 * Bugfix: Had to retire data filtering with mysql_ escape functions in favour of using esc_sql as provided by WordPress core. Some servers now don't support mysql_ functions at all (thanks Daniel)

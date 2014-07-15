@@ -7,10 +7,10 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.4.2
+* Version: 2.4.4
 */
 
-define('THIRSTY_VERSION', '2.4.2', true);
+define('THIRSTY_VERSION', '2.4.4', true);
 
 /*******************************************************************************
 ** thirstyRegisterPostType
@@ -528,7 +528,7 @@ function thirstyLinkNameMeta() {
 
 	$thirstyOptions = get_option('thirstyOptions');
 	echo '<p><label class="infolabel" for="post_title">Link Name:</label></p>';
-	echo '<p><input id="thirsty_linkname" name="post_title" value="' . (!empty($linkData['linkname']) ? $linkData['linkname'] : '') .
+	echo '<p><input id="thirsty_linkname" name="post_title" value="' . htmlspecialchars(!empty($linkData['linkname']) ? $linkData['linkname'] : '') .
 	'" size="50" type="text" /></p>';
 
 }
@@ -755,9 +755,13 @@ function thirstyEditorButtons() {
 	if (!current_user_can('edit_posts') && !current_user_can('edit_pages'))
 		return;
 
-	if (get_user_option('rich_editing') == 'true') {
-		add_filter('mce_external_plugins', 'thirstyMCEButton');
-		add_filter('mce_buttons', 'thirstyRegisterMCEButton', 5);
+	$thirstyOptions = get_option('thirstyOptions');
+
+	if (!isset($thirstyOptions['disablevisualeditorbuttons']) || $thirstyOptions['disablevisualeditorbuttons'] != 'on') {
+		if (get_user_option('rich_editing') == 'true') {
+			add_filter('mce_external_plugins', 'thirstyMCEButton');
+			add_filter('mce_buttons', 'thirstyRegisterMCEButton', 5);
+		}
 	}
 }
 
@@ -936,6 +940,11 @@ function thirstyTrimSlugs($slug) {
 ** @since 2.2
 *******************************************************************************/
 function thirstyQuicktags() {
+	$thirstyOptions = get_option('thirstyOptions');
+	if (isset($thirstyOptions['disabletexteditorbuttons']) && $thirstyOptions['disabletexteditorbuttons'] == 'on') {
+		return;
+	}
+
 	echo '<script type="text/javascript" charset="utf-8">
 	jQuery(document).ready(function() {
 		if (typeof QTags != "undefined")
