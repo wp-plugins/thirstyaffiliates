@@ -111,6 +111,10 @@ Thanks to Matty of WooThemes for the workaround.
 
 == Changelog ==
 
+= 2.4.5 =
+* Feature: Add 307 temporary redirection type
+* Bugfix: Adding additional info to before redirect action to support upcoming new features in Stats add-on
+
 = 2.4.4 =
 * Bugfix: Notify the plain text editor of change event after link is returned
 * Bugfix: Hardening up checks for when editor is not properly defined

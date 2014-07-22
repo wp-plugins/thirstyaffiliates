@@ -7,10 +7,10 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.4.4
+* Version: 2.4.5
 */
 
-define('THIRSTY_VERSION', '2.4.4', true);
+define('THIRSTY_VERSION', '2.4.5', true);
 
 /*******************************************************************************
 ** thirstyRegisterPostType
@@ -721,7 +721,7 @@ function thirstyFilterData($data) {
 		if (empty($data))
 			return $data;
 
-		$data = nl2br(trim(htmlspecialchars(wp_kses_post($data), ENT_COMPAT)));
+		$data = nl2br(trim(htmlspecialchars(wp_kses_post($data), ENT_QUOTES, 'UTF-8')));
 		$breaks = array("\r\n", "\n", "\r");
 		$data = str_replace($breaks, "", $data);
 
@@ -815,7 +815,7 @@ function thirstyRedirectUrl() {
 		$redirectType = apply_filters('thirstyFilterRedirectType', $redirectType);
 
 		// Perform any actions before redirecting
-		do_action('thirstyBeforeLinkRedirect');
+		do_action('thirstyBeforeLinkRedirect', $post->ID, $redirectUrl, $redirectType);
 
 		if (empty($redirectType))
 			$redirectType = 301; // default to 301 redirect
@@ -1968,7 +1968,8 @@ function quickCreateAffiliateLink($linkname = '', $linkurl = '', $nofollow = '',
 function thirstyGetRedirectTypes() {
 	$redirectTypes = array(
 		'301' => '301 Permanent',
-		'302' => '302 Temporary'
+		'302' => '302 Temporary',
+		'307' => '307 Temporary (alternative)'
 	);
 
 	return apply_filters('thirstyFilterRedirectTypeOptions', $redirectTypes);
