@@ -51,6 +51,7 @@ function thirstyAdminOptions() {
 	$thirstyOptions['nofollow'] = isset($thirstyOptions['nofollow']) ? 'checked="checked"' : '';
 	$thirstyOptions['newwindow'] = isset($thirstyOptions['newwindow']) ? 'checked="checked"' : '';
 	$thirstyOptions['showcatinslug'] = isset($thirstyOptions['showcatinslug']) ? 'checked="checked"' : '';
+	$thirstyOptions['disablecatautoselect'] = isset($thirstyOptions['disablecatautoselect']) ? 'checked="checked"' : '';
 	$thirstyOptions['legacyuploader'] = isset($thirstyOptions['legacyuploader']) ? 'checked="checked"' : '';
 	$thirstyOptions['disabletitleattribute'] = isset($thirstyOptions['disabletitleattribute']) ? 'checked="checked"' : '';
 	$thirstyOptions['disablethirstylinkclass'] = isset($thirstyOptions['disablethirstylinkclass']) ? 'checked="checked"' : '';
@@ -121,6 +122,18 @@ function thirstyAdminOptions() {
 			<span class="description">Show the selected category in the url. eg. ' .
 			trailingslashit(get_bloginfo('url')) . '' . thirstyGetCurrentSlug() . '/<span style="font-weight: bold;">link-category</span>/your-affiliate-link-name</span></span>
 			<br /><span class="description"><b>Warning:</b> Changing this setting after you\'ve used links in a post could break those links. Be careful!</span>
+		</td>
+	</tr>
+
+	<tr>
+		<th>
+			<label for="thirstyOptions[disablecatautoselect]">Disable "uncategorized" category on save?</label>
+		<td>
+			<input type="checkbox" name="thirstyOptions[disablecatautoselect]" id="thirstyOptionsDisableCatAutoSelect" ' .
+			$thirstyOptions['disablecatautoselect'] . ' />
+		</td>
+		<td>
+			<span class="description">If the "Show the selected category in the url" option above is selected, by default ThirstyAffiliates will add an "uncategorized" category to apply to non-categorised links during save. If you disable this, it allows you to have some links with categories in the URL and some without.</span>
 		</td>
 	</tr>
 
@@ -339,4 +352,24 @@ function thirstyGenerateSelectOptions($selectNames, $echo = false) {
 }
 
 add_action('admin_menu', 'thirstySetupMenu', 99);
+
+/*******************************************************************************
+** thirstyGlobalAdminNotices
+** This should only be added to for really critical configuration problems that
+** the admin should know about. In most cases this shows a notice to the admin
+** explaining about the config problem and what they have to do to fix it.
+** @since 2.4.6
+*******************************************************************************/
+function thirstyGlobalAdminNotices() {
+	// Check for pretty permalinks
+	global $wp_rewrite;
+	if (empty($wp_rewrite->permalink_structure)) {
+		echo '<div class="error">
+			<p>ThirstyAffiliates requires pretty permalinks, please change
+			your <a href="' . admin_url('options-permalink.php') . '">Permalink settings</a> to something other than default.<a href="#" style="float: right;" id="thirstyDismissPermalinksMessage">Dismiss</a></p>
+		</div>';
+	}
+}
+
+add_action('admin_notices', 'thirstyGlobalAdminNotices');
 ?>

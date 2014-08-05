@@ -7,10 +7,10 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.4.5
+* Version: 2.4.6
 */
 
-define('THIRSTY_VERSION', '2.4.5', true);
+define('THIRSTY_VERSION', '2.4.6', true);
 
 /*******************************************************************************
 ** thirstyRegisterPostType
@@ -88,6 +88,7 @@ function thirstyRegisterPostType() {
 
 	if (!empty($thirstyOptions['showcatinslug']) && $thirstyOptions['showcatinslug'] == 'on') {
 		add_rewrite_tag('%thirstylink-category%', '([^&]+)');
+		add_rewrite_rule("$slug/([^/]+)?/?$",'index.php?thirstylink=$matches[1]', 'top'); // 2.4.5: still match links that don't have category in the url
 		add_rewrite_rule("$slug/([^/]+)?/?([^/]+)?/?",'index.php?thirstylink=$matches[2]&thirstylink-category=$matches[1]', 'top');
 	}
 
@@ -681,7 +682,9 @@ function thirstySavePost($post_id) {
 	if (!empty($thirstyOptions['showcatinslug']) && $thirstyOptions['showcatinslug'] == 'on') {
 		$selectedLinkCats = wp_get_post_terms($post_id, 'thirstylink-category');
 
-		if(empty($selectedLinkCats)) {
+		if ((!isset($thirstyOptions['disablecatautoselect']) || $thirstyOptions['disablecatautoselect'] != 'on') &&
+			empty($selectedLinkCats)) {
+
 			$defaultCat = 'Uncategorized';
 
 			// create the default term if it doesn't exist

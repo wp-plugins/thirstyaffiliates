@@ -111,6 +111,12 @@ Thanks to Matty of WooThemes for the workaround.
 
 == Changelog ==
 
+= 2.4.6 =
+* Feature: Add option to turn of auto selection of category during save process
+* Feature: Show message to user if they have default permalinks selected (we require pretty permalinks)
+* Feature: Added an admin function for showing global notices when there is a critical configuration problem
+* Bugfix: Links without categories selected should still resolve even if the "show categories in URLs" option is enabled (thanks Olaf)
+
 = 2.4.5 =
 * Feature: Add 307 temporary redirection type
 * Bugfix: Adding additional info to before redirect action to support upcoming new features in Stats add-on
