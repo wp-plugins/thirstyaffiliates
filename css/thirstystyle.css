@@ -134,20 +134,49 @@
 	margin: 0 1% 1% 0;
 	position: relative;
 	width: 28.5%;
-	padding: 1.5%;
+	padding: 0 20px 20px 20px;
 	vertical-align: top;
 	border: 1px solid #CCC;
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
+	background: #ffffff;
+}
+
+.thirstyaddonlinkpage {
+	margin: 0 1% 1% 0;
+	position: relative;
+	width: auto;
+	padding: 0 10px 10px 10px;
+	vertical-align: top;
+	border: 1px solid #CCC;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	background: #ffffff;
 }
 
 .thirstyaddon:nth-child(3n) {
 	margin-right: 0;
 }
 
-.thirstyaddon h3 {
+.thirstyaddon h3, .thirstyaddonlinkpage h3 {
 	font-size: 12pt;
+	margin-top: 0px;
+	margin-left: -20px;
+	margin-right: -20px;
+	background: #EEE;
+	padding: 1em;
+	border-bottom: 1px solid #CCC;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.thirstyaddonlinkpage h3 {
+	margin-top: 0px !important;
+	margin-left: -10px !important;
+	margin-right: -10px !important;
+	margin-bottom: 10px !important;
 }
 
 .thirstyaddondescription {
@@ -192,11 +221,11 @@
 	.thirstyaddon {
 		width: 45.5%;
 	}
-	
+
 	.thirstyaddon:nth-child(3n) {
 		margin-right: 1%;
 	}
-	
+
 	.thirstyaddon:nth-child(2n) {
 		margin-right: 0;
 	}
@@ -206,11 +235,11 @@
 	.thirstyaddon {
 		width: 97%;
 	}
-	
+
 	.thirstyaddon:nth-child(3n) {
 		margin-right: 1%;
 	}
-	
+
 	.thirstyaddon:nth-child(2n) {
 		margin-right: 1%;
 	}

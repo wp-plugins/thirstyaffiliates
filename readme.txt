@@ -111,6 +111,11 @@ Thanks to Matty of WooThemes for the workaround.
 
 == Changelog ==
 
+= 2.4.7 =
+* Feature: Add ability to upload multiple images in one hit to affiliate links (thanks Mozie)
+* Bugfix: Added mechanism to only download RSS feed of add-ons at most once per day instead of during each page load
+* Other: Improved the look of the add-ons page and added meta box to link edit screens for add-on notices
+
 = 2.4.6 =
 * Feature: Add option to turn of auto selection of category during save process
 * Feature: Show message to user if they have default permalinks selected (we require pretty permalinks)

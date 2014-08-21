@@ -7,10 +7,10 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.4.6
+* Version: 2.4.7
 */
 
-define('THIRSTY_VERSION', '2.4.6', true);
+define('THIRSTY_VERSION', '2.4.7', true);
 
 /*******************************************************************************
 ** thirstyRegisterPostType
@@ -443,6 +443,53 @@ function thirstySetupPostBoxes() {
 		'side',
 		'low'
 	);
+
+	add_meta_box(
+		'thirstylink-addon-notices',
+		'Add-ons Available',
+		'thirstyAddonsAvailable',
+		'thirstylink',
+		'side',
+		'low'
+	);
+}
+
+/*******************************************************************************
+** thirstyAddonsAvailable
+** Addons available meta box
+** @since 2.4.7
+*******************************************************************************/
+function thirstyAddonsAvailable() {
+
+	// Get the available add-ons list
+	$products = thirstyAddonsPageGetProducts();
+
+	if (!empty($products)) {
+		// Figure out which product to display
+		list($usec, $sec) = explode(' ', microtime());
+		mt_srand((float)$sec + ((float)$usec * 100000));
+
+		$productCount = count($products);
+		$randNum = mt_rand(0, $productCount);
+
+		echo '<ul>';
+
+		$product = $products[$randNum];
+		$productUrl = str_replace('utm_source=rss' , 'utm_source=plugin', $product['url']);
+		$productUrl = str_replace('utm_medium=rss' , 'utm_medium=addonpage', $productUrl);
+		$productTitle = str_replace('ThirstyAffiliates ', '', $product['title']);
+		$productTitle = str_replace(' Add-on', '', $productTitle);
+
+		echo '<li class="thirstyaddonlinkpage">';
+		echo '<h3>' . $productTitle . '</h3>';
+		echo '<div class="thirstyaddondescription">' . $product['description'] . '</div>';
+		echo '<a class="button-primary" href="' . $productUrl . '" target="_blank">Visit Add-on Page &rarr;</a>';
+		echo '</li>';
+
+		echo '</ul>
+		<a href="' . admin_url('edit.php?post_type=thirstylink&page=thirsty-addons') . '">View all available add-ons &rarr;</a>
+		';
+	}
 }
 
 /*******************************************************************************
