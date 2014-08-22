@@ -7,10 +7,10 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.4.7
+* Version: 2.4.8
 */
 
-define('THIRSTY_VERSION', '2.4.7', true);
+define('THIRSTY_VERSION', '2.4.8', true);
 
 /*******************************************************************************
 ** thirstyRegisterPostType
@@ -444,6 +444,7 @@ function thirstySetupPostBoxes() {
 		'low'
 	);
 
+	/* 2.4.8: Temporarily remove these notices
 	add_meta_box(
 		'thirstylink-addon-notices',
 		'Add-ons Available',
@@ -451,7 +452,7 @@ function thirstySetupPostBoxes() {
 		'thirstylink',
 		'side',
 		'low'
-	);
+	);*/
 }
 
 /*******************************************************************************

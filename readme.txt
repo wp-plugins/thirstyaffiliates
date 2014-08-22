@@ -111,6 +111,9 @@ Thanks to Matty of WooThemes for the workaround.
 
 == Changelog ==
 
+= 2.4.8 =
+* Bugfix: Removed add-on notices from sidebar of edit screens. Causing too many issues, we'll revisit this later.
+
 = 2.4.7 =
 * Feature: Add ability to upload multiple images in one hit to affiliate links (thanks Mozie)
 * Bugfix: Added mechanism to only download RSS feed of add-ons at most once per day instead of during each page load
