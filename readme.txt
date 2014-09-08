@@ -3,7 +3,7 @@ Contributors: jkohlbach, RymeraWebCo
 Donate link:
 Tags: thirstyaffiliates, thirsty affiliates, affiliate marketing, affiliate link management, link cloaking, affiliate links, affiliate link, affiliate link manager, manage affiliate links, affiliate link redirect, link cloak, link cloaker, link redirect
 Requires at least: 3.4
-Tested up to: 3.9.1
+Tested up to: 4.0
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
