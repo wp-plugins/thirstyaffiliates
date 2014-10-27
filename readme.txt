@@ -111,6 +111,12 @@ Thanks to Matty of WooThemes for the workaround.
 
 == Changelog ==
 
+= 2.4.9 =
+* Bugfix: Fix compatibility issue with some page builders
+* Bugfix: Corrected bug with legacy media uploader script loading in the background when it shouldn't be
+* Feature: Add new global setting for appending additional rel attributes to links during link insertion
+* Bugfix: Fixed image attaching problem where URL would be malformed when duplicating an existing attachment
+
 = 2.4.8 =
 * Bugfix: Removed add-on notices from sidebar of edit screens. Causing too many issues, we'll revisit this later.
 

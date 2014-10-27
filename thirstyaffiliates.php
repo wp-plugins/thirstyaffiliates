@@ -7,10 +7,10 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.4.8
+* Version: 2.4.9
 */
 
-define('THIRSTY_VERSION', '2.4.8', true);
+define('THIRSTY_VERSION', '2.4.9', true);
 
 /*******************************************************************************
 ** thirstyRegisterPostType
@@ -638,7 +638,7 @@ function thirstyLinkImagesMeta() {
 
 	global $post;
 	$thirstyOptions = get_option('thirstyOptions');
-	$legacyUploader = (isset($thirstyOptions['autolinkbbpress']) && $thirstyOptions['autolinkbbpress'] == 'on') ? true : false;
+	$legacyUploader = (isset($thirstyOptions['legacyuploader']) && $thirstyOptions['legacyuploader'] == 'on') ? true : false;
 
 	if (function_exists('wp_enqueue_media') && !$legacyUploader) {
 		// New media uploader
@@ -886,7 +886,7 @@ function thirstyRedirectUrl() {
 function thirstyAdminHeader() {
 	global $post;
 	$thirstyOptions = get_option('thirstyOptions');
-	$legacyUploader = (isset($thirstyOptions['autolinkbbpress']) && $thirstyOptions['autolinkbbpress'] == 'on') ? true : false;
+	$legacyUploader = (isset($thirstyOptions['legacyuploader']) && $thirstyOptions['legacyuploader'] == 'on') ? true : false;
 
 	$thirstyJSEnable = 'false';
 
@@ -907,7 +907,8 @@ function thirstyAdminHeader() {
 	if (function_exists('wp_enqueue_media') && !$legacyUploader) {
 		wp_enqueue_media();
 	} else {
-		wp_enqueue_script('media');
+		if ($legacyUploader) // 2.4.9 only load if we're using the legacy uploader
+			wp_enqueue_script('media');
 	}
 
 	if (!empty($post->post_type) && $post->post_type == 'thirstylink' ||
@@ -1106,9 +1107,11 @@ function thirstyAttachImageToLink() {
 	$img = wp_get_attachment_metadata($imgId, true);
 	$imgPost = get_post($imgId);
 
+	// If this image is attached to another post already we need to duplicate it
+	// so we can attach it to our post
 	if (!empty($imgPost->post_parent)) {
 		$attachment = array(
-			'guid' => trailingslashit($wp_upload_dir['basedir']) . $img['file'],
+			'guid' => $img['file'],
 			'post_mime_type' => $imgMime,
 			'post_title' => $imgName,
 			'post_content' => '',
@@ -1117,12 +1120,12 @@ function thirstyAttachImageToLink() {
 
 		$attach_id = wp_insert_attachment(
 			$attachment,
-			trailingslashit($wp_upload_dir['baseurl']) . $img['file'],
+			$img['file'],
 			$postId
 		);
 
 		require_once(ABSPATH . 'wp-admin/includes/image.php');
-		$attach_data = wp_generate_attachment_metadata( $attach_id, trailingslashit($wp_upload_dir['basedir']) . $img['file'] );
+		$attach_data = wp_generate_attachment_metadata( $attach_id,  $img['file'] );
 		wp_update_attachment_metadata( $attach_id, $attach_data );
 
 		$img = wp_get_attachment_metadata($attach_id, true);
@@ -1296,6 +1299,11 @@ function thirstyGetLinkCode($linkType = '', $linkID = '', $copiedText = '', $ima
 	if (empty($target))
 		$target = ($linkData['newwindow'] == 'on' ? '_blank' : '');
 
+	// 2.4.9: Add additional rel tags specified globally
+	$additionalRelTags = '';
+	if (isset($thirstyOptions['additionalreltags']) && !empty($thirstyOptions['additionalreltags']))
+		$additionalRelTags = ' ' . $thirstyOptions['additionalreltags'];
+
 	// Check if copied text contains HTML
 	$copiedTextContainsHTML = false;
 	if($copiedText != strip_tags($copiedText)) {
@@ -1319,7 +1327,7 @@ function thirstyGetLinkCode($linkType = '', $linkID = '', $copiedText = '', $ima
 		'href' => get_post_permalink($link->ID),
 		'class' => $linkclass,
 		'id' => '',
-		'rel' => $nofollow,
+		'rel' => $nofollow . $additionalRelTags,
 		'target' => $target,
 		'title' => ((!empty($copiedText) && !$disabletitle) ? $copiedText : (!$disabletitle ? $linkData['linkname'] : ''))
 	);

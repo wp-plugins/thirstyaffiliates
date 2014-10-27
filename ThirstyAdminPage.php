@@ -257,6 +257,18 @@ function thirstyAdminOptions() {
 		<td>
 			<span class="description">Hide the ThirstyAffiliates buttons on the Text editor.</span>
 		</td>
+	</tr>
+
+	<tr>
+		<th>
+			<label for="thirstyOptions[additionalreltags]">Additional rel attribute tags to add during link insertion: </label>
+		<td>
+			<input type="text" name="thirstyOptions[additionalreltags]" id="thirstyOptionsAdditionalRelTags" value="' .
+			$thirstyOptions['additionalreltags'] . '" />
+		</td>
+		<td>
+			<span class="description">Allows you to add extra tags into the rel= attribute when links are inserted.</span>
+		</td>
 	</tr>';
 
 	do_action('thirstyAffiliatesAfterMainSettings');
