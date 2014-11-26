@@ -7,10 +7,10 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.4.9
+* Version: 2.4.10
 */
 
-define('THIRSTY_VERSION', '2.4.9', true);
+define('THIRSTY_VERSION', '2.4.10', true);
 
 /*******************************************************************************
 ** thirstyRegisterPostType
@@ -91,11 +91,6 @@ function thirstyRegisterPostType() {
 		add_rewrite_rule("$slug/([^/]+)?/?$",'index.php?thirstylink=$matches[1]', 'top'); // 2.4.5: still match links that don't have category in the url
 		add_rewrite_rule("$slug/([^/]+)?/?([^/]+)?/?",'index.php?thirstylink=$matches[2]&thirstylink-category=$matches[1]', 'top');
 	}
-
-	if (get_option('thirstyaffiliates_flush') == 'true') {
-        flush_rewrite_rules();
-        delete_option('thirstyaffiliates_flush');
-    }
 
 	/* Set the list page columns */
 	add_filter('manage_thirstylink_posts_columns', 'thirstyAddDestinationColumnToList');
@@ -746,6 +741,14 @@ function thirstySavePost($post_id) {
 		}
 	}
 
+    // 2.4.10: Get existing link meta and just override it with new linkdata
+    $existingLinkData = unserialize(get_post_meta($post_id, 'thirstyData', true));
+    if (is_array($existingLinkData))
+        $linkData = array_merge($existingLinkData, $linkData);
+
+    // 2.4.10: Add filter before saving the link
+    $linkData = apply_filters('thirstyBeforeDataSave', $linkData);
+
 	/* Update the link data */
 	update_post_meta($post_id, 'thirstyData', serialize($linkData));
 
@@ -1110,6 +1113,8 @@ function thirstyAttachImageToLink() {
 	// If this image is attached to another post already we need to duplicate it
 	// so we can attach it to our post
 	if (!empty($imgPost->post_parent)) {
+		$upload_dir = wp_upload_dir(); // 2.4.10: Need the abs path on metadata creation
+
 		$attachment = array(
 			'guid' => $img['file'],
 			'post_mime_type' => $imgMime,
@@ -1125,7 +1130,7 @@ function thirstyAttachImageToLink() {
 		);
 
 		require_once(ABSPATH . 'wp-admin/includes/image.php');
-		$attach_data = wp_generate_attachment_metadata( $attach_id,  $img['file'] );
+		$attach_data = wp_generate_attachment_metadata( $attach_id,  trailingslashit($upload_dir['basedir']) . $img['file'] );
 		wp_update_attachment_metadata( $attach_id, $attach_data );
 
 		$img = wp_get_attachment_metadata($attach_id, true);
@@ -2044,7 +2049,7 @@ function thirstyConvertSpecialToChars($redirectUrl) {
 ** @since 1.3
 *******************************************************************************/
 function thirstyAffiliatesActivation() {
-    add_option('thirstyaffiliates_flush', 'true');
+	flush_rewrite_rules();
 }
 
 /*******************************************************************************
@@ -2053,7 +2058,7 @@ function thirstyAffiliatesActivation() {
 ** @since 1.3
 *******************************************************************************/
 function thirstyAffiliatesDeactivation() {
-    delete_option('thirstyaffiliates_flush');
+	flush_rewrite_rules();
 }
 
 /*******************************************************************************
