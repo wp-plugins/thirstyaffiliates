@@ -111,9 +111,13 @@ Thanks to Matty of WooThemes for the workaround.
 
 == Changelog ==
 
+= 2.4.11 =
+* Bugfix: Fixed a nasty character escaping bug that was wiping data on save in some instances.
+
 = 2.4.10 =
 * Bugfix: Additional data on thirsty data not appearing in fields on the edit page was accidentally being blown away, needed to merge data with existing on save
 * Bugfix: Use the absolute path during media metadata creation when cloning an image from the media library (thanks Olaf)
+* Bugfix: Moved the rewrite rule flushing into the activation functions as best practices have changed since
 
 = 2.4.9 =
 * Bugfix: Fix compatibility issue with some page builders

@@ -7,10 +7,10 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.4.10
+* Version: 2.4.11
 */
 
-define('THIRSTY_VERSION', '2.4.10', true);
+define('THIRSTY_VERSION', '2.4.11', true);
 
 /*******************************************************************************
 ** thirstyRegisterPostType
@@ -779,8 +779,7 @@ function thirstyFilterData($data) {
 		$breaks = array("\r\n", "\n", "\r");
 		$data = str_replace($breaks, "", $data);
 
-		if (get_magic_quotes_gpc())
-			$data = stripslashes($data);
+		$data = stripslashes($data);// 2.4.11: Strip slahes out, make sure to unescape it before passing to esc_sql
 		$data = esc_sql($data);
 	}
     return $data;
