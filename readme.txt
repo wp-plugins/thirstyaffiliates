@@ -111,6 +111,10 @@ Thanks to Matty of WooThemes for the workaround.
 
 == Changelog ==
 
+= 2.4.12 =
+* Bugfix: Rollback of link data merging bugfix from 2.4.10, caused some issues in data persistence in add-ons, will revisit this later
+* Feature: Introduced an optional debug flag on edit screens to assist in debugging link data on sites in the wild
+
 = 2.4.11 =
 * Bugfix: Fixed a nasty character escaping bug that was wiping data on save in some instances.
 

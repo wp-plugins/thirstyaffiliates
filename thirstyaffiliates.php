@@ -7,10 +7,10 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.4.11
+* Version: 2.4.12
 */
 
-define('THIRSTY_VERSION', '2.4.11', true);
+define('THIRSTY_VERSION', '2.4.12', true);
 
 /*******************************************************************************
 ** thirstyRegisterPostType
@@ -575,6 +575,10 @@ function thirstyLinkNameMeta() {
 	echo '<p><input id="thirsty_linkname" name="post_title" value="' . htmlspecialchars(!empty($linkData['linkname']) ? $linkData['linkname'] : '') .
 	'" size="50" type="text" /></p>';
 
+	if ($_GET['debug'] == true) {
+		echo '<pre>DEBUG: ' . print_r($linkData, true) . '</pre>';
+	}
+
 }
 
 /*******************************************************************************
@@ -741,11 +745,6 @@ function thirstySavePost($post_id) {
 		}
 	}
 
-    // 2.4.10: Get existing link meta and just override it with new linkdata
-    $existingLinkData = unserialize(get_post_meta($post_id, 'thirstyData', true));
-    if (is_array($existingLinkData))
-        $linkData = array_merge($existingLinkData, $linkData);
-
     // 2.4.10: Add filter before saving the link
     $linkData = apply_filters('thirstyBeforeDataSave', $linkData);
 
@@ -779,7 +778,8 @@ function thirstyFilterData($data) {
 		$breaks = array("\r\n", "\n", "\r");
 		$data = str_replace($breaks, "", $data);
 
-		$data = stripslashes($data);// 2.4.11: Strip slahes out, make sure to unescape it before passing to esc_sql
+		//if (get_magic_quotes_gpc())
+        $data = stripslashes($data);// Strip slahes out, make sure to unescape it before passing to esc_sql
 		$data = esc_sql($data);
 	}
     return $data;
