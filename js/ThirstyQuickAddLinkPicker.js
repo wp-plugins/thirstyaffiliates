@@ -86,7 +86,7 @@ jQuery(document).ready(function($) {
 			nofollow         = $.trim(quick_add_link_container.find("#qal_no_follow_link:checked").val()),
 			newwindow        = $.trim(quick_add_link_container.find("#qal_new_window:checked").val()),
 			linkredirecttype = $.trim(quick_add_link_container.find("input[name='qal_redirect_type']:checked").val()),
-			linkCategory	 = $.trim(quick_add_link_container.find("#qal_link_categories option:selected").val());
+			linkCategory	 = $.trim(quick_add_link_container.find("#qal_link_categories").val());
 
 		// Link Name
 		validateLinkName(linkname);
@@ -183,7 +183,7 @@ jQuery(document).ready(function($) {
 			nofollow         = $.trim(quick_add_link_container.find("#qal_no_follow_link:checked").val()),
 			newwindow        = $.trim(quick_add_link_container.find("#qal_new_window:checked").val()),
 			linkredirecttype = $.trim(quick_add_link_container.find("input[name='qal_redirect_type']:checked").val()),
-			linkCategory	 = $.trim(quick_add_link_container.find("#qal_link_categories option:selected").val());
+			linkCategory	 = $.trim(quick_add_link_container.find("#qal_link_categories").val());
 
 		// Link Name
 		validateLinkName(linkname);

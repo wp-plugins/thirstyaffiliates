@@ -7,10 +7,10 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.4.12
+* Version: 2.5.0
 */
 
-define('THIRSTY_VERSION', '2.4.12', true);
+define('THIRSTY_VERSION', '2.5.0', true);
 
 /*******************************************************************************
 ** thirstyRegisterPostType
@@ -571,8 +571,8 @@ function thirstyLinkNameMeta() {
 	$linkData = unserialize(get_post_meta($post->ID, 'thirstyData', true));
 
 	$thirstyOptions = get_option('thirstyOptions');
-	echo '<p><label class="infolabel" for="post_title">Link Name:</label></p>';
-	echo '<p><input id="thirsty_linkname" name="post_title" value="' . htmlspecialchars(!empty($linkData['linkname']) ? $linkData['linkname'] : '') .
+	echo '<p><label class="infolabel" for="post_title">Link Name:</label><span id="link_id" style="float:right;">Link ID: <strong>' . $post->ID . '</strong></span></p>';
+	echo '<p style="clear:both;"><input id="thirsty_linkname" name="post_title" value="' . htmlspecialchars(!empty($linkData['linkname']) ? $linkData['linkname'] : '') .
 	'" size="50" type="text" /></p>';
 
 	if ($_GET['debug'] == true) {
@@ -1870,7 +1870,7 @@ function thirstyGetQuickAddLinkThickboxContent() {
 								<div class="field_row">
 									<label for="">Link Categories</label>
 									<span class="desc">You must select a link category as you set the general setting to include category on the link</span>
-									<select name="qal_link_categories" id="qal_link_categories">
+									<select name="qal_link_categories" id="qal_link_categories" style="width: 300px;" data-placeholder="Select categories..." multiple>
 									<?php
 										foreach (get_terms("thirstylink-category", array('hide_empty' => false)) as $link_category) {
 											?>
@@ -1898,7 +1898,18 @@ function thirstyGetQuickAddLinkThickboxContent() {
 			plugins_url('thirstyaffiliates/') . '";
 			var thirstyMCE;</script>';?>
 
+		<link rel="stylesheet" href="<?php echo plugins_url('thirstyaffiliates/'); ?>js/lib/chosen/chosen.min.css"/>
+		<script type="text/javascript" src="<?php echo plugins_url('thirstyaffiliates/'); ?>js/lib/chosen/chosen.jquery.min.js"></script>
+
 		<script type="text/javascript" src="<?php echo plugins_url('thirstyaffiliates/'); ?>js/ThirstyQuickAddLinkPicker.js"></script>
+
+		<script type="text/javascript">
+			jQuery(document).ready(function($){
+
+				$("#qal_link_categories").chosen();
+
+			});
+		</script>
 		</body>
 	</html>
 
@@ -2006,10 +2017,11 @@ function quickCreateAffiliateLink($linkname = '', $linkurl = '', $nofollow = '',
 			}
 
 			/*==========  Set link category if required  ==========*/
-			if( isset($_POST['linkCategory']) ){
-				$linkCat = array( trim($_POST['linkCategory']) );
+			if ( isset( $_POST[ 'linkCategory' ] ) ) {
 
+				$linkCat = $_POST['linkCategory'];
 				wp_set_post_terms( $new_post_id, $linkCat, 'thirstylink-category' );
+
 			}
 
 		}// if($new_post_id == 0) else
@@ -2060,6 +2072,45 @@ function thirstyAffiliatesDeactivation() {
 	flush_rewrite_rules();
 }
 
+/**
+ * Add custom column to thirsty link listings (Link ID).
+ *
+ * @param $columns
+ *
+ * @return array
+ * @since 4.5
+ */
+function thirstyCustomAffiliateListingColumn ( $columns ) {
+
+	$arrayKeys = array_keys($columns);
+	$firstIndex = $arrayKeys[0];
+	$firstValue = $columns[$firstIndex];
+	array_shift($columns);
+
+	$columns = array( $firstIndex => $firstValue , 'link_id' => __( 'Link ID') ) + $columns;
+
+	return $columns;
+
+}
+
+/**
+ * Add custom column value to thirsty link listings (Link ID).
+ *
+ * @param $column
+ * @param $postId
+ *
+ * @since 1.0.0
+ */
+function thirstyCustomAffiliateListingColumnValue ( $column, $postId ) {
+
+	if ( $column == 'link_id' ) {
+
+		echo "<span>" . $postId . "</span>";
+
+	}
+
+}
+
 /*******************************************************************************
 ** thirstyInit
 ** Initialize the plugin
@@ -2069,6 +2120,12 @@ function thirstyInit() {
 	$thirstyOptions = get_option('thirstyOptions');
 
 	thirstyRegisterPostType();
+
+	// Custom Field
+	add_filter( 'manage_edit-thirstylink_columns', 'thirstyCustomAffiliateListingColumn' );
+
+	// Custom Field Value
+	add_action( 'manage_thirstylink_posts_custom_column', 'thirstyCustomAffiliateListingColumnValue' , 10 , 2 );
 
 	/* Add filter to create category links */
 	add_filter('post_type_link', 'thirstyCatLinks', 10, 2);

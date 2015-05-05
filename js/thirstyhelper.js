@@ -1,6 +1,6 @@
 var frame;
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 	if (thirstyJSEnable == true) {
 		jQuery('#thirstyOptionsLinkPrefix').change(function() {
 
@@ -33,6 +33,128 @@ jQuery(document).ready(function() {
 
 		jQuery('#thirstyOptionsShowCatInSlug').click(thirstySetRebuildFlag);
 		jQuery('#thirstyForceLinkRebuild').click(thirstySetRebuildFlag);
+
+
+		$("#export_global_settings").click(function(){
+
+			var $this			  = $(this),
+				settings_textarea = $("#global_settings_string"),
+				import_settings = $("#import_global_settings_action");
+
+			$this.attr('disabled','disabled');
+
+			settings_textarea.val("");
+
+			if ( !settings_textarea.is(":visible") )
+				settings_textarea.slideDown("fast");
+
+			if ( import_settings.is(":visible") )
+				import_settings.slideUp("fast");
+
+			jQuery
+				.ajax({
+					url         :   ajaxurl,
+					type        :   "POST",
+					data        :   { action : "thirstyExportGlobalSettings" },
+					dataType    :   "json"
+				})
+				.done( function( data , textStatus , jqXHR ) {
+
+					if(data.status == 'success'){
+
+						settings_textarea.val(data.thirstyOption);
+
+					}
+
+				})
+				.fail( function( jqXHR , textStatus , errorThrown ) {
+
+					alert( 'Failed to get global settings string' );
+
+					console.log( 'Failed to create lead pages' );
+					console.log( jqXHR );
+					console.log( '----------' );
+
+				})
+				.always( function(){
+
+					$this.removeAttr('disabled');
+
+				});
+
+		});
+
+		$("#import_global_settings").click(function(){
+
+			var $this = $(this),
+				settings_textarea = $("#global_settings_string"),
+				import_settings = $("#import_global_settings_action");
+
+			settings_textarea.val("");
+
+			if ( !settings_textarea.is(":visible") )
+				settings_textarea.slideDown("fast");
+
+			if ( !import_settings.is(":visible") )
+				import_settings.slideDown("fast");
+
+		});
+
+		$("#import_global_settings_action").click(function(){
+
+			var $this = $(this),
+				settings_textarea = $("#global_settings_string"),
+				thirstyOptions = $.trim(settings_textarea.val());
+
+			$this.attr( 'disabled' , 'disabled' );
+
+			if (thirstyOptions == ""){
+
+				alert("Settings string empty");
+				return false;
+
+			}
+
+			jQuery
+				.ajax({
+					url         :   ajaxurl,
+					type        :   "POST",
+					data        :   { action : "thirstyImportGlobalSettings" , thirstyOptions : thirstyOptions },
+					dataType    :   "json"
+				})
+				.done( function( data , textStatus , jqXHR ) {
+
+					console.log(data);
+
+					if ( data.status == 'success' ) {
+
+						alert("Settings imported successfully");
+						location.reload();
+
+					} else if ( data.status == 'fail' ) {
+
+						alert("Failed to import settings\n"+data.error_message);
+
+					}
+
+				})
+				.fail( function( jqXHR , textStatus , errorThrown ) {
+
+					alert( 'Failed to import settings' );
+
+					console.log( 'Failed to import settings' );
+					console.log( jqXHR );
+					console.log( '----------' );
+
+				})
+				.always( function(){
+
+					$this.removeAttr('disabled');
+
+				});
+
+		});
+
 	}
 });
 

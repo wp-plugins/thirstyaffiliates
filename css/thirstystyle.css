@@ -244,3 +244,17 @@
 		margin-right: 1%;
 	}
 }
+
+
+/*
+Export/Import Settings Styling
+*/
+#export_import_controls_container textarea {
+	margin-top:	20px;
+	display: none;
+}
+
+#import_global_settings_action {
+	display: none;
+	margin-top: 20px;
+}

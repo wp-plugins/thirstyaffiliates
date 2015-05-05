@@ -111,6 +111,11 @@ Thanks to Matty of WooThemes for the workaround.
 
 == Changelog ==
 
+= 2.5.0 =
+* Feature: Allow user to specify link categories during Quick Add if category in slug preference is enabled. Enhanced the UI with a multi-select box.
+* Feature: Add Link ID to the list view columns as the first column for easy reference
+* Feature: Added import/export ability of Global settings to make it easy to copy pre-set settings from one site to another
+
 = 2.4.12 =
 * Bugfix: Rollback of link data merging bugfix from 2.4.10, caused some issues in data persistence in add-ons, will revisit this later
 * Feature: Introduced an optional debug flag on edit screens to assist in debugging link data on sites in the wild

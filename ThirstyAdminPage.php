@@ -297,6 +297,8 @@ function thirstyAdminOptions() {
 
 	echo '</div><!-- /.thirstyWhiteBox -->';
 
+	do_action('thirstyAffiliatesAfterPluginInformation');
+
 	echo '
 		<div class="thirstyWhiteBox">
 			<h3>Join The Community</h3>
@@ -384,4 +386,165 @@ function thirstyGlobalAdminNotices() {
 }
 
 add_action('admin_notices', 'thirstyGlobalAdminNotices');
-?>
+
+/**
+ * Render export/import controls.
+ *
+ * @contributor J++
+ * @since 2.5
+ */
+function renderExportImportControls(){
+	?>
+    <style>
+        .export_import_settings_instruction {
+            margin-bottom: 30px;
+        }
+        .export_import_settings_instruction dt {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .export_import_settings_instruction dd {
+            margin-bottom: 20px;
+        }
+        .export_import_settings_instruction dd ul {
+            list-style-type: disc;
+        }
+    </style>
+	<div id="export_import_controls_container" class="thirstyWhiteBox">
+		<h3>Export/Import Global Settings</h3>
+
+        <dl class="export_import_settings_instruction">
+            <dt>Exporting Settings</dt>
+            <dd>
+                <ul>
+                    <li>Click export settings button</li>
+                    <li>Copy the settings text code</li>
+                    <li>Paste in the settings code to the destination site</li>
+                </ul>
+            </dd>
+
+            <dt>Importing Settings</dt>
+            <dd>
+                <ul>
+                    <li>Click import settings button</li>
+                    <li>Paste the settings text code ( From other site )</li>
+                    <li>Click import global settings button</li>
+                </ul>
+            </dd>
+        </dl>
+
+		<input type="button" class="button button-primary" id="export_global_settings" value="Export Settings" />
+		<input type="button" class="button button-primary" id="import_global_settings" value="Import Settings" />
+
+		<div id="textarea_container">
+			<textarea id="global_settings_string" cols="40" rows="10"></textarea>
+		</div>
+		<input type="button" class="button button-primary" id="import_global_settings_action" value="Import Global Settings"/>
+	</div>
+	<?php
+}
+
+add_action( 'thirstyAffiliatesAfterPluginInformation' , 'renderExportImportControls' );
+
+/**
+ * Export global settings.
+ *
+ * @param null $dummyArg
+ * @param bool $ajaxCall
+ *
+ * @contributor J++
+ * @return bool
+ * @since 2.5
+ */
+function thirstyExportGlobalSettings( $dummyArg = null , $ajaxCall = true ){
+
+	$thirstyOption = base64_encode( serialize( get_option('thirstyOptions') ) );
+
+	if($ajaxCall === true){
+
+		header('Content-Type: application/json'); // specify we return json
+		echo json_encode(array(
+			'status'        =>  'success',
+			'thirstyOption' =>  $thirstyOption
+		));
+		die();
+
+	}else{
+
+		return true;
+
+	}
+
+}
+
+add_action( "wp_ajax_thirstyExportGlobalSettings" , 'thirstyExportGlobalSettings' );
+
+/**
+ * Import global settings.
+ *
+ * @param null $thirstyOptions
+ * @param bool $ajaxCall
+ *
+ * @contributor J++
+ * @return bool
+ * @since 2.5
+ */
+function thirstyImportGlobalSettings( $thirstyOptions = null , $ajaxCall = true ){
+
+	// We do this coz unserialize issues E_NOTICE on failure.
+	error_reporting( E_ERROR | E_PARSE );
+
+	if ( $ajaxCall === true )
+		$thirstyOptions = $_POST[ 'thirstyOptions' ];
+
+	$err = null;
+	$thirstyOptions = base64_decode( $thirstyOptions );
+
+	if ( !$thirstyOptions )
+		$err = "Failed to decode settings string";
+
+	if ( is_null( $err ) ) {
+
+		$thirstyOptions = unserialize( $thirstyOptions );
+
+		if ( !$thirstyOptions )
+			$err = "Failed to unserialize settings string";
+
+	}
+
+	if ( is_null( $err ) )
+		update_option( 'thirstyOptions' , $thirstyOptions );
+
+	if($ajaxCall === true){
+
+		if ( is_null( $err ) ) {
+
+			header('Content-Type: application/json'); // specify we return json
+			echo json_encode(array(
+				'status'        =>  'success'
+			));
+			die();
+
+		} else {
+
+			header('Content-Type: application/json'); // specify we return json
+			echo json_encode(array(
+				'status'        =>  'fail',
+				'error_message' =>  $err
+			));
+			die();
+
+		}
+
+	}else{
+
+		if ( is_null( $err ) )
+			return true;
+		else
+			return false;
+
+	}
+
+}
+
+add_action( "wp_ajax_thirstyImportGlobalSettings" , 'thirstyImportGlobalSettings' );
