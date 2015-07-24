@@ -83,7 +83,7 @@ function thirstyLinkByShortcode($atts) {
 			$output .= '>' . $linktext . '</a>';
 		
     	} else {
-    		$output .= '<span style="color: #0000ff;">SHORTCODE ERROR: ThirstyAffiliates did not detect a valid link id, please check your short code!</span>';
+    		$output .= '<span style="color: #0000ff;">'.__('SHORTCODE ERROR: ThirstyAffiliates did not detect a valid link id, please check your short code!').'</span>';
     	}
     	
     }

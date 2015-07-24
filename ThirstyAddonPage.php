@@ -7,7 +7,7 @@
 *******************************************************************************/
 function thirstySetupAddonsMenu() {
 	if (is_admin()) {
-		add_submenu_page('edit.php?post_type=thirstylink', 'Add-ons', 'Add-ons', 'manage_options', 'thirsty-addons', 'thirstyAddonsPage');
+		add_submenu_page('edit.php?post_type=thirstylink', __('Add-ons', 'thirstyaffiliates'), __('Add-ons', 'thirstyaffiliates'), 'manage_options', 'thirsty-addons', 'thirstyAddonsPage');
 	}
 }
 
@@ -19,13 +19,13 @@ function thirstySetupAddonsMenu() {
 function thirstyAddonsPage() {
 
 	if (!current_user_can('manage_options'))  {
-		wp_die( __('You do not have suffifient permissions to access this page.') );
+		wp_die( __('You do not have suffifient permissions to access this page.', 'thirstyaffiliates') );
 	}
 
 	echo '<div class="wrap">';
 	echo '<img id="thirstylogo" src="' . plugins_url('thirstyaffiliates/images/thirstylogo.png') . '" alt="ThirstyAffiliates" />';
 
-	echo '<h2>Turbo Charge ThirstyAffiliates With These Add-ons</h2>';
+	echo '<h2>'.__('Turbo Charge ThirstyAffiliates With These Add-ons', 'thirstyaffiliates').'</h2>';
 
 	// get the products list from the RSS feed on thirstyaffiliates.com and
 	// print them into the page nicely
@@ -43,7 +43,7 @@ function thirstyAddonsPage() {
 			echo '<li class="thirstyaddon">';
 			echo '<h3>' . $productTitle . '</h3>';
 			echo '<div class="thirstyaddondescription">' . $product['description'] . '</div>';
-			echo '<a class="button-primary" href="' . $productUrl . '" target="_blank">Visit Add-on Page &rarr;</a>';
+			echo '<a class="button-primary" href="' . $productUrl . '" target="_blank">'.__('Visit Add-on Page &rarr;', 'thirstyaffiliates').'</a>';
 			echo '</li>';
 		}
 

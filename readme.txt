@@ -111,6 +111,14 @@ Thanks to Matty of WooThemes for the workaround.
 
 == Changelog ==
 
+= 2.6.0 =
+* Feature: Added internationalisation and ability to add translations
+* Translation: Indonesian (thanks [Mulyadi Subali](https://mulyadi.suba.li/))
+* Translation: Brazilian Portugeuse (thanks [Gabriel Galvão](http://www.canalwp.com/))
+* Translation: Italian (thanks [Marco Famà of Time Lapse Network](http://timelapsenetwork.com/))
+* Translation: Spanish (thanks [Javier Marcilla of NinjaSEO](http://ninjaseo.es/))
+* Translation: German (thanks to [Andre Wilimzig-Scholz of Brand and Heist](http://www.brandheist.de/))
+
 = 2.5.0 =
 * Feature: Allow user to specify link categories during Quick Add if category in slug preference is enabled. Enhanced the UI with a multi-select box.
 * Feature: Add Link ID to the list view columns as the first column for easy reference

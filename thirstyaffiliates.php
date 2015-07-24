@@ -7,10 +7,21 @@
 * Author: ThirstyAffiliates
 * Author URI: http://thirstyaffiliates.com
 * Plugin URI: http://thirstyaffiliates.com
-* Version: 2.5.0
+* Version: 2.6.0
+* Text Domain: thirstyaffiliates
+* Domain Path: /languages
 */
 
-define('THIRSTY_VERSION', '2.5.0', true);
+define('THIRSTY_VERSION', '2.6.0', true);
+
+/*******************************************************************************
+** thirstyAffiliatesLoadPluginTextdomain
+** Load Text Domain on International Translations
+** @since 1.0
+*******************************************************************************/
+function thirstyAffiliatesLoadPluginTextdomain() {
+    load_plugin_textdomain( 'thirstyaffiliates', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+}
 
 /*******************************************************************************
 ** thirstyRegisterPostType
@@ -27,8 +38,8 @@ function thirstyRegisterPostType() {
 		'thirstylink',
 		array(
 			'labels' => array(
-				'name' => 'Link Categories',
-				'singular_name' => 'Link Category'
+				'name' => __('Link Categories', 'thirstyaffiliates'),
+				'singular_name' => __('Link Category', 'thirstyaffiliates')
 			),
 			'public' => true,
 			'show_ui' => true,
@@ -43,18 +54,18 @@ function thirstyRegisterPostType() {
 		'thirstylink',
 		array(
 			'labels' => array(
-				'name' => __('Affiliate Links'),
-				'singular_name' => __('Affiliate Link'),
-				'add_new_item' => __('Add New Affiliate Link'),
-				'edit_item' => __('Edit Affiliate Link'),
-				'view_item' => __('View Affiliate Link'),
-				'search_items' =>  __('Search Affiliate Links'),
-				'not_found' => __('No Affiliate Links found!'),
-				'not_found_in_trash' => __('No Affiliate Links found in trash'),
-				'menu_name' => __('Affiliate Links'),
-				'all_items' => __('All Affiliate Links')
+				'name' => __('Affiliate Links', 'thirstyaffiliates'),
+				'singular_name' => __('Affiliate Link', 'thirstyaffiliates'),
+				'add_new_item' => __('Add New Affiliate Link', 'thirstyaffiliates'),
+				'edit_item' => __('Edit Affiliate Link', 'thirstyaffiliates'),
+				'view_item' => __('View Affiliate Link', 'thirstyaffiliates'),
+				'search_items' =>  __('Search Affiliate Links', 'thirstyaffiliates'),
+				'not_found' => __('No Affiliate Links found!', 'thirstyaffiliates'),
+				'not_found_in_trash' => __('No Affiliate Links found in trash', 'thirstyaffiliates'),
+				'menu_name' => __('Affiliate Links', 'thirstyaffiliates'),
+				'all_items' => __('All Affiliate Links', 'thirstyaffiliates')
 			),
-			'description' => 'ThirstyAffiliates affiliate links',
+			'description' => __('ThirstyAffiliates affiliate links', 'thirstyaffiliates'),
 			'public' => true,
 			'menu_position' => 20,
 			'hierarchical' => true,
@@ -210,7 +221,7 @@ function thirstyAddCategoryColumnToList($posts_columns) {
             $new_posts_columns[$key] = $posts_column;
         }
     }
-    $new_posts_columns['thirstylink-category'] = 'Link Categories';
+    $new_posts_columns['thirstylink-category'] = __('Link Categories', 'thirstyaffiliates');
     return $new_posts_columns;
 }
 
@@ -345,7 +356,7 @@ function thirstyRestrictLinksByCategory() {
 		$thirstyTax = get_taxonomy($taxonomy);
 
 		wp_dropdown_categories(array(
-			'show_option_all' => __("Show {$thirstyTax->labels->all_items}"),
+			'show_option_all' => "Show {$thirstyTax->labels->all_items}",
 			'taxonomy' => $taxonomy,
 			'name' => $taxonomy,
 			'orderby' => 'name',
@@ -479,12 +490,11 @@ function thirstyAddonsAvailable() {
 		echo '<li class="thirstyaddonlinkpage">';
 		echo '<h3>' . $productTitle . '</h3>';
 		echo '<div class="thirstyaddondescription">' . $product['description'] . '</div>';
-		echo '<a class="button-primary" href="' . $productUrl . '" target="_blank">Visit Add-on Page &rarr;</a>';
+		echo '<a class="button-primary" href="' . $productUrl . '" target="_blank">'.__('Visit Add-on Page', 'thirstyaffiliates').' &rarr;</a>';
 		echo '</li>';
 
-		echo '</ul>
-		<a href="' . admin_url('edit.php?post_type=thirstylink&page=thirsty-addons') . '">View all available add-ons &rarr;</a>
-		';
+		echo '</ul>';
+		echo '<a href="' . admin_url('edit.php?post_type=thirstylink&page=thirsty-addons') . '">'.__('View all available add-ons &rarr;', 'thirstyaffiliates').'</a>';
 	}
 }
 
@@ -502,7 +512,7 @@ function thirstyRedirectTypeMeta() {
 
 	$redirectTypes = thirstyGetRedirectTypes();
 
-	echo "<p>Override the default redirection type for this link: </p><p>";
+	echo '<p>'.__('Override the default redirection type for this link:', 'thirstyaffiliates').'</p><p>';
 
 	foreach ($redirectTypes as $redirectTypeCode => $redirectTypeDesc) {
 
@@ -544,16 +554,16 @@ function thirstyRedirectTypeMeta() {
 function thirstySaveLinkMeta() {
 	global $post;
 
-	echo '<p class="thirstySaveMe">NOTE: Please save your link after adding or removing images</p>';
-	echo '<input name="post_status" type="hidden" id="post_status" value="publish" />';
-	echo '<input name="original_publish" type="hidden" id="original_publish" value="Save" />';
-	echo '<input name="save" type="submit" class="button-primary" id="publish" tabindex="5" accesskey="p" value="Save Link">';
+	echo '<p class="thirstySaveMe">'.__('NOTE: Please save your link after adding or removing images', 'thirstyaffiliates').'</p>';
+	echo '<input name="post_status" type="hidden" id="post_status" value="'.__('publish', 'thirstyaffiliates').'" />';
+	echo '<input name="original_publish" type="hidden" id="original_publish" value="'.__('Save', 'thirstyaffiliates').'" />';
+	echo '<input name="save" type="submit" class="button-primary" id="publish" tabindex="5" accesskey="p" value="'.__('Save Link', 'thirstyaffiliates').'">';
 
 	if (current_user_can("delete_post", $post->ID)) {
 		if (!EMPTY_TRASH_DAYS)
-			$delete_text = __('Delete Permanently');
+			$delete_text = __('Delete Permanently', 'thirstyaffiliates');
 		else
-			$delete_text = __('Move to Trash');
+			$delete_text = __('Move to Trash', 'thirstyaffiliates');
 
 		echo '&nbsp;&nbsp;<a class="submitdelete deletion" href="' . get_delete_post_link($post->ID) . '">' . $delete_text . '</a>';
 	}
@@ -571,12 +581,12 @@ function thirstyLinkNameMeta() {
 	$linkData = unserialize(get_post_meta($post->ID, 'thirstyData', true));
 
 	$thirstyOptions = get_option('thirstyOptions');
-	echo '<p><label class="infolabel" for="post_title">Link Name:</label><span id="link_id" style="float:right;">Link ID: <strong>' . $post->ID . '</strong></span></p>';
+	echo '<p><label class="infolabel" for="post_title">'.__('Link Name:', 'thirstyaffiliates').'</label><span id="link_id" style="float:right;">'.__('Link ID:', 'thirstyaffiliates').' <strong>' . $post->ID . '</strong></span></p>';
 	echo '<p style="clear:both;"><input id="thirsty_linkname" name="post_title" value="' . htmlspecialchars(!empty($linkData['linkname']) ? $linkData['linkname'] : '') .
 	'" size="50" type="text" /></p>';
 
 	if ($_GET['debug'] == true) {
-		echo '<pre>DEBUG: ' . print_r($linkData, true) . '</pre>';
+		echo '<pre>'.__('DEBUG: ') . print_r($linkData, true) . '</pre>';
 	}
 
 }
@@ -603,27 +613,27 @@ function thirstyLinkUrlMeta() {
 	}
 	</style>';
 
-	echo '<p><label class="infolabel" for="thirsty[linkurl]">Destination URL:</label></p>';
+	echo '<p><label class="infolabel" for="thirsty[linkurl]">'.__('Destination URL:', 'thirstyaffiliates').'</label></p>';
 	echo '<p><input id="thirsty_linkurl" name="thirsty[linkurl]" value="' . html_entity_decode((!empty($linkData['linkurl']) ? $linkData['linkurl'] : '')) . '" size="50" type="text" /></p>';
 
 	/* Only show permalink if it's an existing post */
 	if (!empty($post->post_title)) {
-		echo '<p><label class="infolabel">Cloaked URL:</label></p>';
-		echo '<input type="text" readonly="readonly" id="thirsty_cloakedurl" value="' . get_post_permalink($post->ID) . '"> <span class="button-secondary" id="thirstyEditSlug">Edit Slug</span> <a href="' . get_post_permalink($post->ID) . '" target="_blank"><span class="button-secondary" id="thirstyVisitLink">Visit Link</span></a><input id="thirsty_linkslug" name="post_name" value="' . $post->post_name . '" size="50" type="text" /></span> <input id="thirstySaveSlug" type="button" value="Save" class="button-secondary" /></p>';
+		echo '<p><label class="infolabel">'.__('Cloaked URL:', 'thirstyaffiliates').'</label></p>';
+		echo '<input type="text" readonly="readonly" id="thirsty_cloakedurl" value="' . get_post_permalink($post->ID) . '"> <span class="button-secondary" id="thirstyEditSlug">'.__('Edit Slug', 'thirstyaffiliates').'</span> <a href="' . get_post_permalink($post->ID) . '" target="_blank"><span class="button-secondary" id="thirstyVisitLink">'.__('Visit Link').'</span></a><input id="thirsty_linkslug" name="post_name" value="' . $post->post_name . '" size="50" type="text" /></span> <input id="thirstySaveSlug" type="button" value="'.__('Save').'" class="button-secondary" /></p>';
 	}
 
 	/* Only display link nofollow setting if the global nofollow setting is disabled */
 	if ($thirstyOptions['nofollow'] != 'on') {
-		echo '<p><label class="infolabel" for="thirsty_nofollow">No follow this link?:</label>
+		echo '<p><label class="infolabel" for="thirsty_nofollow">'.__('No follow this link?:', 'thirstyaffiliates').'</label>
 		<input id="thirsty_nofollow" name="thirsty[nofollow]" ' . $linkData['nofollow'] . ' type="checkbox" />
-		<span class="thirsty_description">Adds the rel="nofollow" tag so search engines don\'t pass link juice</span></p>';
+		<span class="thirsty_description">'.__('Adds the rel="nofollow" tag so search engines don\'t pass link juice', 'thirstyaffiliates').'</span></p>';
 	}
 
 	/* Only display link new window setting if the global new window setting is disabled */
 	if ($thirstyOptions['newwindow'] != 'on') {
-		echo '<p><label class="infolabel" for="thirsty_newwindow">Open this link in new window?</label>
+		echo '<p><label class="infolabel" for="thirsty_newwindow">'.__('Open this link in new window?', 'thirstyaffiliates').'</label>
 		<input id="thirsty_newwindow" name="thirsty[newwindow]" ' . $linkData['newwindow'] . ' type="checkbox" />
-		<span class="thirsty_description">Opens links in a new window when clicked on</span></p>';
+		<span class="thirsty_description">'.__('Opens links in a new window when clicked on', 'thirstyaffiliates').'</span></p>';
 	}
 }
 
@@ -641,11 +651,10 @@ function thirstyLinkImagesMeta() {
 
 	if (function_exists('wp_enqueue_media') && !$legacyUploader) {
 		// New media uploader
-		echo '<div id="thirsty_upload_media_manager" data-editor="content" data-uploader-title="Add Image To Affiliate Link" data-uploader-button-text="Add To Affiliate Link" class="button-secondary">Upload/Insert&nbsp;&nbsp;<img id="thirsty_add_images" src="' . plugins_url('thirstyaffiliates/') . 'images/media-button.png" alt="Upload/Insert images" /></div>';
+		echo '<div id="thirsty_upload_media_manager" data-editor="content" data-uploader-title="'.__('Add Image To Affiliate Link', 'thirstyaffiliates').'" data-uploader-button-text="'.__('Add To Affiliate Link').'" class="button-secondary">'.__('Upload/Insert').'&nbsp;&nbsp;<img id="thirsty_add_images" src="' . plugins_url('thirstyaffiliates/') . 'images/media-button.png" alt="'.__('Upload/Insert images', 'thirstyaffiliates').'" /></div>';
 	} else {
-		// Legacy thickbox uploader
-		echo '<div id="thirsty_upload_insert_img" class="button-secondary">Upload/Insert&nbsp;&nbsp;<a class="thickbox" href="' . trailingslashit(get_bloginfo('url')) .
-		'wp-admin/media-upload.php?post_id=' . $post->ID . '?type=image&TB_iframe=1"><img id="thirsty_add_images" src="' . plugins_url('thirstyaffiliates/') . 'images/media-button.png" alt="Upload/Insert images" /></a></div>';
+		echo '<div id="thirsty_upload_insert_img" class="button-secondary">'.__('Upload/Insert', 'thirstyaffiliates').'&nbsp;&nbsp;<a class="thickbox" href="' . trailingslashit(get_bloginfo('url')) .
+				'wp-admin/media-upload.php?post_id=' . $post->ID . '?type=image&TB_iframe=1"><img id="thirsty_add_images" src="' . plugins_url('thirstyaffiliates/') . 'images/media-button.png" alt="'.__('Upload/Insert images').'" /></a></div>';
 	}
 
 
@@ -678,7 +687,7 @@ function thirstyLinkImagesMeta() {
 		echo '<div id="thirsty_image_holder">';
 		foreach ($attachments as $attachment) {
 			$img = wp_get_attachment_image_src($attachment->ID, 'full');
-			echo '<div class="thirstyImgHolder"><span class="thirstyRemoveImg" title="Remove This Image" id="' . $attachment->ID . '"></span><a class="thirstyImg thickbox" href="' . $img[0] . '" rel="gallery-linkimgs" title="' . $attachment->post_title . '">';
+			echo '<div class="thirstyImgHolder"><span class="thirstyRemoveImg" title="'.__('Remove This Image').'" id="' . $attachment->ID . '"></span><a class="thirstyImg thickbox" href="' . $img[0] . '" rel="gallery-linkimgs" title="' . $attachment->post_title . '">';
 			echo wp_get_attachment_image($attachment->ID, array(100, 100));
 			echo '</a></div>';
 		}
@@ -903,6 +912,7 @@ function thirstyAdminHeader() {
 	'	var thirstyJSEnable = ' . $thirstyJSEnable . ';' . "\n" .
 	"</script>\n\n";
 
+
 	// always queue thickbox
 	wp_enqueue_script('thickbox', true);
 	wp_enqueue_style('thickbox');
@@ -1002,11 +1012,11 @@ function thirstyQuicktags() {
 	echo '<script type="text/javascript" charset="utf-8">
 	jQuery(document).ready(function() {
 		if (typeof QTags != "undefined")
-			QTags.addButton("ThirstyAffiliates_Aff_Link", "affiliate link", thirstyQTagsButton, "", "", "Open the ThirstyAffiliates link picker", 30);
+			QTags.addButton("ThirstyAffiliates_Aff_Link", "affiliate link", thirstyQTagsButton, "", "", "'.__('Open the ThirstyAffiliates link picker', 'thirstyaffiliates').'", 30);
 
 		// Quick add quick tag
 		if (typeof QTags != "undefined")
-			QTags.addButton("ThirstyAffiliates_quick_add_Aff_Link", "quick add affiliate link", thirstyQTagsButtonQuickAdd, "", "", "Open quick add affiliate link dialog", 31);
+			QTags.addButton("ThirstyAffiliates_quick_add_Aff_Link", "quick add affiliate link", thirstyQTagsButtonQuickAdd, "", "", "'.__('Open quick add affiliate link dialog', 'thirstyaffiliates').'", 31);
 
 	});
 
@@ -1217,8 +1227,8 @@ function thirstyLinkPickerSearch() {
 
 			$attachments = get_posts($attachment_args);
 			$imageThumbsHTML .= '<img class="insert_img_link' . (count($attachments) > 0 ? '' : ' img_link_disabled') . '" src="' . plugins_url('thirstyaffiliates/') . 'images/icon-images' . (count($attachments) > 0 ? '' : '-disabled') .
-				'.png" alt="Insert Image Link" ' .
-				'title="Insert Image Link" /><div class="img_choices">';
+				'.png" alt="'.__('Insert Image Link', 'thirstyaffiliates').'" ' .
+				'title="'.__('Insert Image Link', 'thirstyaffiliates').'" /><div class="img_choices">';
 
 			if (count($attachments) > 0) {
 
@@ -1237,8 +1247,8 @@ function thirstyLinkPickerSearch() {
 			'<span class="linkname">' . $link->post_title .
 			'</span>' .
 			'</td><td class="right">
-			<img class="insert_link" linkID="' . $link->ID . '" src="' . plugins_url('thirstyaffiliates/') . 'images/icon-link.png" alt="Insert Plain Link" title="Insert Plain Link" />
-			<img class="insert_shortcode_link" linkID="' . $link->ID . '" src="' . plugins_url('thirstyaffiliates/') . 'images/icon-shortcode.png" alt="Insert Shortcode" title="Insert Shortcode" />
+			<img class="insert_link" linkID="' . $link->ID . '" src="' . plugins_url('thirstyaffiliates/') . 'images/icon-link.png" alt="'.__('Insert Plain Link', 'thirstyaffiliates').'" title="'.__('Insert Plain Link', 'thirstyaffiliates').'" />
+			<img class="insert_shortcode_link" linkID="' . $link->ID . '" src="' . plugins_url('thirstyaffiliates/') . 'images/icon-shortcode.png" alt="'.__('Insert Shortcode', 'thirstyaffiliates').'" title="'.__('Insert Shortcode', 'thirstyaffiliates').'" />
 			' . $imageThumbsHTML . '
 			</td></tr>';
 
@@ -1246,7 +1256,7 @@ function thirstyLinkPickerSearch() {
 		}
 	} else {
 		if (!empty($search_query)) // make sure it's a search query and not just a request for more links
-			echo '<tr><td>Sorry, no affiliate links found.</td></tr>';
+			echo '<tr><td>'.__('Sorry, no affiliate links found.', 'thirstyaffiliates').'</td></tr>';
 	}
 
 	die();
@@ -1574,16 +1584,16 @@ function thirstyGetThickboxContent() {
 	</head>
 	<body>
 	<div id="picker_container">
-		<img id="heading_title" src="<?php echo plugins_url('thirstyaffiliates/'); ?>images/thirstylogo.png" alt="Affiliate Link Picker" />
+		<img id="heading_title" src="<?php echo plugins_url('thirstyaffiliates/'); ?>images/thirstylogo.png" alt="<?php _e('Affiliate Link Picker', 'thirstyaffiliates'); ?>" />
 
 		<div id="search_box">
-		<label for="search_input">Search ...</label>
+		<label for="search_input"><?php _e('Search ...', 'thirstyaffiliates'); ?></label>
 		<input type="text" value="" size="35" id="search_input" name="search_input" />
 		</div>
 		<table id="picker_content" cellspacing="0" cellpadding="0">
 			&nbsp;
 		</table>
-		<img id="show_more_loader" src="<?php echo plugins_url('thirstyaffiliates/'); ?>images/thirsty-loader.gif" alt="Loading ..." />&nbsp;<img id="show_more" src="<?php echo plugins_url('thirstyaffiliates/'); ?>images/search-load-more.png" alt="Load more ..." />
+		<img id="show_more_loader" src="<?php echo plugins_url('thirstyaffiliates/'); ?>images/thirsty-loader.gif" alt="Loading ..." />&nbsp;<img id="show_more" src="<?php echo plugins_url('thirstyaffiliates/'); ?>images/search-load-more.png" alt="'.__('Load more ...', 'thirstyaffiliates').'" />
 	</div>
 
 	<?php echo '<script type="text/javascript">var thirstyPluginDir = "' .
@@ -1772,21 +1782,21 @@ function thirstyGetQuickAddLinkThickboxContent() {
 					$thirstyOptions = get_option('thirstyOptions');
 				?>
 
-				<img id="heading_title" src="<?php echo plugins_url('thirstyaffiliates/'); ?>images/thirstylogo.png" alt="Affiliate Link Picker" />
+				<img id="heading_title" src="<?php echo plugins_url('thirstyaffiliates/'); ?>images/thirstylogo.png" alt="<?php _e('Affiliate Link Picker', 'thirstyaffiliates'); ?>" />
 
 				<div id="error-bulletin"></div>
 
 				<div id="quick-add-link-form">
 
 					<div class="field_row">
-						<label for="qal_link_name">Link Name:</label>
+						<label for="qal_link_name"><?php _e('Link Name:', 'thirstyaffiliates'); ?></label>
 						<input type="text" name="qal_link_name" id="qal_link_name">
 						<div class="errmsg"></div>
 					</div>
 
 					<div class="field_row">
-						<label for="qal_destination_url">Destination URL:</label>
-						<div class="desc">http:// or https:// is required</div>
+						<label for="qal_destination_url"><?php _e('Destination URL:', 'thirstyaffiliates'); ?></label>
+						<div class="desc"><?php _e('http:// or https:// is required', 'thirstyaffiliates'); ?></div>
 						<input type="text" name="qal_destination_url" id="qal_destination_url">
 						<div class="errmsg"></div>
 
@@ -1795,14 +1805,14 @@ function thirstyGetQuickAddLinkThickboxContent() {
 							/* Only display link nofollow setting if the global nofollow setting is disabled */
 							if ($thirstyOptions['nofollow'] != 'on') {
 								?>
-								<div class="option"><label for="qal_no_follow_link"><input type="checkbox" name="qal_no_follow_link" value="on" id="qal_no_follow_link">No follow this link?</label></div>
+								<div class="option"><label for="qal_no_follow_link"><input type="checkbox" name="qal_no_follow_link" value="on" id="qal_no_follow_link"><?php _e('No follow this link?', 'thirstyaffiliates'); ?></label></div>
 								<?php
 							}
 
 							/* Only display link new window setting if the global new window setting is disabled */
 							if ($thirstyOptions['newwindow'] != 'on') {
 								?>
-								<div class="option"><label for="qal_new_window"><input type="checkbox" name="qal_new_window" value="on" id="qal_new_window">Open this link in new window?</label></div>
+								<div class="option"><label for="qal_new_window"><input type="checkbox" name="qal_new_window" value="on" id="qal_new_window"><?php _e('Open this link in new window?', 'thirstyaffiliates'); ?></label></div>
 								<?php
 							}
 
@@ -1810,8 +1820,8 @@ function thirstyGetQuickAddLinkThickboxContent() {
 					</div>
 
 					<div class="field_row">
-						<label>Redirect Type</label>
-						<span class="desc">Override the default redirection type for this link:</span>
+						<label><?php _e('Redirect Type', 'thirstyaffiliates'); ?></label>
+						<span class="desc"><?php _e('Override the default redirection type for this link:', 'thirstyaffiliates'); ?></span>
 						<?php
 							foreach (thirstyGetRedirectTypes() as $key => $value) {
 								?>
@@ -1819,7 +1829,7 @@ function thirstyGetQuickAddLinkThickboxContent() {
 									<label>
 										<input type="radio" name="qal_redirect_type" value="<?php echo $key; ?>" <?php echo (strcasecmp($key, $thirstyOptions['linkredirecttype']) == 0)?"checked":""; ?>>
 										<?php echo $value; ?>
-										<?php echo (strcasecmp($key, $thirstyOptions['linkredirecttype']) == 0)?" (Default)":""; ?>
+										<?php echo (strcasecmp($key, $thirstyOptions['linkredirecttype']) == 0)? __(" (Default)") : ""; ?>
 									</label>
 								</div>
 								<?php
@@ -1868,13 +1878,13 @@ function thirstyGetQuickAddLinkThickboxContent() {
 							if(count($link_categories) > 0){
 								?>
 								<div class="field_row">
-									<label for="">Link Categories</label>
-									<span class="desc">You must select a link category as you set the general setting to include category on the link</span>
-									<select name="qal_link_categories" id="qal_link_categories" style="width: 300px;" data-placeholder="Select categories..." multiple>
+									<label for=""><?php _e('Link Categories', 'thirstyaffiliates'); ?></label>
+									<span class="desc"><?php _e('You must select a link category as you set the general setting to include category on the link', 'thirstyaffiliates'); ?></span>
+									<select name="qal_link_categories" id="qal_link_categories" style="width: 300px;" data-placeholder="<?php _e('Select categories...', 'thirstyaffiliates'); ?>" multiple>
 									<?php
 										foreach (get_terms("thirstylink-category", array('hide_empty' => false)) as $link_category) {
 											?>
-											<option value="<?php echo $link_category->term_id; ?>"><?php echo $link_category->name; ?></option>
+											<option value="<?php echo $link_category->term_id; ?>"><?php $link_category->name; ?></option>
 											<?php
 										}
 									?>
@@ -1886,8 +1896,8 @@ function thirstyGetQuickAddLinkThickboxContent() {
 					?>
 
 					<div class="field_row button-container">
-						<input type="button" id="add-link" class="button button_secondary" value="Add Link">
-						<input type="button" id="quick-add-link" class="button button-primary" value="Add Link &amp; Insert Into Post">
+						<input type="button" id="add-link" class="button button_secondary" value="<?php _e('Add Link', 'thirstyaffiliates'); ?>">
+						<input type="button" id="quick-add-link" class="button button-primary" value="<?php _e('Add Link &amp; Insert Into Post', 'thirstyaffiliates'); ?>">
 					</div>
 
 				</div><!-- quick-add-link-form -->
@@ -1927,7 +1937,7 @@ function quickCreateAffiliateLink($linkname = '', $linkurl = '', $nofollow = '',
 
 	// Validate Nonce
 	if(!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], plugin_basename(__FILE__))) {
-		echo "You don't have appropriate permission to perform this action";
+		_e("You don't have appropriate permission to perform this action", "thirstyaffiliates");
 		echo $_POST['nonce'];
 		die();
 	}
@@ -1956,7 +1966,7 @@ function quickCreateAffiliateLink($linkname = '', $linkurl = '', $nofollow = '',
 
 		// Kill the flow
 		// TODO: Enhance error message
-		echo "Server Error: Some fields dont have appropriate values";
+		_e("Server Error: Some fields dont have appropriate values", "thirstyaffiliates");
 		die();
 
 	}else{
@@ -1982,7 +1992,7 @@ function quickCreateAffiliateLink($linkname = '', $linkurl = '', $nofollow = '',
 
 			// Kill the flow
 			// TODO: Enhance error message
-			echo "Server Error: Failed to dynamically insert new post";
+			_e("Server Error: Failed to dynamically insert new post", "thirstyaffiliates");
 			die();
 
 		}else{
@@ -2011,7 +2021,7 @@ function quickCreateAffiliateLink($linkname = '', $linkurl = '', $nofollow = '',
 
 				// Kill the flow
 				// TODO: Enhance error message
-				echo "Server Error: Failed to update meta data of recently dynamically created post";
+				_e("Server Error: Failed to update meta data of recently dynamically created post", "thirstyaffiliates");
 				die();
 
 			}
@@ -2199,5 +2209,8 @@ add_action('admin_head', 'thirstyAdminHeader');
 
 /* Output front end header stuff */
 add_action('wp_head', 'thirstyHeader', 10);
+
+/* Load Plug-ins Text Domain*/
+add_action( 'plugins_loaded', 'thirstyAffiliatesLoadPluginTextdomain' );
 
 ?>

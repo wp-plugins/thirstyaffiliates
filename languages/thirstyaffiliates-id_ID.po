@@ -1,0 +1,547 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: thirstyaffiliates\n"
+"POT-Creation-Date: 2015-07-08 10:57+0800\n"
+"PO-Revision-Date: 2015-07-22 13:00+0800\n"
+"Last-Translator: \n"
+"Language-Team: Rymera Web Co <josh@rymera.com.au>\n"
+"Language: id_ID\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.2\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: ThirstyAddonPage.php:10
+msgid "Add-ons"
+msgstr "Add-on"
+
+#: ThirstyAddonPage.php:22 ThirstyAdminPage.php:22
+msgid "You do not have suffifient permissions to access this page."
+msgstr "Anda tidak memiliki cukup izin untuk mengakses halaman ini."
+
+#: ThirstyAddonPage.php:28
+msgid "Turbo Charge ThirstyAffiliates With These Add-ons"
+msgstr "Tingkatkan Kemampuan ThirstyAffiliates dengan Add-on Ini"
+
+#: ThirstyAddonPage.php:46
+msgid "Visit Add-on Page &rarr;"
+msgstr "Kunjungi Halaman Add-on &rarr;"
+
+#: ThirstyAdminPage.php:11 thirstyaffiliates.php:970
+msgid "Settings"
+msgstr "Pengaturan"
+
+#: ThirstyAdminPage.php:77
+msgid "Settings updated."
+msgstr "Pengaturan diperbarui."
+
+#: ThirstyAdminPage.php:78
+msgid "Links rebuilt."
+msgstr "Link dibuat kembali."
+
+#: ThirstyAdminPage.php:84
+msgid "General Settings"
+msgstr "Pengaturan Umum"
+
+#: ThirstyAdminPage.php:88
+msgid "Link Prefix:"
+msgstr "Prefiks Link:"
+
+#: ThirstyAdminPage.php:92
+msgid "custom"
+msgstr "sesuaikan"
+
+#: ThirstyAdminPage.php:92
+msgid " selected"
+msgstr " pilihan"
+
+#: ThirstyAdminPage.php:92
+msgid "Custom"
+msgstr "Sesuaikan"
+
+#: ThirstyAdminPage.php:108
+msgid "The prefix that comes before your cloaked link's slug.<br />eg. "
+msgstr "Prefiks yang dituliskan sebelum slug link Anda yang disembunyikan.<br />misalnya, "
+
+#: ThirstyAdminPage.php:110 ThirstyAdminPage.php:124
+msgid "Warning:"
+msgstr "Peringatan:"
+
+#: ThirstyAdminPage.php:110 ThirstyAdminPage.php:124
+msgid "Changing this setting after you've used links in a post could break those links. Be careful!"
+msgstr ""
+"ThirstyAdminPage.php:110 ThirstyAdminPage.php:124\n"
+"Mengubah pengaturan ini setelah Anda menggunakan link pada artikel dapat merusak link tersebut. Hati-hati!"
+
+#: ThirstyAdminPage.php:116
+msgid "Show Link Category in URL?"
+msgstr "Tampilkan Kategori Link di URL?"
+
+#: ThirstyAdminPage.php:122
+msgid "Show the selected category in the url. eg. "
+msgstr "Tampilkan kategori pilihan di url. misalnya, "
+
+#: ThirstyAdminPage.php:130
+msgid "Disable \"uncategorized\" category on save?"
+msgstr "Nonaktifkan kategori \"tanpa kategori\" saat menyimpan?"
+
+#: ThirstyAdminPage.php:136
+msgid "If the \"Show the selected category in the url\" option above is selected, by default ThirstyAffiliates will add an \"uncategorized\" category to apply to non-categorised links during save. If you disable this, it allows you to have some links with categories in the URL and some without."
+msgstr ""
+"ThirstyAdminPage.php:136\n"
+"Jika pilihan \"Tampilkan kategori pilihan di url\" di atas dipilih, secara default ThirstyAffiliates akan menambahkan kategori \"tanpa kategori\" yang akan diterapkan pada link tanpa kategori saat menyimpan. Jika Anda menonaktifkan ini, hal ini memampukan Anda untuk memiliki sebagian link dengan kategori di URL dan sebagian tanpa kategori."
+
+#: ThirstyAdminPage.php:142
+msgid "Link Redirect Type:"
+msgstr "Jenis Pengalihan Link:"
+
+#: ThirstyAdminPage.php:159
+msgid "This is the type of redirect ThirstyAffiliates will use to redirect the user to your affiliate link."
+msgstr ""
+"ThirstyAdminPage.php:159\n"
+"Ini adalah jenis pengalihan yang akan digunakan ThirstyAffiliates untuk mengalihkan pengguna ke link afiliasi Anda."
+
+#: ThirstyAdminPage.php:165
+msgid "Use no follow on links?"
+msgstr "Gunakan no follow pada link?"
+
+#: ThirstyAdminPage.php:171
+msgid "Add the nofollow attribute to links so search engines don't index them"
+msgstr "Tambahkan atribut nofollow ke link sehingga mesin pencari tidak mengindeksnya"
+
+#: ThirstyAdminPage.php:177
+msgid "Open links in new window?"
+msgstr "Buka link di jendela baru?"
+
+#: ThirstyAdminPage.php:183
+msgid "Force the user to open links in a new window or tab"
+msgstr "Paksa pengguna untuk membuka link di jendela atau tab baru"
+
+#: ThirstyAdminPage.php:189
+msgid "Revert to legacy image uploader?"
+msgstr "Kembali ke peng-upload gambar lama?"
+
+#: ThirstyAdminPage.php:195
+msgid "Disable the new media uploader in favour of the old style uploader"
+msgstr "Nonaktifkan peng-upload media baru dan gunakan peng-upload lama"
+
+#: ThirstyAdminPage.php:201
+msgid "Disable title attribute output on link insertion?"
+msgstr "Nonaktifkan keluaran atribut judul saat menyisipkan link?"
+
+#: ThirstyAdminPage.php:207
+msgid ""
+"Links are automatically output with a title html attribute (by default this shows the text\n"
+"\t\t\tthat you have linked), this option lets you disable the output of the title attribute on your links."
+msgstr ""
+"ThirstyAdminPage.php:207\n"
+"Link secara otomatis ditampilkan dengan atribut html judul (secara default, hal ini menampilkan teks yang telah Anda sambungkan). Pilihan ini memampukan Anda untuk menonaktifkan keluaran atribut judul pada link Anda."
+
+#: ThirstyAdminPage.php:214
+msgid "Disable automatic output of ThirstyAffiliates CSS classes?"
+msgstr "Nonaktifkan keluaran otomatis kelas CSS ThirstyAffiliates?"
+
+#: ThirstyAdminPage.php:220
+msgid ""
+"To help with styling your affiliate links a CSS class called \"thirstylink\" is added\n"
+"\t\t\tto the link and a CSS class called \"thirstylinkimg\" is added to images (when inserting image affiliate links),\n"
+"\t\t\tthis option disables the addition of both of these CSS classes."
+msgstr ""
+"ThirstyAdminPage.php:220\n"
+"Untuk membantu pemformatan link afiliasi Anda, kelas CSS bernama \"thirstylink\" ditambahkan ke link dan kelas CSS bernama \"thirstylinkimg\" ditambahkan ke gambar (saat menyisipkan link afiliasi gambar), pilihan ini menonaktifkan penambahan kedua kelas CSS ini."
+
+#: ThirstyAdminPage.php:228
+msgid "Disable slug shortening?"
+msgstr "Nonaktifkan penyingkatan slug?"
+
+#: ThirstyAdminPage.php:234
+msgid "By default, ThirstyAffiliates removes superfluous words from your cloaked link URLs, this option turns that feature off."
+msgstr ""
+"ThirstyAdminPage.php:234\n"
+"Secara default, ThirstyAffiliates menghapus kata-kata yang berlebihan dari URL link Anda yang disembunyikan. Pilihan ini menonaktifkan fitur tersebut."
+
+#: ThirstyAdminPage.php:240
+msgid "Disable buttons on the Visual editor?"
+msgstr "Nonaktifkan tombol pada editor Visual?"
+
+#: ThirstyAdminPage.php:246
+msgid "Hide the ThirstyAffiliates buttons on the Visual editor."
+msgstr "Sembunyikan tombol ThirstyAffiliates pada editor Visual."
+
+#: ThirstyAdminPage.php:252
+msgid "Disable buttons on the Text/Quicktags editor?"
+msgstr "Nonaktifkan tombol pada editor Teks/Quicktags?"
+
+#: ThirstyAdminPage.php:258
+msgid "Hide the ThirstyAffiliates buttons on the Text editor."
+msgstr "Sembunyikan tombol ThirstyAffiliates pada editor Teks."
+
+#: ThirstyAdminPage.php:264
+msgid "Additional rel attribute tags to add during link insertion: "
+msgstr "Tag atribut rel tambahan untuk ditambahkan saat menyisipkan link: "
+
+#: ThirstyAdminPage.php:270
+msgid "Allows you to add extra tags into the rel= attribute when links are inserted."
+msgstr ""
+"ThirstyAdminPage.php:270\n"
+"Memampukan Anda untuk menambahkan tag tambahan ke rel= attribute saat link disisipkan."
+
+#: ThirstyAdminPage.php:284
+msgid "Save All Changes"
+msgstr "Simpan Semua Perubahan"
+
+#: ThirstyAdminPage.php:285
+msgid "Save & Force Link Rebuild"
+msgstr "Simpan & Paksa Pembuatan Link Kembali"
+
+#: ThirstyAdminPage.php:292
+msgid "Plugin Information"
+msgstr "Informasi Plugin"
+
+#: ThirstyAdminPage.php:305
+msgid "Visit Our Website"
+msgstr "Kunjungi Situs Web Kami"
+
+#: ThirstyAdminPage.php:306
+msgid "Browse ThirstyAffiliates Add-ons"
+msgstr "Telusuri Add-on ThirstyAffiliates"
+
+#: ThirstyAdminPage.php:307
+msgid "Join Our Affiliate Program"
+msgstr "Gabung dengan Program Afiliasi Kami"
+
+#: ThirstyAdminPage.php:307
+#, php-format
+msgid "(up to 50% commissions)"
+msgstr "(komisi sampai 50%)"
+
+#: ThirstyAdminPage.php:308
+msgid "Like us on Facebook"
+msgstr "Sukai kami di Facebook"
+
+#: ThirstyAdminPage.php:309
+msgid "Follow us on Twitter"
+msgstr "Ikuti kami di Twitter"
+
+#: ThirstyAdminPage.php:319 thirstyaffiliates.php:600
+msgid "DEBUG: "
+msgstr ""
+
+#: ThirstyAdminPage.php:382
+msgid ""
+"ThirstyAffiliates requires pretty permalinks, please change\n"
+"\t\t\tyour"
+msgstr ""
+"ThirstyAdminPage.php:382\n"
+"ThirstyAffiliates memerlukan pretty permalink, silakan ubah"
+
+#: ThirstyAdminPage.php:383
+msgid "Permalink settings"
+msgstr "pengaturan Permalink Anda"
+
+#: ThirstyAdminPage.php:383
+msgid "to something other than default."
+msgstr "ke pengaturan selain default."
+
+#: ThirstyAdminPage.php:383
+msgid "Dismiss"
+msgstr "Abaikan"
+
+#: ThirstyAdminPage.php:414
+msgid "Export/Import Global Settings"
+msgstr "Pengaturan Global Ekspor/Impor"
+
+#: ThirstyAdminPage.php:417
+msgid "Exporting Settings"
+msgstr "Pengaturan Pengeksporan"
+
+#: ThirstyAdminPage.php:420
+msgid "Click export settings button"
+msgstr "Klik tombol pengaturan ekspor"
+
+#: ThirstyAdminPage.php:421
+msgid "Copy the settings text code"
+msgstr "Salin kode teks pengaturan"
+
+#: ThirstyAdminPage.php:422
+msgid "Paste in the settings code to the destination site"
+msgstr "Tempelkan kode pengaturan ke situs tujuan"
+
+#: ThirstyAdminPage.php:426
+msgid "Importing Settings"
+msgstr "Pengaturan Pengimporan"
+
+#: ThirstyAdminPage.php:429
+msgid "Click import settings button"
+msgstr "Klik tombol pengaturan impor"
+
+#: ThirstyAdminPage.php:430
+msgid "Paste the settings text code ( From other site )"
+msgstr "Tempelkan kode teks pengaturan (Dari situs lain)"
+
+#: ThirstyAdminPage.php:431
+msgid "Click import global settings button"
+msgstr "Klik tombol pengaturan global impor"
+
+#: ThirstyAdminPage.php:436
+msgid "Export Settings"
+msgstr "Pengaturan Ekspor"
+
+#: ThirstyAdminPage.php:437
+msgid "Import Settings"
+msgstr "Pengaturan Impor"
+
+#: ThirstyAdminPage.php:442
+msgid "Import Global Settings"
+msgstr "Pengaturan Global Impor"
+
+#: ThirstyAdminPage.php:504
+msgid "Failed to decode settings string"
+msgstr "Gagal mendekode string pengaturan"
+
+#: ThirstyAdminPage.php:511
+msgid "Failed to unserialize settings string"
+msgstr "Gagal mengacak string pengaturan"
+
+#: ThirstyShortcode.php:86
+msgid "SHORTCODE ERROR: ThirstyAffiliates did not detect a valid link id, please check your short code!"
+msgstr ""
+"ThirstyShortcode.php:86\n"
+"EROR SHORTCODE: ThirstyAffiliates tidak mendeteksi id link yang valid. Harap periksa short code Anda!"
+
+#: thirstyaffiliates.php:52 thirstyaffiliates.php:235 thirstyaffiliates.php:1892
+msgid "Link Categories"
+msgstr "Kategori Link"
+
+#: thirstyaffiliates.php:53
+msgid "Link Category"
+msgstr "Kategori Link"
+
+#: thirstyaffiliates.php:68 thirstyaffiliates.php:76
+msgid "Affiliate Links"
+msgstr "Link Afiliasi"
+
+#: thirstyaffiliates.php:69
+msgid "Affiliate Link"
+msgstr "Link Afiliasi"
+
+#: thirstyaffiliates.php:70
+msgid "Add New Affiliate Link"
+msgstr "Tambahkan Link Afiliasi Baru"
+
+#: thirstyaffiliates.php:71
+msgid "Edit Affiliate Link"
+msgstr "Edit Link Afiliasi"
+
+#: thirstyaffiliates.php:72
+msgid "View Affiliate Link"
+msgstr "Lihat Link Afiliasi"
+
+#: thirstyaffiliates.php:73
+msgid "Search Affiliate Links"
+msgstr "Cari Link Afiliasi"
+
+#: thirstyaffiliates.php:74
+msgid "No Affiliate Links found!"
+msgstr "Tidak ada Link Afiliasi yang ditemukan!"
+
+#: thirstyaffiliates.php:75
+msgid "No Affiliate Links found in trash"
+msgstr "Tidak ada Link Afiliasi yang ditemukan di tempat sampah"
+
+#: thirstyaffiliates.php:77
+msgid "All Affiliate Links"
+msgstr "Semua Link Afiliasi"
+
+#: thirstyaffiliates.php:79
+msgid "ThirstyAffiliates affiliate links"
+msgstr "Link afiliasi ThirstyAffiliates "
+
+#: thirstyaffiliates.php:504
+msgid "Visit Add-on Page"
+msgstr "Kunjungi Halaman Add-on"
+
+#: thirstyaffiliates.php:508
+msgid "View all available add-ons &rarr;"
+msgstr "Lihat semua add-on yang tersedia &rarr;"
+
+#: thirstyaffiliates.php:526 thirstyaffiliates.php:1835
+msgid "Override the default redirection type for this link:"
+msgstr "Batalkan jenis pengalihan default untuk link ini:"
+
+#: thirstyaffiliates.php:568
+msgid "NOTE: Please save your link after adding or removing images"
+msgstr "CATATAN: Harap simpan link Anda setelah menambahkan atau menghapus gambar"
+
+#: thirstyaffiliates.php:569
+msgid "publish"
+msgstr "terbitkan"
+
+#: thirstyaffiliates.php:570 thirstyaffiliates.php:633
+msgid "Save"
+msgstr "Simpan "
+
+#: thirstyaffiliates.php:571
+msgid "Save Link"
+msgstr "Simpan Link"
+
+#: thirstyaffiliates.php:575
+msgid "Delete Permanently"
+msgstr "Hapus Permanen"
+
+#: thirstyaffiliates.php:577
+msgid "Move to Trash"
+msgstr "Pindahkan ke Tempat Sampah"
+
+#: thirstyaffiliates.php:595 thirstyaffiliates.php:1803
+msgid "Link Name:"
+msgstr "Nama Link:"
+
+#: thirstyaffiliates.php:595
+msgid "Link ID:"
+msgstr "ID Link:"
+
+#: thirstyaffiliates.php:627 thirstyaffiliates.php:1809
+msgid "Destination URL:"
+msgstr "URL Tujuan:"
+
+#: thirstyaffiliates.php:632
+msgid "Cloaked URL:"
+msgstr "URL yang Disembunyikan:"
+
+#: thirstyaffiliates.php:633
+msgid "Edit Slug"
+msgstr ""
+
+#: thirstyaffiliates.php:633
+msgid "Visit Link"
+msgstr "Kunjungi Link"
+
+#: thirstyaffiliates.php:638
+msgid "No follow this link?:"
+msgstr "No follow link ini?"
+
+#: thirstyaffiliates.php:640
+msgid "Adds the rel=\"nofollow\" tag so search engines don't pass link juice"
+msgstr "Tambahkan rel=\"nofollow\" sehingga mesin pencari tidak menyalurkan link juice"
+
+#: thirstyaffiliates.php:645 thirstyaffiliates.php:1826
+msgid "Open this link in new window?"
+msgstr "Buka link ini di jendela baru?"
+
+#: thirstyaffiliates.php:647
+msgid "Opens links in a new window when clicked on"
+msgstr "Membuka link di jendela baru saat diklik"
+
+#: thirstyaffiliates.php:665
+msgid "Add Image To Affiliate Link"
+msgstr "Tambahkan Gambar ke Link Afiliasi"
+
+#: thirstyaffiliates.php:665
+msgid "Add To Affiliate Link"
+msgstr "Tambahkan ke Link Afiliasi"
+
+#: thirstyaffiliates.php:665 thirstyaffiliates.php:667
+msgid "Upload/Insert"
+msgstr "Upload/Sisipkan"
+
+#: thirstyaffiliates.php:665 thirstyaffiliates.php:668
+msgid "Upload/Insert images"
+msgstr "Upload/Sisipkan gambar"
+
+#: thirstyaffiliates.php:701
+msgid "Remove This Image"
+msgstr "Hapus Gambar Ini"
+
+#: thirstyaffiliates.php:1026
+msgid "Open the ThirstyAffiliates link picker"
+msgstr "Buka pemilih link ThirstyAffiliates"
+
+#: thirstyaffiliates.php:1030
+msgid "Open quick add affiliate link dialog"
+msgstr "Buka dialog tambahkan cepat link afiliasi"
+
+#: thirstyaffiliates.php:1241 thirstyaffiliates.php:1242
+msgid "Insert Image Link"
+msgstr "Sisipkan Link Gambar "
+
+#: thirstyaffiliates.php:1261
+msgid "Insert Plain Link"
+msgstr "Sisipkan Link Teks"
+
+#: thirstyaffiliates.php:1262
+msgid "Insert Shortcode"
+msgstr "Sisipkan Shortcode"
+
+#: thirstyaffiliates.php:1270
+msgid "Sorry, no affiliate links found."
+msgstr "Maaf, tidak ada link afiliasi yang ditemukan."
+
+#: thirstyaffiliates.php:1598 thirstyaffiliates.php:1796
+msgid "Affiliate Link Picker"
+msgstr "Pemilih Link Afiliasi"
+
+#: thirstyaffiliates.php:1601
+msgid "Search ..."
+msgstr "Cari..."
+
+#: thirstyaffiliates.php:1810
+msgid "http:// or https:// is required"
+msgstr "http:// atau https:// diperlukan"
+
+#: thirstyaffiliates.php:1819
+msgid "No follow this link?"
+msgstr "No follow link ini?"
+
+#: thirstyaffiliates.php:1834
+msgid "Redirect Type"
+msgstr "Jenis Pengalihan"
+
+#: thirstyaffiliates.php:1843
+msgid " (Default)"
+msgstr ""
+
+#: thirstyaffiliates.php:1893
+msgid "You must select a link category as you set the general setting to include category on the link"
+msgstr ""
+"thirstyaffiliates.php:1893\n"
+"Anda harus memilih kategori link saat Anda menetapkan pengaturan umum untuk menyertakan kategori pada link"
+
+#: thirstyaffiliates.php:1894
+msgid "Select categories..."
+msgstr "Pilih kategori..."
+
+#: thirstyaffiliates.php:1910
+msgid "Add Link"
+msgstr "Tambahkan Link"
+
+#: thirstyaffiliates.php:1911
+msgid "Add Link &amp; Insert Into Post"
+msgstr "Tambahkan Link &amp; Sisipkan ke Artikel"
+
+#: thirstyaffiliates.php:1951
+msgid "You don't have appropriate permission to perform this action"
+msgstr "Anda tidak memiliki izin untuk melakukan tindakan ini."
+
+#: thirstyaffiliates.php:1980
+msgid "Server Error: Some fields dont have appropriate values"
+msgstr "Eror Server: Sebagian bidang tidak memiliki nilai yang tepat"
+
+#: thirstyaffiliates.php:2006
+msgid "Server Error: Failed to dynamically insert new post"
+msgstr "Eror Server: Gagal menyisipkan artikel baru secara dinamis"
+
+#: thirstyaffiliates.php:2035
+msgid "Server Error: Failed to update meta data of recently dynamically created post"
+msgstr ""
+"thirstyaffiliates.php:2035\n"
+"Eror Server: Gagal meng-update meta data dari artikel yang baru dibuat secara dinamis"
+
+#: thirstyaffiliates.php:2111
+msgid "Link ID"
+msgstr "ID Link"

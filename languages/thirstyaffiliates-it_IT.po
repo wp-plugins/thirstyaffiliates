@@ -1,0 +1,584 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: thirstyaffiliates\n"
+"POT-Creation-Date: 2015-07-09 00:27+0800\n"
+"PO-Revision-Date: 2015-07-15 16:16+0200\n"
+"Last-Translator: \n"
+"Language-Team: Rymera Web Co <josh@rymera.com.au>\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.2\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: ThirstyAddonPage.php:10
+msgid "Add-ons"
+msgstr "Add-on"
+
+#: ThirstyAddonPage.php:22 ThirstyAdminPage.php:22
+msgid "You do not have suffifient permissions to access this page."
+msgstr "Non hai privilegi sufficienti per accedere a questa pagina."
+
+#: ThirstyAddonPage.php:28
+msgid "Turbo Charge ThirstyAffiliates With These Add-ons"
+msgstr "Potenzia subito ThirstyAffiliates con questi Add-on"
+
+#: ThirstyAddonPage.php:46
+msgid "Visit Add-on Page &rarr;"
+msgstr "Visita la pagina degli Add-on &rarr;"
+
+#: ThirstyAdminPage.php:11 thirstyaffiliates.php:970
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: ThirstyAdminPage.php:77
+msgid "Settings updated."
+msgstr "Impostazioni aggiornate."
+
+#: ThirstyAdminPage.php:78
+msgid "Links rebuilt."
+msgstr "Link ricostruiti."
+
+#: ThirstyAdminPage.php:84
+msgid "General Settings"
+msgstr "Impostazioni Generali"
+
+#: ThirstyAdminPage.php:88
+msgid "Link Prefix:"
+msgstr "Prefisso Link:"
+
+#: ThirstyAdminPage.php:92
+msgid "custom"
+msgstr "personalizzato"
+
+#: ThirstyAdminPage.php:92
+msgid " selected"
+msgstr " selezionato"
+
+#: ThirstyAdminPage.php:92
+msgid "Custom"
+msgstr "Personalizza"
+
+#: ThirstyAdminPage.php:108
+msgid "The prefix that comes before your cloaked link's slug.<br />eg. "
+msgstr "Il prefisso che viene prima del tuo link modificato.<br />Es. "
+
+#: ThirstyAdminPage.php:110 ThirstyAdminPage.php:124
+msgid "Warning:"
+msgstr "Attenzione:"
+
+#: ThirstyAdminPage.php:110 ThirstyAdminPage.php:124
+msgid ""
+"Changing this setting after you've used links in a post could break those "
+"links. Be careful!"
+msgstr ""
+"Modificare questa impostazione dopo aver utilizzato i link in un post "
+"potrebbe renderli non funzionanti. Fai attenzione!"
+
+#: ThirstyAdminPage.php:116
+msgid "Show Link Category in URL?"
+msgstr "Mostrare la Categoria dei Link nella URL?"
+
+#: ThirstyAdminPage.php:122
+msgid "Show the selected category in the url. eg. "
+msgstr "Mostra la categoria selezionata nell’URL. Es. "
+
+#: ThirstyAdminPage.php:130
+msgid "Disable \"uncategorized\" category on save?"
+msgstr "Disabilita la categoria “Senza Categoria” al salvataggio?"
+
+#: ThirstyAdminPage.php:136
+msgid ""
+"If the \"Show the selected category in the url\" option above is selected, "
+"by default ThirstyAffiliates will add an \"uncategorized\" category to apply "
+"to non-categorised links during save. If you disable this, it allows you to "
+"have some links with categories in the URL and some without."
+msgstr ""
+"Se l’opzione “Mostra la categoria selezionata nell’URL” qui sopra è "
+"selezionata, di default ThirstyAffiliates aggiungerà una categoria “Senza "
+"Categoria” che attribuirà a quelli che non ne hanno una, durante il "
+"salvataggio. Se lo disabiliti, ti permetterà di avere alcuni link con "
+"categoria nella URL, e altri senza."
+
+#: ThirstyAdminPage.php:142
+msgid "Link Redirect Type:"
+msgstr "Tipo di Link Redirect:"
+
+#: ThirstyAdminPage.php:159
+msgid ""
+"This is the type of redirect ThirstyAffiliates will use to redirect the user "
+"to your affiliate link."
+msgstr ""
+"Questo è il tipo di redirect the ThirstyAffiliates utilizzerà per ridirigere "
+"l’utente al tuo link affiliazione."
+
+#: ThirstyAdminPage.php:165
+msgid "Use no follow on links?"
+msgstr "Utilizzare link No-Follow?"
+
+#: ThirstyAdminPage.php:171
+msgid "Add the nofollow attribute to links so search engines don't index them"
+msgstr ""
+"Aggiunge l’attributo No-Follow ai link così che i motori di ricerca non li "
+"indicizzeranno"
+
+#: ThirstyAdminPage.php:177
+msgid "Open links in new window?"
+msgstr "Aprire i link in una nuova finestra?"
+
+#: ThirstyAdminPage.php:183
+msgid "Force the user to open links in a new window or tab"
+msgstr "Forza l’utente ad aprire link in una nuova finestra o nuovo tab"
+
+#: ThirstyAdminPage.php:189
+msgid "Revert to legacy image uploader?"
+msgstr "Tornare al vecchio Image Uploader?"
+
+#: ThirstyAdminPage.php:195
+msgid "Disable the new media uploader in favour of the old style uploader"
+msgstr "Disabilita il nuovo Image Uploader preferendo l’Uploader vecchio stile"
+
+#: ThirstyAdminPage.php:201
+msgid "Disable title attribute output on link insertion?"
+msgstr "Disabilitare l’output per l’attributo title all’inserimento dei link?"
+
+#: ThirstyAdminPage.php:207
+msgid ""
+"Links are automatically output with a title html attribute (by default this "
+"shows the text\n"
+"\t\t\tthat you have linked), this option lets you disable the output of the "
+"title attribute on your links."
+msgstr ""
+"I link vengono automaticamente mandati in output con l’attributo HTML title "
+"(di default questo mostra il testo\n"
+"\t\t\tche hai linciato), questa opzione ti consente di disabilitare l’output "
+"dell’attributo title per i tuoi link."
+
+#: ThirstyAdminPage.php:214
+msgid "Disable automatic output of ThirstyAffiliates CSS classes?"
+msgstr ""
+"Disabilitare l’output automatico delle classi CSS di ThirstyAffiliates?"
+
+#: ThirstyAdminPage.php:220
+msgid ""
+"To help with styling your affiliate links a CSS class called \"thirstylink\" "
+"is added\n"
+"\t\t\tto the link and a CSS class called \"thirstylinkimg\" is added to "
+"images (when inserting image affiliate links),\n"
+"\t\t\tthis option disables the addition of both of these CSS classes."
+msgstr ""
+"Abbiamo aggiunto una classe CSS chiamata “thirstylink\" per aiutarti nello "
+"styling dei tuoi link affiliazione\n"
+"\t\t\tai link, e una chiamata \"thirstylinkimg\" alle immagini (quando "
+"inserisci un Link Affiliazione Immagine),\n"
+"\t\t\tQuesta opzione disabilita l’aggiunta di entrambe queste classi CSS."
+
+#: ThirstyAdminPage.php:228
+msgid "Disable slug shortening?"
+msgstr "Disabilita Abbreviazione Slug?"
+
+#: ThirstyAdminPage.php:234
+msgid ""
+"By default, ThirstyAffiliates removes superfluous words from your cloaked "
+"link URLs, this option turns that feature off."
+msgstr ""
+"Di default, ThirstyAffiliates rimuove parole superflue dall’URL modificata, "
+"questa opzione disattiva questa funzione."
+
+#: ThirstyAdminPage.php:240
+msgid "Disable buttons on the Visual editor?"
+msgstr "Disabilitare i bottoni nel Visual editor?"
+
+#: ThirstyAdminPage.php:246
+msgid "Hide the ThirstyAffiliates buttons on the Visual editor."
+msgstr "Nasconde i bottoni di ThirstyAffiliates nell’editor di testo Visuale."
+
+#: ThirstyAdminPage.php:252
+msgid "Disable buttons on the Text/Quicktags editor?"
+msgstr "Disabilitare i bottoni negli editor Testo/Quicktags?"
+
+#: ThirstyAdminPage.php:258
+msgid "Hide the ThirstyAffiliates buttons on the Text editor."
+msgstr "Nasconde i bottoni di ThirstyAffiliates nell’editor di tipo Testo."
+
+#: ThirstyAdminPage.php:264
+msgid "Additional rel attribute tags to add during link insertion: "
+msgstr ""
+"Tag addizionali da inserire nell’attributo rel durante l’inserimento di "
+"link: "
+
+#: ThirstyAdminPage.php:270
+msgid ""
+"Allows you to add extra tags into the rel= attribute when links are inserted."
+msgstr ""
+"Consente di aggiungere extra tag nell’attributo rel= quando vengono inseriti "
+"link."
+
+#: ThirstyAdminPage.php:284
+msgid "Save All Changes"
+msgstr "Salva tutti i cambiamenti"
+
+#: ThirstyAdminPage.php:285
+msgid "Save & Force Link Rebuild"
+msgstr "Salva e Forza la Ricostruzione Link"
+
+#: ThirstyAdminPage.php:292
+msgid "Plugin Information"
+msgstr "Informazioni sul Plugin"
+
+#: ThirstyAdminPage.php:305
+msgid "Visit Our Website"
+msgstr "Visita il nostro sito"
+
+#: ThirstyAdminPage.php:306
+msgid "Browse ThirstyAffiliates Add-ons"
+msgstr "Sfoglia gli Add-on per ThirstyAffiliates"
+
+#: ThirstyAdminPage.php:307
+msgid "Join Our Affiliate Program"
+msgstr "Iscriviti al nostro Programma Affiliazione"
+
+#: ThirstyAdminPage.php:307
+#, php-format
+msgid "(up to 50% commissions)"
+msgstr "(fino al 50% di commissioni)"
+
+#: ThirstyAdminPage.php:308
+msgid "Like us on Facebook"
+msgstr "Mi Piace su Facebook"
+
+#: ThirstyAdminPage.php:309
+msgid "Follow us on Twitter"
+msgstr "Seguici su Twitter"
+
+#: ThirstyAdminPage.php:319 thirstyaffiliates.php:600
+msgid "DEBUG: "
+msgstr "DEBUG: "
+
+#: ThirstyAdminPage.php:382
+msgid ""
+"ThirstyAffiliates requires pretty permalinks, please change\n"
+"\t\t\tyour"
+msgstr ""
+"ThirstyAffiliates necessita di permalinks ben fatti, per piacere cambia\n"
+"\t\t\t il tuo"
+
+#: ThirstyAdminPage.php:383
+msgid "Permalink settings"
+msgstr "Impostazioni Permalink"
+
+#: ThirstyAdminPage.php:383
+msgid "to something other than default."
+msgstr "in qualcosa di diverso rispetto al default."
+
+#: ThirstyAdminPage.php:383
+msgid "Dismiss"
+msgstr "Annulla"
+
+#: ThirstyAdminPage.php:414
+msgid "Export/Import Global Settings"
+msgstr "Esporta/Importa le impostazioni globali"
+
+#: ThirstyAdminPage.php:417
+msgid "Exporting Settings"
+msgstr "Esportando le impostazioni"
+
+#: ThirstyAdminPage.php:420
+msgid "Click export settings button"
+msgstr "Clicca il pulsante per esportare le impostazioni"
+
+#: ThirstyAdminPage.php:421
+msgid "Copy the settings text code"
+msgstr "Copia il codice di testo delle impostazioni"
+
+#: ThirstyAdminPage.php:422
+msgid "Paste in the settings code to the destination site"
+msgstr "Incolla il codice delle impostazioni nel sito di destinazione"
+
+#: ThirstyAdminPage.php:426
+msgid "Importing Settings"
+msgstr "Importando le impostazioni"
+
+#: ThirstyAdminPage.php:429
+msgid "Click import settings button"
+msgstr "Clicca il bottone di importazione delle impostazioni"
+
+#: ThirstyAdminPage.php:430
+msgid "Paste the settings text code ( From other site )"
+msgstr "Incolla il codice delle impostazioni ( Da altro sito )"
+
+#: ThirstyAdminPage.php:431
+msgid "Click import global settings button"
+msgstr "Clicca il bottone di importazione globale delle impostazioni"
+
+#: ThirstyAdminPage.php:436
+msgid "Export Settings"
+msgstr "Esporta Impostazioni"
+
+#: ThirstyAdminPage.php:437
+msgid "Import Settings"
+msgstr "Importa Impostazioni"
+
+#: ThirstyAdminPage.php:442
+msgid "Import Global Settings"
+msgstr "Importa Impostazioni Globali"
+
+#: ThirstyAdminPage.php:504
+msgid "Failed to decode settings string"
+msgstr "Impossibile decodificare la stringa di impostazioni"
+
+#: ThirstyAdminPage.php:511
+msgid "Failed to unserialize settings string"
+msgstr "Impossibile deserializzare la stringa di impostazioni"
+
+#: ThirstyShortcode.php:86
+msgid ""
+"SHORTCODE ERROR: ThirstyAffiliates did not detect a valid link id, please "
+"check your short code!"
+msgstr ""
+"ERRORE DI SHORTCODE: ThirstyAffiliates non individua un ID Link valido, per "
+"cortesia controlla il tuo shortcode!"
+
+#: thirstyaffiliates.php:52 thirstyaffiliates.php:235
+#: thirstyaffiliates.php:1892
+msgid "Link Categories"
+msgstr "Link di Categorie"
+
+#: thirstyaffiliates.php:53
+msgid "Link Category"
+msgstr "Link di Categoria"
+
+#: thirstyaffiliates.php:68 thirstyaffiliates.php:76
+msgid "Affiliate Links"
+msgstr "Link Affiliazione"
+
+#: thirstyaffiliates.php:69
+msgid "Affiliate Link"
+msgstr "Link Affiliazione"
+
+#: thirstyaffiliates.php:70
+msgid "Add New Affiliate Link"
+msgstr "Aggiungi nuovo Link Affiliazione"
+
+#: thirstyaffiliates.php:71
+msgid "Edit Affiliate Link"
+msgstr "Modifica Link Affiliazione"
+
+#: thirstyaffiliates.php:72
+msgid "View Affiliate Link"
+msgstr "Vedi Link Affiliazione"
+
+#: thirstyaffiliates.php:73
+msgid "Search Affiliate Links"
+msgstr "Cerca Link Affiliazione"
+
+#: thirstyaffiliates.php:74
+msgid "No Affiliate Links found!"
+msgstr "Nessun Link Affiliazione trovato!"
+
+#: thirstyaffiliates.php:75
+msgid "No Affiliate Links found in trash"
+msgstr "Nessun Link Affiliazione trovato nel cestino"
+
+#: thirstyaffiliates.php:77
+msgid "All Affiliate Links"
+msgstr "Tutti i Link Affiliazione"
+
+#: thirstyaffiliates.php:79
+msgid "ThirstyAffiliates affiliate links"
+msgstr "Link Affiliazione ThirstyAffiliates"
+
+#: thirstyaffiliates.php:504
+msgid "Visit Add-on Page"
+msgstr "Visita la Pagina Add-on"
+
+#: thirstyaffiliates.php:508
+msgid "View all available add-ons &rarr;"
+msgstr "Guarda tutti gli Add-on disponibili &rarr;"
+
+#: thirstyaffiliates.php:526 thirstyaffiliates.php:1835
+msgid "Override the default redirection type for this link:"
+msgstr "Sovrascrivi il tipo di redirect di default per questo link:"
+
+#: thirstyaffiliates.php:568
+msgid "NOTE: Please save your link after adding or removing images"
+msgstr ""
+"NOTA: Per piacere salva il tuo link dopo aver aggiunto o rimosso le immagini"
+
+#: thirstyaffiliates.php:569
+msgid "publish"
+msgstr "pubblica"
+
+#: thirstyaffiliates.php:570 thirstyaffiliates.php:633
+msgid "Save"
+msgstr "Salva"
+
+#: thirstyaffiliates.php:571
+msgid "Save Link"
+msgstr "Salva Link"
+
+#: thirstyaffiliates.php:575
+msgid "Delete Permanently"
+msgstr "Elimina Permanentemente"
+
+#: thirstyaffiliates.php:577
+msgid "Move to Trash"
+msgstr "Sposta nel Cestino"
+
+#: thirstyaffiliates.php:595 thirstyaffiliates.php:1803
+msgid "Link Name:"
+msgstr "Nome del Link:"
+
+#: thirstyaffiliates.php:595
+msgid "Link ID:"
+msgstr "ID del Link:"
+
+#: thirstyaffiliates.php:627 thirstyaffiliates.php:1809
+msgid "Destination URL:"
+msgstr "URL di Destinazione:"
+
+#: thirstyaffiliates.php:632
+msgid "Cloaked URL:"
+msgstr "URL Modificata:"
+
+#: thirstyaffiliates.php:633
+msgid "Edit Slug"
+msgstr "Modifica lo Slug"
+
+#: thirstyaffiliates.php:633
+msgid "Visit Link"
+msgstr "Visita Link"
+
+#: thirstyaffiliates.php:638
+msgid "No follow this link?:"
+msgstr "Rendere questo link No-Follow?:"
+
+#: thirstyaffiliates.php:640
+msgid "Adds the rel=\"nofollow\" tag so search engines don't pass link juice"
+msgstr ""
+"Aggiunge il tag rel=\"nofollow\" così che i motori di ricerca non passino un "
+"po’ della tua authority"
+
+#: thirstyaffiliates.php:645 thirstyaffiliates.php:1826
+msgid "Open this link in new window?"
+msgstr "Apri questo link in una nuova finestra?"
+
+#: thirstyaffiliates.php:647
+msgid "Opens links in a new window when clicked on"
+msgstr "Apre link in una nuova finestra quando cliccat"
+
+#: thirstyaffiliates.php:665
+msgid "Add Image To Affiliate Link"
+msgstr "Aggiungi Immagine al Link Affiliazione"
+
+#: thirstyaffiliates.php:665
+msgid "Add To Affiliate Link"
+msgstr "Aggiungi al Link Affiliazione"
+
+#: thirstyaffiliates.php:665 thirstyaffiliates.php:667
+msgid "Upload/Insert"
+msgstr "Upload/Inserisci"
+
+#: thirstyaffiliates.php:665 thirstyaffiliates.php:668
+msgid "Upload/Insert images"
+msgstr "Upload/Inserisci immagini"
+
+#: thirstyaffiliates.php:701
+msgid "Remove This Image"
+msgstr "Rimuovi questa Immagine"
+
+#: thirstyaffiliates.php:1026
+msgid "Open the ThirstyAffiliates link picker"
+msgstr "Apri il Link Picker di ThirstyAffiliates"
+
+#: thirstyaffiliates.php:1030
+msgid "Open quick add affiliate link dialog"
+msgstr "Apre la finestra Aggiungi Subito Link Affiliazione"
+
+#: thirstyaffiliates.php:1241 thirstyaffiliates.php:1242
+msgid "Insert Image Link"
+msgstr "Inserisci Link Immagine"
+
+#: thirstyaffiliates.php:1261
+msgid "Insert Plain Link"
+msgstr "Inserisci Link testo"
+
+#: thirstyaffiliates.php:1262
+msgid "Insert Shortcode"
+msgstr "Inserisci Shortcode"
+
+#: thirstyaffiliates.php:1270
+msgid "Sorry, no affiliate links found."
+msgstr "Spiacente, nessun link affiliazione trovato."
+
+#: thirstyaffiliates.php:1598 thirstyaffiliates.php:1796
+msgid "Affiliate Link Picker"
+msgstr "Picker Link Affiliazione"
+
+#: thirstyaffiliates.php:1601
+msgid "Search ..."
+msgstr "Cerca …"
+
+#: thirstyaffiliates.php:1810
+msgid "http:// or https:// is required"
+msgstr "http:// o https:// is richiesto"
+
+#: thirstyaffiliates.php:1819
+msgid "No follow this link?"
+msgstr "Rendere questo link No-Follow?"
+
+#: thirstyaffiliates.php:1834
+msgid "Redirect Type"
+msgstr "Tipo di Redirect"
+
+#: thirstyaffiliates.php:1843
+msgid " (Default)"
+msgstr " (Default)"
+
+#: thirstyaffiliates.php:1893
+msgid ""
+"You must select a link category as you set the general setting to include "
+"category on the link"
+msgstr ""
+"Devi selezionare una Categoria di Link dal momento in cui questo è impostato "
+"nelle Impostazioni Generali"
+
+#: thirstyaffiliates.php:1894
+msgid "Select categories..."
+msgstr "Scegli categorie..."
+
+#: thirstyaffiliates.php:1910
+msgid "Add Link"
+msgstr "Aggiungi Link"
+
+#: thirstyaffiliates.php:1911
+msgid "Add Link &amp; Insert Into Post"
+msgstr "Aggiungi Link &amp; Inserisci nel Post"
+
+#: thirstyaffiliates.php:1951
+msgid "You don't have appropriate permission to perform this action"
+msgstr "Non hai sufficienti privilegi per fare questo"
+
+#: thirstyaffiliates.php:1980
+msgid "Server Error: Some fields dont have appropriate values"
+msgstr "Errore del Server: Alcuni campi non contengono valori validi"
+
+#: thirstyaffiliates.php:2006
+msgid "Server Error: Failed to dynamically insert new post"
+msgstr "Errore del Server: Impossibile inserire dinamicamente un nuovo post"
+
+#: thirstyaffiliates.php:2035
+msgid ""
+"Server Error: Failed to update meta data of recently dynamically created post"
+msgstr ""
+"Errore del Server: Impossibile caricare i meta dati di post creati "
+"dinamicamente di recente"
+
+#: thirstyaffiliates.php:2111
+msgid "Link ID"
+msgstr "ID Link"
